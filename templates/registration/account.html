@@ -7,8 +7,25 @@
 {% load static %}
     <div class="w3-panel w3-white w3-card-4 w3-round">
         {{ user }}
-        {% for answer in user.answers.all %}
-            <li>{{ answer }}</li>
-        {% endfor %}
+        <table class="w3-table-all">
+            <tr>
+                <th>Question</th>
+                <th>Correctly</th>
+                <th>Wrongly</th>
+            </tr>
+            {% for answer in user.answers.all %}
+            <tr class="w3-hover-theme">
+                <td>
+                    {{ answer.question.text }}
+                </td>
+                <td>
+                    <span class="w3-text-green">{{ answer.correctly }}</span>
+                </td>
+                <td>
+                    <span class="w3-text-red">{{ answer.wrongly }}</span>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}

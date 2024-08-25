@@ -34,8 +34,6 @@ class Question(models.Model):
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
-    state = models.BooleanField()
-    date = models.DateTimeField(auto_now_add=True)
+    correctly = models.IntegerField(default=0)
+    wrongly = models.IntegerField(default=0)
 
-    def __str__(self):
-        return f'{self.user.username} answered "{self.question.text}" on {self.date} ' + ('correctly' if self.state else 'wrongly')

@@ -56,7 +56,9 @@ def points(request, pawn_slug):
                 return redirect(reverse('quiz.points', kwargs={'pawn_slug': pawn_slug}))
             request.session['points'] += 1
             messages.success(request, 'Corretto')
-            Answer.objects.create(question=question, user=request.user, state=True)
+            answer, _ = Answer.objects.get_or_create(question=question, user=request.user)
+            answer.correctly += 1
+            answer.save()
             request.session['answered_questions'].append(question_id)
             questions_filtered = [question for question in questions if str(question.id) not in request.session['answered_questions']]
             if len(questions_filtered) == 0:
