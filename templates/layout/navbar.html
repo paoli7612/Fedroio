@@ -1,0 +1,39 @@
+{% load filter_split %}
+<div class="w3-top m3-display-container">
+    <div class="w3-bar w3-theme w3-card">
+        <div>
+            {% url 'home' as url %}
+            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                <i class="fa fa-home"></i>
+                <span class="w3-hide-small">Home_</span>
+            </a>
+
+            {% url 'pawns' as url %}
+            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                <i class="fa fa-home"></i>
+                <span class="w3-hide-small">Pawns</span>
+            </a>
+            {% url 'quiz' as url %}
+            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                <i class="fa fa-question"></i>
+                <span class="w3-hide-small">Quiz</span>
+            </a>
+
+            <div class="w3-right">
+                {% if user.is_authenticated %}
+                    {% url 'account' as url %}
+                    <a class="w3-bar-item w3-btn" href="{{ url }}" title={{ user.last_name }}>
+                        <i class="fa fa-user"></i>
+                        <span class="w3-hide-small">{{ user.username }}</span>
+                    </a> 
+                {% else %}
+                    {% url 'login' as url %}
+                    <a class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}" href="{{ url }}" title="Login">
+                        <i class="fa fa-sign-in"></i>
+                        <span class="w3-hide-small">Accedi</span>
+                    </a> 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

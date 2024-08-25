@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+
+
+{% for field in form %}
+    <label class="w3-panel">
+        {{ field.label_tag }}
+        {{ field }}
+    </label>
+    {% if field.errors %}
+        <div class="w3-text-red">
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+<script>
+    $(document).ready(function() {
+        $('input[type="checkbox"]').addClass('w3-check');
+        $('textarea').prop('rows', 2);
+        $('input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select').addClass('w3-input w3-card w3-round');
+        $('input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select').first().focus();
+
+    });
+</script>

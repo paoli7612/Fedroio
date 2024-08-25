@@ -1,0 +1,38 @@
+
+{% extends "layout/base.html" %}
+
+{% block title %}Ask{% endblock %}
+
+{% block content %}
+{% load static %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>{{ title }}</h1>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <form method="post">
+            <div class="w3-panel w3-white w3-card-4 w3-round">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="w3-panel">
+                        {{ text|safe }}
+                    </div>
+                    <div class="w3-center w3-panel">
+                        <div class="w3-large">
+                            Are you sure?
+                        </div>
+                        <a href="{{ pawn.url }}" class="w3-btn">
+                            <i class="fa fa-arrow-left"></i>
+                            Back
+                        </a>
+                        <button type="submit" class="w3-btn w3-theme w3-round w3-card">
+                            Accept
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+{% endblock %}

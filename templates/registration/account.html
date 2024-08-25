@@ -1,0 +1,14 @@
+
+{% extends "layout/base.html" %}
+
+{% block title %}Ask{% endblock %}
+
+{% block content %}
+{% load static %}
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        {{ user }}
+        {% for answer in user.answers.all %}
+            <li>{{ answer }}</li>
+        {% endfor %}
+    </div>
+{% endblock %}

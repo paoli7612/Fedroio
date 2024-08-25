@@ -1,0 +1,60 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Pawn - {{ pawn }}{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <div class="w3-left w3-margin">
+            <a href="{{ pawn.parent_url }}" class="w3-btn w3-round w3-theme" title="back">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        </div>
+
+        <h1 class="w3-left">
+            {{ pawn }}
+        </h1>
+        <div class="w3-right w3-margin">
+            {% if user.is_superuser %}
+                <a href="{% url 'pawn.new' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <a href="{% url 'pawn.edit' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'pawn.edit-questions' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="edit questions">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-question-circle"></i>
+                </a>
+                <a href="{% url 'pawn.delete' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="delete pawn">
+                    <i class="fa fa-trash"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <div class="w3-panel w3-border w3-round w3-border-theme w3-card">
+            <strong>{{ pawn.questions.count }} Question</strong>
+            <div class="w3-right w3-margin">
+                {% if pawn.all_questions %}
+                <a href="{% url 'quiz.points' pawn_slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
+                    <i class="fa fa-play"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="w3-row w3-panel">
+            {% for pawn in pawns %}
+                <div class="w3-col m6 l4 w3-padding">
+                    <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-hover-theme w3-border w3-border-theme w3-card-4">
+                        <h3>
+                            {{ pawn }}
+                        </h3>
+                        <b>{{ pawn.number }}</b>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
