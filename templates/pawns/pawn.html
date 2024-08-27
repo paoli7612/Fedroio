@@ -46,10 +46,10 @@
         </div>
         <div class="w3-row w3-panel">
             {% for pawn in pawns %}
-                <div class="w3-col m6 l4 w3-padding">
+                <div class="w3-col s12 m6 l4 w3-padding">
                     <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-hover-theme w3-border w3-border-theme w3-card-4">
                         <h3>
-                            {{ pawn }}
+                            {{ pawn|truncatechars:20  }}
                         </h3>
                         <b>{{ pawn.number }}</b>
                     </a>
