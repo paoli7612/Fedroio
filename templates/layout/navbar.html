@@ -2,15 +2,26 @@
 <div class="w3-top m3-display-container">
     <div class="w3-bar w3-theme w3-card">
         <div>
+            {% url 'home' as url %}
+            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                <i class="fa fa-home"></i>
+                <span class="w3-hide-small">Home</span>
+            </a>
+
+            {% url 'info' as url %}
+            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                <i class="fa fa-info"></i>
+                <span class="w3-hide-small">Info</span>
+            </a>
 
             {% url 'pawns' as url %}
             <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
-                <i class="fa fa-home"></i>
+                <i class="fa fa-sitemap"></i>
                 <span class="w3-hide-small">Pawns</span>
             </a>
             {% url 'quiz' as url %}
             <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
-                <i class="fa fa-question"></i>
+                <i class="fa fa-question-circle"></i>
                 <span class="w3-hide-small">Quiz</span>
             </a>
 

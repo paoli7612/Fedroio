@@ -4,13 +4,80 @@
 
 {% block content %}
 {% load static %}
+    <div class="" style="max-width: 800px; margin: auto;">
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
-        <h1>Fedroio</h1>
+        <h1>Fedro.io</h1>
     </div>
 
-    <div class="w3-panel w3-white w3-card-4 w3-round">
-
-        
+    <div class="w3-panel">
+        <div class="w3-half w3-left w3-grey w3-card w3-round">
+            <h3 class="w3-center">CSE</h3>
+            <p class="w3-margin">
+                Esplora quiz e simulazioni di esami del corso magistrale in Cybersecurity. <br><span class="w3-text-grey">[NON DISPONIBILE]</span>
+            </p>
+            <div class="w3-panel w3-right">
+                <button disabled="disabled" class="w3-btn w3-white w3-card w3-round w3-grey">
+                    Raggiungi il Pawn
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <div class="w3-third w3-right w3-theme-l2 w3-card w3-round">
+            <h3 class="w3-center">ICDL</h3>
+            <p class="w3-margin">
+                Esplora quiz e simulazioni di esami ICDL, studia in modo semplice e competitivo.
+            </p>
+            <div class="w3-panel w3-right">
+                <a href="/icdl" class="w3-btn w3-white w3-card w3-round">
+                    Raggiungi il Pawn
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
+
+    <div class="w3-white w3-card-4 w3-round w3-row">
+        <div class="w3-third w3-round w3-panel w3-center">
+            <a href="{% url 'pawns' %}" class="w3-btn w3-border-theme w3-border w3-card w3-round">
+                <h3>
+                    Pawns
+                    <i class="fa fa-sitemap"></i>
+                </h3>
+            </a>
+            <p>            
+                Abbiamo creato un sistema gerarchico che organizza la conoscenza in singoli <strong>Pawn</strong> (pedoni), semplificando l'apprendimento e la gestione delle informazioni.
+            </p>
+        </div>
+        <div class="w3-third w3-round w3-panel w3-center">
+            <a href="{% url 'pawns' %}" class="w3-btn w3-border-theme w3-border w3-card w3-round">
+                <h3>
+                    Quiz
+                    <i class="fa fa-question-circle"></i>
+                </h3>
+            </a>
+            <p>            
+                I nostri <strong>Quiz</strong> legano ogni "pawn" a domande, semplificando l'apprendimento e il monitoraggio, con opzioni per competere o accedere anonimamente.
+            </p>
+        </div>
+        <div class="w3-third w3-round w3-panel w3-center">
+            <a href="{% url 'pawns' %}" class="w3-btn w3-border-theme w3-border w3-card w3-round">
+                <h3>
+                    Community
+                    <i class="fa fa-users"></i>
+                </h3>
+            </a>
+            <p>            
+                La possibilità di autenticarsi permette di tenere traccia dei progressi e delle esercitazioni lungo i vari pawn
+            </p>
+        </div>
+    </div>
+        <div class="w3-card-4 w3-round w3-theme">
+            <p class="w3-center">
+                &copy; 2024 Fedro.io
+            </p>
+        </div>
+    </div>
+</div>
+   
 {% endblock %}
