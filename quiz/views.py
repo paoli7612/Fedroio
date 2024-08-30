@@ -63,7 +63,7 @@ def points(request, pawn_slug):
             questions_filtered = [question for question in questions if str(question.id) not in request.session['answered_questions']]
             if len(questions_filtered) == 0:
                 messages.success(request, 'Risposte completate :D')
-                return redirect(reverse('profile'))
+                return redirect(reverse('account'))
             question = choice(questions_filtered)
             while question.id in request.session['answered_questions']:
                 questions_filtered.remove(question)
