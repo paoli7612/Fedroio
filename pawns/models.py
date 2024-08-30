@@ -12,6 +12,7 @@ class Pawn(models.Model):
     slug = models.SlugField(max_length=512, unique=True, blank=True)
     image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # Add this line
     number = models.PositiveIntegerField(null=True, blank=True)
+    hide = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
