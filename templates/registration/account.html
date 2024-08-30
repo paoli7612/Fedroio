@@ -6,15 +6,15 @@
 {% block content %}
 {% load static %}
     <div class="w3-panel w3-white w3-card-4 w3-round">
-        {{ user }}
-        <table class="w3-table-all">
+        <h1>{{ user }}</h1>
+        <table class="w3-table-all w3-panel w3-card">
             <tr>
                 <th>Question</th>
                 <th>Correctly</th>
                 <th>Wrongly</th>
             </tr>
             {% for answer in user.answers.all %}
-            <tr class="w3-hover-theme">
+            <tr>
                 <td>
                     {{ answer.question.text }}
                 </td>

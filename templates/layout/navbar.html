@@ -2,11 +2,6 @@
 <div class="w3-top m3-display-container">
     <div class="w3-bar w3-theme w3-card">
         <div>
-            {% url 'home' as url %}
-            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
-                <i class="fa fa-home"></i>
-                <span class="w3-hide-small">Home_</span>
-            </a>
 
             {% url 'pawns' as url %}
             <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
