@@ -57,10 +57,11 @@ def points(request, pawn_slug):
                 return redirect(reverse('quiz.points', kwargs={'pawn_slug': pawn_slug}))
             request.session['points'] += 1
             messages.success(request, 'Corretto')
-            answer, _ = Answer.objects.get_or_create(question=question, user=request.user)
-            answer.correctly += 1
-            answer.save()
-            request.session['answered_questions'].append(question_id)
+            if request.user.is_authenticated:
+                answer, _ = Answer.objects.get_or_create(question=question, user=request.user)
+                answer.correctly += 1
+                answer.save()
+                request.session['answered_questions'].append(question_id)
             questions_filtered = [question for question in questions if str(question.id) not in request.session['answered_questions']]
             if len(questions_filtered) == 0:
                 messages.success(request, 'Risposte completate :D')
@@ -70,9 +71,10 @@ def points(request, pawn_slug):
                 questions_filtered.remove(question)
                 question = choice(questions_filtered)
         else:
-            answer, _ = Answer.objects.get_or_create(question=question, user=request.user)
-            answer.wrongly += 1
-            answer.save()
+            if request.user.is_authenticated:
+                answer, _ = Answer.objects.get_or_create(question=question, user=request.user)
+                answer.wrongly += 1
+                answer.save()
             messages.error(request, 'Errore')
 
     return render(request, 'quiz/points.html', {
