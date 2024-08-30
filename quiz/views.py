@@ -24,7 +24,8 @@ def question_edit(request, id):
     else:
         form = QuestionForm(instance=question)
     return render(request, 'pawns/form.html', {
-        'form': form
+        'form': form,
+        'back_url': question.pawn.url
     })
 
 def question_delete(request, id):

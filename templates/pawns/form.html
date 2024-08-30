@@ -9,14 +9,12 @@
         <h1>Pawns</h1>
     </div>
 
-
-
     <div class="w3-panel w3-white w3-card-4 w3-round">
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="w3-right w3-panel">
-                <a href="{{ pawn.url }}" class="w3-btn">
+                <a href="{{ back_url }}" class="w3-btn">
                     <i class="fa fa-arrow-left"></i>
                     Annulla
                 </a>

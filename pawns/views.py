@@ -49,7 +49,8 @@ def new_pawn(request, slug):
 
     return render(request, 'pawns/form.html', {
         'form': form,
-        'pawn': parent_pawn
+        'pawn': parent_pawn,
+        'back_url': parent_pawn.url
     })
 
 def edit_pawn(request, slug):
@@ -65,7 +66,8 @@ def edit_pawn(request, slug):
         form = PawnForm(instance=pawn)
     return render(request, 'pawns/form.html', {
         'form': form,
-        'pawn': pawn
+        'pawn': pawn,
+        'back_url': pawn.url
     })
 
 def delete_pawn(request, slug):
