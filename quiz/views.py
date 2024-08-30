@@ -70,9 +70,10 @@ def points(request, pawn_slug):
                 questions_filtered.remove(question)
                 question = choice(questions_filtered)
         else:
-            Answer.objects.create(question=question, user=request.user, state=False)
+            answer, _ = Answer.objects.get_or_create(question=question, user=request.user)
+            answer.wrongly += 1
+            answer.save()
             messages.error(request, 'Errore')
-            return redirect(reverse('quiz.points', kwargs={'pawn_slug': pawn_slug}))
 
     return render(request, 'quiz/points.html', {
         'points': request.session['points'],
