@@ -19,10 +19,13 @@ def pawn(request, slug):
         'pawns': Pawn.objects.filter(parent=pawn)
     })
 
-def new_pawn(request, slug):
+def new_pawn(request, slug=None):
     parent_pawn = None
     if slug:
         parent_pawn = get_object_or_404(Pawn, slug=slug)
+        back_url = parent_pawn.url
+    else:
+        back_url = reverse('pawns')
 
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES)
@@ -50,7 +53,7 @@ def new_pawn(request, slug):
     return render(request, 'pawns/form.html', {
         'form': form,
         'pawn': parent_pawn,
-        'back_url': parent_pawn.url
+        'back_url': back_url
     })
 
 def edit_pawn(request, slug):
