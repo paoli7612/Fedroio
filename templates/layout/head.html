@@ -11,16 +11,6 @@
         <meta name="robots" content="index, follow, max-image-preview:standard">
         <meta name="format-detection" content="telephone=no">
 
-        <meta property="og:image" content="static 'img/logo1200px.jpg' %}">
-        <meta property="og:image:width" content="1200">
-        <meta property="og:image:height" content="900">
-        <meta property="og:image" content="static 'img/logo800px.jpg' %}">
-        <meta property="og:image:width" content="800">
-        <meta property="og:image:height" content="600">
-        <meta property="og:image" content="static 'img/logo640px.jpg' %}">
-        <meta property="og:image:width" content="640">
-        <meta property="og:image:height" content="480">
-
         <meta property="og:title" content="Fedro.io">
         <meta property="og:type" content="website"> 
         <link rel="preconnect" href="//fedro.io">
@@ -33,8 +23,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-{{ user.theme|default:'blue' }}.css">
         <link rel="apple-touch-icon" sizes="180x180" href="https://istalcidedegasperi.edu.it/sito-download-file/324/all">
-        <link rel="icon" type="image/x-icon" sizes="16x16" href="https://istalcidedegasperi.edu.it/sito-download-file/324/all">
-        <link rel="icon" type="image/png" sizes="192x192" href="https://istalcidedegasperi.edu.it/sito-download-file/324/all">
+        {% load static %}
+        <link rel="icon" type="image/x-icon" sizes="16x16" href="{% static 'img/loco.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/loco.png' %}">
     
         <style>
             body {
