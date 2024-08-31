@@ -67,22 +67,23 @@
                     {% include 'partials/abutton.html' with url=url title='Play chain' icon='chain' label='Catena'%}
                 {% endif %}
             </div>
+            {% if user.is_superuser %}
+            <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">
+                <h3>Questions</h3>
+                <table class="w3-table-all">
+                    {% for question in pawn.questions.all %}
+                    <tr>
+                        <td>{{ question }}</td>
+                        <td>
+                            <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
         </div>
     </div>
 
-    {% if user.is_superuser %}
-    <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">
-        <table class="w3-table-all">
-            {% for question in pawn.questions.all %}
-            <tr>
-                <td>{{ question }}</td>
-                <td>
-                    <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn"><i
-                            class="fa fa-edit"></i></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    {% endif %}
+   
 {% endblock %}
