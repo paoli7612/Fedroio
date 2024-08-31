@@ -63,7 +63,7 @@
                     {% url 'quiz.points' pawn_slug=pawn.slug as url %}
                     {% include 'partials/abutton.html' with url=url title='Play points' icon='play' label='Punti'%}
 
-                    {% url 'quiz.serial' pawn_slug=pawn.slug as url %}
+                    {% url 'quiz.chain' pawn_slug=pawn.slug as url %}
                     {% include 'partials/abutton.html' with url=url title='Play chain' icon='chain' label='Catena'%}
                 {% endif %}
             </div>

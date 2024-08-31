@@ -1,5 +1,0 @@
-Quale tra le seguenti è una caratteristica della memoria RAM? Memorizza dati temporanei; Memorizza dati permanentemente; È utilizzata per archiviare file di grandi dimensioni; È un dispositivo di input.
-Qual è il componente che esegue calcoli e controlla il funzionamento di tutte le applicazioni in un computer? Processore; Memoria RAM; Monitor; Stampante.
-Qual è la funzione principale di una porta USB? Collegare periferiche come mouse e stampanti; Trasmettere segnali audio e video ad alta definizione; Collegare cavi Ethernet; Memorizzare dati su un disco rigido.
-Qual è il termine corretto per definire la parte fisica di un computer? Hardware; Software; Sistema operativo; Licenza EULA.
-Quale delle seguenti è una funzione delle applicazioni di produttività di ufficio? Creazione e gestione di documenti; Navigazione su Internet; Controllo delle risorse di sistema; Funzionamento del processore.

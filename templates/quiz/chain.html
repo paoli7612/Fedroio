@@ -1,0 +1,54 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Catena{% endblock %}
+
+{% block content %}
+    <h1>{{ points }}</h1>
+    {% if user.is_superuser %}
+        <div class="w3-right w3-margin">
+            <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a href="{% url 'question.delete' id=question.id %}" class="w3-btn w3-round w3-theme" title="delete pawn">
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+    {% endif %}
+    <div class="w3-panel">
+        {% for question in questions %}
+        <div class="w3-card w3-block">
+            {{ question }}
+        </div>
+        {% endfor %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ question.id }}">
+        <div class="w3-card-4 w3-round w3-white">
+            <div class="w3-theme w3-center w3-round w3-xlarge" style="border-radius: 4px 4px 0px 0px;">
+                punti: {{ points }}
+            </div>
+            <div class="w3-theme-l2 w3-center">
+                {{ question.pawn }}
+            </div>
+            <div class="w3-panel">
+                <p>{{ question.text }}</p>
+                {% for id, text in question.get_random_answers %}
+                    <label class="w3-panel w3-round w3-padding w3-hover-theme w3-block">
+                        <input type="radio" class="w3-radio" required="required" name="answer" value="{{ id }}" id="{{ id }}">
+                        {{ text }}
+                    </label>
+                {% endfor %}
+                <div class="w3-center w3-panel">
+                    <button class="w3-btn w3-card w3-round w3-theme">
+                        <i class="fa fa-check"></i>
+                        Conferma
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+    

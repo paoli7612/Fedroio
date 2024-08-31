@@ -3,7 +3,7 @@ from pawns.models import Pawn
 from django.shortcuts import get_object_or_404
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
+from core.models import User
 
 from django.db import models
 
@@ -30,6 +30,10 @@ class Question(models.Model):
 
     def delete_url(self):
         return reverse('question.delete', kwargs={'section_slug': self.section.slug, 'chapter_slug': self.chapter.slug, 'question_id': self.id})
+
+    def userAnswered(self, user, state):
+        if user.is_authenticated:
+            user.answer(self, state)
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
