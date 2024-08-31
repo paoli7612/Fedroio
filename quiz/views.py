@@ -8,8 +8,6 @@ from .forms import QuestionForm
 
 from pawns.models import Pawn
 
-
-# Create your views here.
 def index(request):
     return render(request, 'quiz/index.html')
 
@@ -31,9 +29,19 @@ def question_edit(request, id):
 def question_new(request, slug):
     pawn = get_object_or_404(Pawn, slug=slug)
 
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.pawn = pawn
+            question.save()
+            messages.success(request, 'question created successfully!')
+    else:
+        form = QuestionForm()
     return render(request, 'pawns/form.html', {
+        'form': form,
+        'back_url': pawn.url
     })
-
 
 def question_delete(request, id):
     question = get_object_or_404(Question, id=id)
