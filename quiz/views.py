@@ -110,6 +110,7 @@ def chain(request, pawn_slug):
         order = Case(*[When(id=pk, then=pos) for pos, pk in enumerate(chain_ids)])
         chain = list(Question.objects.filter(id__in=chain_ids).order_by(order))
         if request.POST.get('answer') == '0':
+            messages.success(request, 'Corretto') # messaggio "corretto"
             question.userAnswered(request.user, True)
             request.session['points'] += 1
             if len(chain) == request.session['points']:
@@ -123,12 +124,13 @@ def chain(request, pawn_slug):
             else:
                 nextQuestion = get_object_or_404(Question, id=request.session['chain'][request.session['points']])
         else:
+            messages.error(request, 'Errore')
             question.userAnswered(request.user, False)
             request.session['points'] = 0
             nextQuestion = chain[0]
         
     return render(request, 'quiz/chain.html', {
-        'points': request.session['points'],
+        'points': request.session['points']+1,
         'question': nextQuestion,
         'questions': chain
     })

@@ -3,8 +3,8 @@
 {% block title %}Catena{% endblock %}
 
 {% block content %}
-    <h1>{{ points }}</h1>
-    {% if user.is_superuser %}
+    <div class="w3-row">
+        {% if user.is_superuser %}
         <div class="w3-right w3-margin">
             <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn">
                 <i class="fa fa-edit"></i>
@@ -13,22 +13,29 @@
                 <i class="fa fa-trash"></i>
             </a>
         </div>
-    {% endif %}
-    <div class="w3-panel">
-        {% for question in questions %}
-        <div class="w3-card w3-block">
-            {{ question }}
-        </div>
-        {% endfor %}
+        {% endif %}
     </div>
-    <form method="post">
+    <div class="w3-panel w3-quarter">
+        <ul class="w3-ul w3-white w3-round w3-card w3-bottombar w3-border-theme">
+            {% for question in questions %}
+            <li>
+                {{ question }}
+                {% if points > forloop.counter %}
+                <i class="fa fa-check w3-text-green"></i>
+                {% elif points < forloop.counter %}
+                <i class="fa fa-times w3-text-red"></i>
+                {% else %}
+                <i class="fa fa-arrow-left"></i>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form method="post" class="w3-threequarter">
         {% csrf_token %}
         <input type="hidden" name="id" value="{{ question.id }}">
         <div class="w3-card-4 w3-round w3-white">
             <div class="w3-theme w3-center w3-round w3-xlarge" style="border-radius: 4px 4px 0px 0px;">
-                punti: {{ points }}
-            </div>
-            <div class="w3-theme-l2 w3-center">
                 {{ question.pawn }}
             </div>
             <div class="w3-panel">
