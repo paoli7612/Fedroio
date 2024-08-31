@@ -35,6 +35,9 @@
             <a href="{{ pawn.url }}"
                 class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
                 <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
+                <span class=" w3-display-right w3-padding">{{ pawn.all_questions|length }}
+                    <i class="fa fa-question-circle"></i>
+                </span>
                 <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
             </a>
         </div>
