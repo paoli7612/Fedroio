@@ -1,74 +1,88 @@
-{% extends "layout/base.html" %}
+{% extends 'layout/base.html' %}
 
-{% block title %}Pawn - {{ pawn }}{% endblock %}
+{% block title %}
+    Pawn - {{ pawn }}
+{% endblock %}
 
 {% block content %}
-
     <div class="w3-panel w3-white w3-card-4 w3-round">
         <div class="w3-left w3-margin">
-            <a href="{{ pawn.parent_url }}" class="w3-btn w3-round w3-theme" title="back">
-                <i class="fa fa-arrow-left"></i>
-            </a>
+            <a href="{{ pawn.parent_url }}" class="w3-btn w3-round w3-theme" title="back"><i class="fa fa-arrow-left"></i></a>
         </div>
 
-        <h1 class="w3-left">
-            {{ pawn }}
-        </h1>
-        <div class="w3-right w3-margin">
-            {% if user.is_superuser %}
-                <a href="{% url 'pawn.new' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
-                    <i class="fa fa-plus"></i>
-                </a>
-                <a href="{% url 'pawn.edit' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a href="{% url 'question.new' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="edit questions">
-                    <i class="fa fa-plus"></i>
-                    <i class="fa fa-question-circle"></i>
-                </a>
-                <a href="{% url 'pawn.edit-questions' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="edit questions">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-question-circle"></i>
-                </a>
-                <a href="{% url 'pawn.delete' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="delete pawn">
-                    <i class="fa fa-trash"></i>
-                </a>
-            {% endif %}
-        </div>
+        <h1 class="w3-left">{{ pawn }}</h1>
+        {% if user.is_superuser %}
+            <div class="w3-right w3-margin">
+                {% url 'pawn.new' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='New pawn' icon='plus'%}
+
+                {% url 'pawn.edit' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='Edit pawn' icon='edit'%}
+                
+                {% url 'pawn.delete' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='Delete pawn' icon='trash'%}
+            </div>
+        {% endif %}
     </div>
 
     {% if pawn.text %}
-        <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">
-            {{ pawn.text|safe }}
-        </div>
+        <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">{{ pawn.text|safe }}</div>
     {% endif %}
 
     <div class="w3-row">
         {% for pawn in pawns %}
-            <div class="w3-col s12 m6 l4 w3-padding">
-                <a href="{{ pawn.url }}" class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
-                    <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
-                    <p class="w3-center">{{ pawn|truncatechars:32  }}</p>
-                </a>
-            </div>
+        <div class="w3-col s12 m6 l4 w3-padding">
+            <a href="{{ pawn.url }}"
+                class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
+                <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
+                <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+            </a>
+        </div>
         {% endfor %}
     </div>
 
-    <div class="w3-half">
-        <div class="w3-panel w3-white w3-card-4 w3-round">
-            <h3>Quiz</h3>
-            <div class="w3-panel w3-border w3-round w3-border-theme w3-card">
-                <strong>{{ pawn.all_questions|length }} Question</strong>
-                <div class="w3-right w3-margin">
-                    {% if pawn.all_questions %}
-                    <a href="{% url 'quiz.points' pawn_slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
-                        <i class="fa fa-play"></i>
-                    </a>
-                    {% endif %}
-                </div>
+    <div class="w3-row">
+
+        <div class="w3-panel w3-white w3-card-4 w3-round w3-half">
+            <h3 class="w3-left">Quiz
+                <sub>
+                    <span class="w3-small">{{ pawn.all_questions|length }} Domande</span>
+                </sub>
+            </h3>
+            
+            {% if user.is_superuser %}
+            <div class="w3-right w3-margin">
+                {% url 'question.new' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
+                {% url 'pawn.edit-questions' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='Edit questions' icon='edit'%}
+            </div>
+            {% endif %}
+            <div class="w3-panel w3-center">
+                {% if pawn.all_questions %}
+                    {% url 'quiz.points' pawn_slug=pawn.slug as url %}
+                    {% include 'partials/abutton.html' with url=url title='Play points' icon='play' label='Punti'%}
+
+                    {% url 'quiz.serial' pawn_slug=pawn.slug as url %}
+                    {% include 'partials/abutton.html' with url=url title='Play chain' icon='chain' label='Catena'%}
+                {% endif %}
             </div>
         </div>
     </div>
 
-    
+    {% if user.is_superuser %}
+    <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">
+        <table class="w3-table-all">
+            {% for question in pawn.questions.all %}
+            <tr>
+                <td>{{ question }}</td>
+                <td>
+                    <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn"><i
+                            class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
 {% endblock %}
