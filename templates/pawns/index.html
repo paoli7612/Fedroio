@@ -20,7 +20,12 @@
         <div class="w3-row w3-panel">
             {% for pawn in pawns %}
                 <div class="w3-col m4 l3 w3-margin">
-                    <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-hover-theme w3-border w3-border-theme w3-card-4">
+                    <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-border w3-border-theme w3-card-4">
+                        {% if pawn.image %}
+                        <div class="w3-container w3-padding">
+                            <img src="{{ pawn.image.url }}" style="height: 5em;" class="w3-round">
+                        </div>
+                        {% endif %}
                         <h3>
                             {{ pawn }}
                         </h3>
