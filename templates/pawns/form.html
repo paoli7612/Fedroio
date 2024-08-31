@@ -10,7 +10,7 @@
     </div>
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="w3-right w3-panel">
