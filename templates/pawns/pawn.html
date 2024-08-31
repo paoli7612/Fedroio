@@ -22,6 +22,10 @@
                 <a href="{% url 'pawn.edit' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="add pawn">
                     <i class="fa fa-edit"></i>
                 </a>
+                <a href="{% url 'question.new' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="edit questions">
+                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-question-circle"></i>
+                </a>
                 <a href="{% url 'pawn.edit-questions' slug=pawn.slug %}" class="w3-btn w3-round w3-theme" title="edit questions">
                     <i class="fa fa-edit"></i>
                     <i class="fa fa-question-circle"></i>

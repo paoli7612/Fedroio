@@ -28,6 +28,13 @@ def question_edit(request, id):
         'back_url': question.pawn.url
     })
 
+def question_new(request, slug):
+    pawn = get_object_or_404(Pawn, slug=slug)
+
+    return render(request, 'pawns/form.html', {
+    })
+
+
 def question_delete(request, id):
     question = get_object_or_404(Question, id=id)
     if request.method == 'POST':
