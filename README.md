@@ -1,6 +1,6 @@
 # Fedroio
 
-<a href="https://www.fedro.io">test hosting</a>
+<a href="https://fedro.io/home/">test hosting</a>
 
 ## ICDL
 
