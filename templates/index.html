@@ -24,12 +24,12 @@
                     {{ pawn.text|truncatechars:128 }}
                 </p>
                 {% if pawn.image %}
-                <div class="w3-container w3-padding">
-                    <img src="{{ pawn.image.url }}" class="w3-round w3-block">
+                <div class="w3-container w3-padding w3-center">
+                    <img src="{{ pawn.image.url }}" style="max-height: 100px;" class="w3-round">
                 </div>
                 {% endif %}
                 <div class="w3-panel w3-right">
-                    <a href="/pawns/icdl" class="w3-btn w3-white w3-card w3-round">
+                    <a href="{{ pawn.url }}" class="w3-btn w3-theme w3-card w3-round">
                         Raggiungi il Pawn
                         <i class="fa fa-arrow-right"></i>
                     </a>
