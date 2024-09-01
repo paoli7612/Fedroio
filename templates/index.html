@@ -15,31 +15,29 @@
         </h3>
     </div>
 
-    <div class="w3-panel">
-        <div class="w3-half w3-left w3-grey w3-card w3-round">
-            <h3 class="w3-center">CSE</h3>
-            <p class="w3-margin">
-                Esplora quiz e simulazioni di esami del corso magistrale in Cybersecurity. <br><span class="w3-text-grey">[NON DISPONIBILE]</span>
-            </p>
-            <div class="w3-panel w3-right">
-                <button disabled="disabled" class="w3-btn w3-white w3-card w3-round w3-grey">
-                    Raggiungi il Pawn
-                    <i class="fa fa-arrow-right"></i>
-                </button>
+    <div class="w3-panel w3-row">
+        {% for pawn in pawns %}
+        <div class="w3-col m6  w3-padding">
+            <div class="w3-panel w3-white w3-card w3-round">
+                <h3 class="w3-center">{{ pawn }}</h3>
+                <p class="w3-margin">
+                    {{ pawn.text|truncatechars:32 }}
+                </p>
+                {% if pawn.image %}
+                <div class="w3-container w3-padding">
+                    <img src="{{ pawn.image.url }}" class="w3-round w3-block">
+                </div>
+                {% endif %}
+                <div class="w3-panel w3-right">
+                    <a href="/pawns/icdl" class="w3-btn w3-white w3-card w3-round">
+                        Raggiungi il Pawn
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="w3-third w3-right w3-theme-l2 w3-card w3-round">
-            <h3 class="w3-center">ICDL</h3>
-            <p class="w3-margin">
-                Esplora quiz e simulazioni di esami ICDL, studia in modo semplice e competitivo.
-            </p>
-            <div class="w3-panel w3-right">
-                <a href="/pawns/icdl" class="w3-btn w3-white w3-card w3-round">
-                    Raggiungi il Pawn
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
+            {% endfor %}
+        
     </div>
 
     <div class="w3-white w3-card-4 w3-round w3-row">
