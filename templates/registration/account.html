@@ -15,9 +15,9 @@
             <tr>
                 <th>Question</th>
                 <th>Correctly</th>
-                <th>Wrongly</th>
+                <th>Wrongly <i class="fa fa-arrow-down"></i></th>
             </tr>
-            {% for answer in user.answers.all %}
+            {% for answer in answers %}
             <tr>
                 <td>
                     {{ answer.question.text }}

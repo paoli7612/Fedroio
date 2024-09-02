@@ -11,7 +11,9 @@ def home(request):
     })
 
 def account(request):
-    return render(request, 'registration/account.html')
+    return render(request, 'registration/account.html', {
+        'answers': request.user.answers.all().order_by('-wrongly')
+    })
 
 def info(request):
     return render(request, 'info.html')
