@@ -25,12 +25,16 @@
     </div>
     {% include './_childs.html' %}
     <div class="w3-row">
+        {% if pawn.quiz %}
         <div class="w3-col m6 w3-padding">
             {% include './_quiz.html' %}
         </div>
+        {% endif %}
+        {% if pawn.coze %}
         <div class="w3-col m6 w3-padding">
             {% include './_coze-test.html' %}
         </div>
+        {% endif %}
     </div>
 
 {% endblock %}

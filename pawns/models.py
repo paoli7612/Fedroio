@@ -15,6 +15,8 @@ class Pawn(models.Model):
     image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # Add this line
     number = models.PositiveIntegerField(null=True, blank=True)
     hide = models.BooleanField(default=True)
+    quiz = models.BooleanField(default=False)
+    coze = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:
