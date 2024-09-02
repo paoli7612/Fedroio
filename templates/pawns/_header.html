@@ -1,0 +1,24 @@
+<div class="w3-margin w3-white w3-card w3-round w3-row">
+    <div class="w3-col m9">
+        <a href="{{ pawn.parent_url }}" class="w3-btn w3-round w3-theme w3-left w3-margin" title="back">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <h1 class="w3-left">{{ pawn }}</h1>
+    </div>
+    <div class="w3-col m3">
+        {% if user.is_superuser %}
+            <div class="w3-right w3-margin">
+                {% url 'pawn.new' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='New pawn' icon='plus'%}
+                
+                {% url 'pawn.edit' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='Edit pawn' icon='edit'%}
+                
+                {% url 'pawn.delete' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='Delete pawn' icon='trash'%}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+    

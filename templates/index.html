@@ -21,7 +21,7 @@
             <div class="w3-panel w3-white w3-card w3-round">
                 <h3 class="w3-center">{{ pawn }}</h3>
                 <p class="w3-margin">
-                    {{ pawn.text|truncatechars:128 }}
+                    {{ pawn.text|safe|truncatechars:128 }}
                 </p>
                 {% if pawn.image %}
                 <div class="w3-container w3-padding w3-center">
@@ -66,12 +66,12 @@
         <div class="w3-third w3-round w3-panel w3-center">
             <a href="{% url 'pawns' %}" class="w3-btn w3-border-theme w3-border w3-card w3-round">
                 <h3>
-                    Community
-                    <i class="fa fa-users"></i>
+                    Coze test
+                    <i class="fa fa-play-circle"></i>
                 </h3>
             </a>
             <p>            
-                La possibilità di autenticarsi permette di tenere traccia dei progressi e delle esercitazioni lungo i vari pawn
+                Un secondo metodo per esercitarsi ed imparare è il classico <strong>fill-in-the-gap</strong> autogenerato sulle frasi complete dei nostri pawns
             </p>
         </div>
     </div>

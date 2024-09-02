@@ -1,0 +1,34 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Catena{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card w3-round">
+        <h1>Cloze Test</h1>
+        <form method="post">
+            <input type="hidden" name="sentence_id" value="{{ sentence.id }}">
+            {% csrf_token %}
+            {% for word in sentence.hide_words %}
+                {% if word == '___' %}
+                    <input class="w3-input w3-card w3-round" style="display: inline-block; max-width: 200px;" type="text" name="word_{{ forloop.counter }}">
+                {% else %}
+                    {{ word }}
+                {% endif %}
+            {% endfor %}
+            <div class="w3-panel w3-center">
+                <button type="submit" class="w3-btn w3-card w3-round w3-theme">
+                    Conferma
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $("input:text:visible:first").focus();
+    </script>
+
+{% endblock %}
+
+    

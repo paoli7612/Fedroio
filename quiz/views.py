@@ -7,7 +7,7 @@ from random import choice, shuffle
 from .models import Question, Answer
 from .forms import QuestionForm
 
-from pawns.models import Pawn
+from pawns.models import Pawn, Sentence
 
 def index(request):
     return render(request, 'quiz/index.html')
@@ -134,3 +134,4 @@ def chain(request, pawn_slug):
         'question': nextQuestion,
         'questions': chain
     })
+

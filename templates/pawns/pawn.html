@@ -5,128 +5,32 @@
 {% endblock %}
 
 {% block content %}
-    {% if pawn.hide %}
-        <div class="w3-panel w3-card w3-round w3-black w3-text-amber">
-            <p class="w3-center">
-                <i class="fa fa-hourglass-half w3-margin"></i>
-                <b>Pawn</b> Coming Soon: Stay Tuned!
-                <i class="fa fa-hourglass-half w3-margin"></i>
-            </p>
-        </div>
-    {% endif %}
-    <div class="w3-panel w3-white w3-card-4 w3-round">
-        <div class="w3-left w3-margin">
-            <a href="{{ pawn.parent_url }}" class="w3-btn w3-round w3-theme" title="back"><i class="fa fa-arrow-left"></i></a>
-        </div>
-
-        <h1 class="w3-left">{{ pawn }}</h1>
-        {% if user.is_superuser %}
-            <div class="w3-right w3-margin">
-                {% url 'pawn.new' slug=pawn.slug as url %}
-                {% include 'partials/abutton-admin.html' with url=url title='New pawn' icon='plus'%}
-
-                {% url 'pawn.edit' slug=pawn.slug as url %}
-                {% include 'partials/abutton-admin.html' with url=url title='Edit pawn' icon='edit'%}
-                
-                {% url 'pawn.delete' slug=pawn.slug as url %}
-                {% include 'partials/abutton-admin.html' with url=url title='Delete pawn' icon='trash'%}
-            </div>
-        {% endif %}
-    </div>
-
-
-    {% if pawn.image and pawn.text %}
+    {% include './_bar-coming-soon.html' %}
+    {% include './_header.html' %}
     <div class="w3-row">
-        <div class="w3-col m3 w3-center">
-            <div class="w3-margin">
-                <div class="w3-white w3-round w3-padding w3-card">
-                    <img src="{{ pawn.image.url }}" class="w3-round w3-block">
-                </div>
-            </div>
-        </div>
-        <div class="w3-col m9">
-            <div class="w3-margin w3-card-4 w3-round w3-white w3-padding w3-large">
-                {{ pawn.text|safe }}
-            </div>
-        </div>
-    </div>
-    {% elif pawn.image %}
-        <div class="w3-container w3-padding w3-center">
-            <img src="{{ pawn.image.url }}" style="max-height: 500px;" class="w3-round">
-        </div>
-    {% elif pawn.text %}
-        <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">{{ pawn.text|safe }}</div>
-    {% endif %}
-
-    <div class="w3-row">
-        {% for pawn in pawns %}
-        <div class="w3-col s12 m6 l4 w3-padding">
-            <a href="{{ pawn.url }}" class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
-                <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
-                {% if pawn.hide %}
-                    <span class="w3-display-bottomright w3-padding w3-round w3-red w3-margin w3-card">
-                        <i class="fa fa-hourglass-half"></i>
-                    </span>
-                {% elif pawn.all_questions %}
-                    <span class="w3-display-bottomright w3-padding w3-round w3-theme w3-margin w3-card">
-                        {{ pawn.all_questions|length }}
-                        <i class="fa fa-question-circle"></i>
-                    </span>
-                {% endif %}
+        <div class="w3-col m3 w3-padding">
+            <div class="w3-white w3-padding w3-card w3-round">
                 {% if pawn.image %}
-                    <img src="{{ pawn.image.url }}" style="max-height: 90px;" class="w3-round w3-border w3-border-theme w3-card w3-white w3-padding w3-left">
-                    <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+                    <img src="{{ pawn.image.url }}" class="w3-round w3-block">
                 {% else %}
-                    <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+                    <img src="rfdsf" alt=""  class="w3-round w3-block">
                 {% endif %}
-            </a>
+            </div>
         </div>
-        {% endfor %}
+        <div class="w3-col m9 w3-padding">
+            <div class="w3-card w3-round w3-white w3-padding w3-large">
+                {{ pawn.text|safe|default:'[Nessuna descrizione]' }}
+            </div>
+        </div>
     </div>
-
+    {% include './_childs.html' %}
     <div class="w3-row">
-
-        <div class="w3-panel w3-white w3-card-4 w3-round w3-half">
-            <h3 class="w3-left">Quiz
-                <sub>
-                    <span class="w3-small">{{ pawn.all_questions|length }} Domande</span>
-                </sub>
-            </h3>
-            
-            {% if user.is_superuser %}
-            <div class="w3-right w3-margin">
-                {% url 'question.new' slug=pawn.slug as url %}
-                {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
-                {% url 'pawn.edit-questions' slug=pawn.slug as url %}
-                {% include 'partials/abutton-admin.html' with url=url title='Edit questions' icon='edit'%}
-            </div>
-            {% endif %}
-            <div class="w3-panel w3-center">
-                {% if pawn.all_questions %}
-                    {% url 'quiz.points' pawn_slug=pawn.slug as url %}
-                    {% include 'partials/abutton.html' with url=url title='Play points' icon='play' label='Punti'%}
-
-                    {% url 'quiz.chain' pawn_slug=pawn.slug as url %}
-                    {% include 'partials/abutton.html' with url=url title='Play chain' icon='chain' label='Catena'%}
-                {% endif %}
-            </div>
-            {% if user.is_superuser %}
-            <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">
-                <h3>Questions</h3>
-                <table class="w3-table-all">
-                    {% for question in pawn.questions.all %}
-                    <tr>
-                        <td>{{ question }}</td>
-                        <td>
-                            <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn"><i class="fa fa-edit"></i></a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        {% endif %}
+        <div class="w3-col m6 w3-padding">
+            {% include './_quiz.html' %}
+        </div>
+        <div class="w3-col m6 w3-padding">
+            {% include './_coze-test.html' %}
         </div>
     </div>
 
-   
 {% endblock %}

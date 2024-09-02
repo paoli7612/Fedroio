@@ -5,8 +5,8 @@ class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
 
     def answer(self, question, state):
-        from quiz.models import Answer
-        a, _ = Answer.objects.get_or_create(question=question, user=self)
+        from pawns.models import QuestionSubmitted
+        a, _ = QuestionSubmitted.objects.get_or_create(question=question, user=self)
         if state:
             a.correctly += 1   
         else:

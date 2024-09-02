@@ -27,5 +27,4 @@ urlpatterns = [
     path('account', views.account, name='account'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('pawns/', include('pawns.urls')),
-    path('quiz/', include('quiz.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

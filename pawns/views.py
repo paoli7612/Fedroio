@@ -1,12 +1,11 @@
+import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db import IntegrityError
 from django.urls import reverse
 from django.contrib import messages
-from .models import Pawn
-from .forms import PawnForm
-from quiz.models import Question
+from .models import Pawn, Sentence, Question
+from .forms import PawnForm, SentenceForm, QuestionForm
 
-# Create your views here.
 def index(request):
     return render(request, 'pawns/index.html', {
         'pawns': Pawn.objects.filter(parent=None)
@@ -15,8 +14,7 @@ def index(request):
 def pawn(request, slug):
     pawn = get_object_or_404(Pawn, slug=slug)
     return render(request, 'pawns/pawn.html', {
-        'pawn': pawn,
-        'pawns': Pawn.objects.filter(parent=pawn)
+        'pawn': pawn
     })
 
 def new_pawn(request, slug=None):
@@ -56,9 +54,38 @@ def new_pawn(request, slug=None):
         'back_url': back_url
     })
 
+def edit_sentence(request, id):
+    sentence = get_object_or_404(Sentence, id=id)
+    if request.method == 'POST':
+        form = SentenceForm(request.POST, request.FILES, instance=sentence)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Sentence updated successfully!')
+            return redirect(sentence.pawn.url())
+    else:
+        form = SentenceForm(instance=sentence)
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'back_url': sentence.pawn.url()
+    })
+
+def edit_question(request, id):
+    quesiton = get_object_or_404(Question, id=id)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES, instance=quesiton)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Sentence updated successfully!')
+            return redirect(quesiton.pawn.url())
+    else:
+        form = QuestionForm(instance=quesiton)
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'back_url': quesiton.pawn.url()
+    })
+
 def edit_pawn(request, slug):
     pawn = get_object_or_404(Pawn, slug=slug)
-
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES, instance=pawn)
         if form.is_valid():
@@ -85,6 +112,30 @@ def delete_pawn(request, slug):
         'url_back': pawn.url()
     })
 
+def delete_question(request, id):
+    question = get_object_or_404(Question, id=id)
+    if request.method == 'POST':
+        url = question.pawn.url()
+        question.delete()
+        return redirect(url)
+    return render(request, 'ask.html', {
+        'title': 'Delete Question',
+        'text': f'You\'re deleting the Question: <b>{question}</b>?',
+        'url_back': question.pawn.url()
+    })
+
+def delete_sentence(request, id):
+    sentence = get_object_or_404(Sentence, id=id)
+    if request.method == 'POST':
+        url = sentence.pawn.url()
+        sentence.delete()
+        return redirect(url)
+    return render(request, 'ask.html', {
+        'title': 'Delete sentence',
+        'text': f'You\'re deleting this sentence: <b>{sentence}</b>?',
+        'url_back': sentence.pawn.url()
+    })
+
 def edit_questions(request, slug):
     pawn = get_object_or_404(Pawn, slug=slug)
     if request.method == 'POST':
@@ -103,4 +154,110 @@ def edit_questions(request, slug):
         return redirect(pawn.url())
     return render(request, 'pawns/edit-questions.html', {
         'pawn': pawn
+    })
+
+def new_sentence(request, slug):
+    pawn = get_object_or_404(Pawn, slug=slug)
+    if request.method == 'POST':
+        form = SentenceForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'New sentence created!')
+                return redirect(reverse('pawn', args=[pawn.slug]))
+            except IntegrityError as e:
+                form.fields['slug'].initial = form.cleaned_data['slug']
+                if 'UNIQUE constraint failed' in str(e):
+                    form.add_error('slug', f'{pawn.slug}: A pawn with this slug already exists.')
+                else:
+                    form.add_error(None, 'An error occurred while creating the pawn.')
+    else:
+        form = SentenceForm(initial={'pawn': pawn})
+
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'pawn': pawn,
+        'back_url': pawn.url()
+    })
+
+def new_question(request, slug):
+    pawn = get_object_or_404(Pawn, slug=slug)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'New sentence created!')
+                return redirect(reverse('pawn', args=[pawn.slug]))
+            except IntegrityError as e:
+                form.fields['slug'].initial = form.cleaned_data['slug']
+                if 'UNIQUE constraint failed' in str(e):
+                    form.add_error('slug', f'{pawn.slug}: A pawn with this slug already exists.')
+                else:
+                    form.add_error(None, 'An error occurred while creating the pawn.')
+    else:
+        form = QuestionForm(initial={'pawn': pawn})
+
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'pawn': pawn,
+        'back_url': pawn.url()
+    })
+
+def quiz_points(request, slug):
+    pawn = get_object_or_404(Pawn, slug=slug)
+    questions = pawn.all_questions() # prendo tutte le domande di questo pawns o i figli
+    if request.method == 'GET': # Nuova partita
+        request.session['points'] = 0
+        request.session['answered_questions'] = [] 
+        question = random.choice(questions)
+    else: # Risposta ad una domanda
+        question_id = request.POST.get('id')
+        question = get_object_or_404(Question, id=question_id)
+
+        if request.POST.get('answer') == '0': # Se ha risposto correttamente
+
+            if question_id in request.session['answered_questions']: # Se è gia stata risposta questa domanda durante questa partita riavvia la partita (probabile abuso della applicazione)
+                messages.error(request, 'Hai già risposto a questa domanda!')
+                return redirect(reverse('pawn.quiz-points', kwargs={'slug': slug}))
+            else: # non dovrebbe avere imbrogliato
+                request.session['points'] += 1 # un punto nella session
+                messages.success(request, 'Corretto') # messaggio "corretto"
+                question.userAnswered(request.user, True)
+
+                request.session['answered_questions'].append(question_id)
+                
+                questions_filtered = [question for question in questions if str(question.id) not in request.session['answered_questions']] # prendo le domande che non ho ancora risposto
+                if len(questions_filtered) == 0: # se le domande sono finite
+                    messages.success(request, 'Risposte completate :D')
+                    return redirect(reverse('account'))
+                else: # se ci sono ancora domande
+                    question = random.choice(questions_filtered)
+        else: # Se la risposta non è corretta
+            if request.user.is_authenticated:
+                request.user.answer(question, False)
+
+            messages.error(request, 'Errore')
+
+    return render(request, 'quiz/points.html', {
+        'points': request.session['points'],
+        'question': question
+    })
+
+def coze_test(request, slug):
+    pawn = get_object_or_404(Pawn, slug=slug)
+
+    if request.method == 'POST':
+        sentence = get_object_or_404(Sentence, id=int(request.POST.get('sentence_id')))
+        kw = {key: value for key, value in request.POST.items() if key.startswith('word_')}
+        if sentence.control(kw):
+            messages.success(request, 'Corretto')
+            sentence = random.choice(pawn.sentences.all())
+        else:
+            messages.error(request, 'Riprova')
+    else:
+        sentence = random.choice(pawn.sentences.all())
+
+    return render(request, 'quiz/fitg.html', {
+        'sentence': sentence
     })

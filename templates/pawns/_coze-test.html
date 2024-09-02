@@ -1,0 +1,39 @@
+<div class="w3-panel w3-white w3-card-4 w3-round">
+    <div class="w3-row">
+        <h3 class="w3-left">Coze test
+            <sub>
+                <span class="w3-small">{{ pawn.sentences.count }} Frasi</span>
+            </sub>
+        </h3>
+        {% if user.is_superuser %}
+        <div class="w3-right w3-margin">
+            {% url 'pawn.sentence-new' slug=pawn.slug as url %}
+            {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
+        </div>
+        {% endif %}
+    </div>
+    <div class="w3-panel w3-center">
+        {% if pawn.sentences %}
+            {% url 'pawn.quiz-coze' slug=pawn.slug as url %}
+            {% include 'partials/abutton.html' with url=url title='Play' icon='play' label='Play'%}
+        {% endif %}
+    </div>
+    <table class="w3-table-all w3-card w3-margin-bottom">
+        {% for sentence in pawn.sentences.all %}
+        <tr>
+            <td>
+                {{ sentence|safe }}
+            </td>
+            <td>
+                <a href="{{ sentence.url_edit }}" class="w3-btn w3-round w3-theme w3-right" title="edit sentence">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{{ sentence.url_delete }}" class="w3-btn w3-round w3-theme" title="delete sentence">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+</div>

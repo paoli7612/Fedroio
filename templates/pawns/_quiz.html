@@ -1,0 +1,45 @@
+<div class="w3-panel w3-white w3-card-4 w3-round">
+    <h3 class="w3-left">Quiz
+        <sub>
+            <span class="w3-small">{{ pawn.all_questions|length }} Domande</span>
+        </sub>
+    </h3>
+    
+    {% if user.is_superuser %}
+    <div class="w3-right w3-margin">
+        {% url 'pawn.question-new' slug=pawn.slug as url %}
+        {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
+        {% url 'pawn.edit-questions' slug=pawn.slug as url %}
+        {% include 'partials/abutton-admin.html' with url=url title='Edit questions' icon='edit'%}
+    </div>
+    {% endif %}
+    <div class="w3-panel w3-center">
+        {% if pawn.all_questions %}
+            {% url 'pawn.quiz-points' slug=pawn.slug as url %}
+            {% include 'partials/abutton.html' with url=url title='Play points' icon='play' label='Punti'%}
+
+            {% url 'quiz.chain' pawn_slug=pawn.slug as url %}
+            {% include 'partials/abutton.html' with url=url title='Play chain' icon='chain' label='Catena'%}
+        {% endif %}
+    </div>
+    {% if user.is_superuser %}
+        <table class="w3-table-all w3-card w3-margin-bottom">
+            {% for question in pawn.questions.all %}
+                <tr>
+                    <td>
+                        {{ question }}
+                        <span class="w3-text-green">{{ question.correct }}</span>
+                    </td>
+                    <td>
+                        <a href="{{ question.url_edit }}" class="w3-btn w3-round w3-theme" title="add question">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="{{ question.url_delete }}" class="w3-btn w3-round w3-theme" title="delete question">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</div>
