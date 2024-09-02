@@ -9,7 +9,7 @@
         <div class="w3-panel w3-card w3-round w3-black w3-text-amber">
             <p class="w3-center">
                 <i class="fa fa-hourglass-half w3-margin"></i>
-                Post Coming Soon: Stay Tuned!
+                <b>Pawn</b> Coming Soon: Stay Tuned!
                 <i class="fa fa-hourglass-half w3-margin"></i>
             </p>
         </div>
@@ -61,13 +61,18 @@
     <div class="w3-row">
         {% for pawn in pawns %}
         <div class="w3-col s12 m6 l4 w3-padding">
-            <a href="{{ pawn.url }}"
-                class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
+            <a href="{{ pawn.url }}" class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
                 <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
-                <span class=" w3-display-right w3-padding">
-                    {{ pawn.all_questions|length }}
-                    <i class="fa fa-question-circle"></i>
-                </span>
+                {% if pawn.hide %}
+                    <span class="w3-display-bottomright w3-padding w3-round w3-red w3-margin w3-card">
+                        <i class="fa fa-hourglass-half"></i>
+                    </span>
+                {% elif pawn.all_questions %}
+                    <span class="w3-display-bottomright w3-padding w3-round w3-theme w3-margin w3-card">
+                        {{ pawn.all_questions|length }}
+                        <i class="fa fa-question-circle"></i>
+                    </span>
+                {% endif %}
                 {% if pawn.image %}
                     <img src="{{ pawn.image.url }}" style="max-height: 90px;" class="w3-round w3-border w3-border-theme w3-card w3-white w3-padding w3-left">
                     <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
