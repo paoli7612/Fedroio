@@ -25,12 +25,27 @@
         {% endif %}
     </div>
 
-    {% if pawn.image %}
+
+    {% if pawn.image and pawn.text %}
+    <div class="w3-row">
+        <div class="w3-col m5 w3-center">
+            <div class="w3-margin">
+                <div class="w3-white w3-round w3-padding w3-card">
+                    <img src="{{ pawn.image.url }}" class="w3-round w3-block">
+                </div>
+            </div>
+        </div>
+        <div class="w3-col m7">
+            <div class="w3-margin w3-card-4 w3-round w3-white w3-padding w3-large">
+                {{ pawn.text|safe }}
+            </div>
+        </div>
+    </div>
+    {% elif pawn.image %}
     <div class="w3-container w3-padding w3-center">
         <img src="{{ pawn.image.url }}" style="max-height: 500px;" class="w3-round">
     </div>
-    {% endif %}
-    {% if pawn.text %}
+    {% elif pawn.text %}
         <div class="w3-panel w3-card-4 w3-round w3-white w3-padding w3-large">{{ pawn.text|safe }}</div>
     {% endif %}
 
@@ -40,10 +55,16 @@
             <a href="{{ pawn.url }}"
                 class="w3-btn w3-display-container w3-round w3-block w3-hover-theme w3-bottombar w3-border-black w3-card-4 w3-white">
                 <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
-                <span class=" w3-display-right w3-padding">{{ pawn.all_questions|length }}
+                <span class=" w3-display-right w3-padding">
+                    {{ pawn.all_questions|length }}
                     <i class="fa fa-question-circle"></i>
                 </span>
-                <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+                {% if pawn.image %}
+                    <img src="{{ pawn.image.url }}" style="max-height: 90px;" class="w3-round w3-border w3-border-theme w3-padding w3-left">
+                    <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+                {% else %}
+                    <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+                {% endif %}
             </a>
         </div>
         {% endfor %}
