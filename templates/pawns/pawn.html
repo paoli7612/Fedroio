@@ -60,7 +60,7 @@
                     <i class="fa fa-question-circle"></i>
                 </span>
                 {% if pawn.image %}
-                    <img src="{{ pawn.image.url }}" style="max-height: 90px;" class="w3-round w3-border w3-border-theme w3-padding w3-left">
+                    <img src="{{ pawn.image.url }}" style="max-height: 90px;" class="w3-round w3-border w3-border-theme w3-card w3-padding w3-left">
                     <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
                 {% else %}
                     <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
