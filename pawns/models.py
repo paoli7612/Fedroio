@@ -64,7 +64,7 @@ class Pawn(models.Model):
         for s in sentences:
             for w in s.text.split(' '):
                 if w[0] == w[-1] == '*':
-                    words.append(w)
+                    words.append(w[1:-1])
         random.shuffle(words)
         return words
 
@@ -88,9 +88,9 @@ class Sentence(models.Model):
     def __str__(self):
         return re.sub(r'\*(.*?)\*', r'<strong>\1</strong>', self.text)
 
-    def control(self, asd):
+    def control(self, dict):
         correct = {f'word_{i+1}': parola.strip('*') for i, parola in enumerate(self.text.split())}
-        for k, w in asd.items():
+        for k, w in dict.items():
             if w.lower() != correct[k].lower():
                 return False
         return True

@@ -6,26 +6,34 @@
 
     <div class="w3-panel w3-white w3-card w3-round">
         <h1>Cloze Test</h1>
+    
         <form method="post">
             <input type="hidden" name="sentence_id" value="{{ sentence.id }}">
             {% csrf_token %}
-            <ul class="w3-ul">
-                {% for sentence in sentences %}
-                    <li>
-                        {% for word in sentence.hide_words %}
-                            {% if word == '___' %}
-                                <input class="w3-input w3-card w3-round w3-margin" style="display: inline-block; max-width: 200px;" type="text" name="{{ sentence.id}}_{{ forloop.counter }}">
-                            {% else %}
-                                {{ word }}
-                            {% endif %}
-                        {% endfor %}
+            <div class="w3-threequarter">
+                <ul class="w3-ul">
+                    {% for sentence in sentences %}
+                        <li>
+                            {% for word in sentence.hide_words %}
+                                {% if word == '___' %}
+                                    <input class="w3-input w3-card w3-round w3-margin" style="display: inline-block; max-width: 200px;" type="text" name="{{ sentence.id}}_{{ forloop.counter }}">
+                                {% else %}
+                                    {{ word }}
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="w3-quarter">
+                <ul class="w3-ul w3-card w3-round">
+                    {% for word in words %}
+                    <li class="w3-center">
+                        {{ word }} 
                     </li>
-                {% endfor %}
-            </ul>
-
-            {% for word in words %}
-                {{ word }} <br>
-            {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
 
             <div class="w3-panel w3-center">
                 <button type="submit" class="w3-btn w3-card w3-round w3-theme">

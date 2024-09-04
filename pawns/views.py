@@ -268,7 +268,19 @@ def coze_choice(request, slug):
     words = pawn.all_words()
 
     if request.method == 'POST':
-        print(request.POST)
+        error = False
+        for k,w in request.POST.items():
+            try:
+                id, word = k.split('_')
+                sentence = get_object_or_404(Sentence, id=id)
+                if not sentence.control({'word_' + word: w}):
+                    error = True
+            except Exception as e:
+                print(e) 
+        if error:
+            messages.error(request, 'errato')
+        else:
+            messages.success(request, 'corretto')
 
     return render(request, 'quiz/coze-choice.html', {
         'sentences': sentences,
