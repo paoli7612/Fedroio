@@ -13,9 +13,11 @@
         {% endif %}
     </div>
     <div class="w3-panel w3-center">
-        {% if pawn.sentences %}
+        {% if pawn.all_sentences %}
             {% url 'pawn.quiz-coze' slug=pawn.slug as url %}
             {% include 'partials/abutton.html' with url=url title='Play' icon='play' label='Play'%}
+            {% url 'pawn.choice-coze' slug=pawn.slug as url %}
+            {% include 'partials/abutton.html' with url=url title='Scegli' icon='check-square-o' label='Scegli'%}
         {% endif %}
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom">
@@ -24,6 +26,7 @@
             <td>
                 {{ sentence|safe }}
             </td>
+            {% if user.is_superuser %}
             <td>
                 <a href="{{ sentence.url_edit }}" class="w3-btn w3-round w3-theme w3-right" title="edit sentence">
                     <i class="fa fa-edit"></i>
@@ -32,6 +35,7 @@
                     <i class="fa fa-trash"></i>
                 </a>
             </td>
+            {% endif %}
             
         </tr>
         {% endfor %}

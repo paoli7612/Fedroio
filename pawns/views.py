@@ -258,6 +258,19 @@ def coze_test(request, slug):
     else:
         sentence = random.choice(pawn.sentences.all())
 
-    return render(request, 'quiz/fitg.html', {
+    return render(request, 'quiz/coze-test.html', {
         'sentence': sentence
     })
+
+def coze_choice(request, slug):
+    pawn = get_object_or_404(Pawn, slug=slug)
+    sentences = pawn.all_sentences()
+    words = pawn.all_words()
+
+    if request.method == 'POST':
+        print(request.POST)
+
+    return render(request, 'quiz/coze-choice.html', {
+        'sentences': sentences,
+        'words': words 
+    }) 

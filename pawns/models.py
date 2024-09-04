@@ -49,6 +49,25 @@ class Pawn(models.Model):
                 questions += questions_child
         return questions
     
+    def all_sentences(self):
+        sentences = list(self.sentences.all())
+        for child in self.childs.all():
+            sentences_child = child.all_sentences()
+            if sentences_child:
+                sentences += sentences_child
+        random.shuffle(sentences)
+        return sentences
+    
+    def all_words(self):
+        sentences = self.all_sentences()
+        words = list()
+        for s in sentences:
+            for w in s.text.split(' '):
+                if w[0] == w[-1] == '*':
+                    words.append(w)
+        random.shuffle(words)
+        return words
+
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')
     text = models.TextField(max_length=512)
