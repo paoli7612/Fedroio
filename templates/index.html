@@ -2,11 +2,11 @@
 
 {% block title %}Index{% endblock %}
 
-{% load static %}
 {% block content %}
     <div class="" style="max-width: 800px; margin: auto;">
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
+        {% load static %}   
         <img class="w3-left w3-margin" style="width: 5em" src="{% static "img/loco.png" %}" alt="logo Fedro">
         <img class="w3-right w3-margin w3-hide-small" style="width: 5em" src="{% static "img/loco.png" %}" alt="logo Fedro">
         <h1 class="w3-center">Fedro.io</h1>
