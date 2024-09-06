@@ -16,7 +16,7 @@
                         <li>
                             {% for word in sentence.hide_words %}
                                 {% if word == '___' %}
-                                    <input class="w3-input w3-card w3-round w3-margin" style="display: inline-block; max-width: 200px;" type="text" name="{{ sentence.id}}_{{ forloop.counter }}">
+                                    <input class="w3-input w3-card w3-round w3-margin-left w3-margin-right" style="display: inline-block; max-width: 200px;" type="text" name="{{ sentence.id}}_{{ forloop.counter }}">
                                 {% else %}
                                     {{ word }}
                                 {% endif %}
