@@ -79,11 +79,10 @@ class Sentence(models.Model):
     def url_delete(self):
         return reverse('pawns.sentence-delete', kwargs={'id': self.id})
 
-    def hide(self):
-        return re.sub(r'\*[^*]*\*', '___', self.text)
-    
     def hide_words(self):
-        return self.hide().split(' ')
+        parti = re.split(r'(\*.*?\*)', self.text)
+        risultato = ['___' if part.startswith('*') and part.endswith('*') else part for part in parti]
+        return risultato
 
     def __str__(self):
         return re.sub(r'\*(.*?)\*', r'<strong>\1</strong>', self.text)

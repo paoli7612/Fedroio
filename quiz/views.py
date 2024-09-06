@@ -134,4 +134,3 @@ def chain(request, pawn_slug):
         'question': nextQuestion,
         'questions': chain
     })
-

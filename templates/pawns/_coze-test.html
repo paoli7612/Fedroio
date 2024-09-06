@@ -6,17 +6,17 @@
             </sub>
         </h3>
         {% if user.is_superuser %}
-        <div class="w3-right w3-margin">
-            {% url 'pawn.sentence-new' slug=pawn.slug as url %}
-            {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
-        </div>
+            <div class="w3-right w3-margin">
+                {% url 'pawn.sentence-new' slug=pawn.slug as url %}
+                {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
+            </div>
         {% endif %}
     </div>
     <div class="w3-panel w3-center">
         {% if pawn.all_sentences %}
-            {% url 'pawn.quiz-coze' slug=pawn.slug as url %}
+            {% url 'pawn.coze' slug=pawn.slug as url %}
             {% include 'partials/abutton.html' with url=url title='Play' icon='play' label='Play'%}
-            {% url 'pawn.choice-coze' slug=pawn.slug as url %}
+            {% url 'pawn.coze-choice' slug=pawn.slug as url %}
             {% include 'partials/abutton.html' with url=url title='Scegli' icon='check-square-o' label='Scegli'%}
         {% endif %}
     </div>
