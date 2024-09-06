@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Pawns{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>Edit-group</h1>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="w3-right w3-panel">
+                <a href="{% url 'dashboard' %}" class="w3-btn">
+                    <i class="fa fa-arrow-left"></i>
+                    Annulla
+                </a>
+                <button type="submit" class="w3-btn w3-theme w3-round w3-card">
+                    Salva
+                    <i class="fa fa-save"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,9 +1,28 @@
+import random, string
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 from django.db import models
+from django.contrib.auth.hashers import make_password
+
 
 
 class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
+
+    def url(self):
+        return reverse('user', kwargs={'id': self.id})
+
+    def url_delete(self):
+        return reverse('user.delete', kwargs={'id': self.id})
+
+    def url_reset(self):
+        return reverse('user.reset', kwargs={'id': self.id})
+
+    def reset_password(self):
+        new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+        self.set_password(new_password) 
+        self.save()
+        return new_password
 
     def answer(self, question, state):
         from pawns.models import QuestionSubmitted
