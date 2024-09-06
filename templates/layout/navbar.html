@@ -14,11 +14,7 @@
                 <span class="w3-hide-small">Pawns</span>
             </a>
 
-            {% url 'info' as url %}
-            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
-                <i class="fa fa-info"></i>
-                <span class="w3-hide-small">Info</span>
-            </a>
+
 
             {% if user.is_superuser %}
                 {% url 'dashboard' as url %}
@@ -29,6 +25,11 @@
             {% endif %}
 
             <div class="w3-right">
+                {% url 'info' as url %}
+                <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                    <i class="fa fa-info"></i>
+                    <span class="w3-hide-small">Info</span>
+                </a>
                 {% if user.is_authenticated %}
                     {% url 'account' as url %}
                     <a class="w3-bar-item w3-btn" href="{{ url }}" title={{ user.last_name }}>

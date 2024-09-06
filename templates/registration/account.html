@@ -5,6 +5,16 @@
 
 {% block content %}
 {% load static %}
+<div class="w3-panel w3-white w3-card-4 w3-round">
+    <h1>Gruppi</h1>
+    {% for group in user.groups.all %}
+        <div class="w3-panel">
+            <a href="" class="w3-btn w3-border w3-border-theme">
+                {{ group }}
+            </a>
+        </div>
+    {% endfor %}
+</div>
     <div class="w3-panel w3-white w3-card-4 w3-round">
         <h1 class="w3-left">{{ user }}</h1>
         <form action="{% url 'logout' %}" method="post" class="w3-right w3-margin">
