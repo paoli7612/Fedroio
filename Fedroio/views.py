@@ -10,10 +10,7 @@ def home(request):
         'pawns': Pawn.objects.filter(parent=None)[:2]
     })
 
-def account(request):
-    return render(request, 'registration/account.html', {
-        'answers': request.user.answers.all().order_by('-wrongly', 'correctly')
-    })
+
 
 def info(request):
     return render(request, 'info.html')

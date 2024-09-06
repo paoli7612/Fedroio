@@ -27,12 +27,9 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('info/', views.info, name='info'),
     path('admin/', admin.site.urls),
-    path('account', views.account, name='account'),
-    path('accounts/', include('django.contrib.auth.urls')),
+
     path('pawns/', include('pawns.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    path('', include('core.urls'))
 ] 
-if not settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

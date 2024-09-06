@@ -1,14 +1,14 @@
 
 {% extends "layout/base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Accedi{% endblock %}
+{% block title %}Registrati{% endblock %}
 
 {% block content %}
 {% load static %}
     <div class="w3-half w3-panel">
 
         <div class="w3-panel w3-white w3-card-4 w3-round">
-            <h3 class="w3-center">Login</h3>
+            <h3 class="w3-center">Signup</h3>
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
