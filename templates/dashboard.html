@@ -37,6 +37,11 @@
 
 <div class="w3-panel w3-card w3-round w3-white">
     <h1>Gruppi</h1>
+    <div class="w3-panel">
+        <a href="{% url 'core.group.new' %}" class="w3-btn w3-round w3-card w3-theme w3-right">
+            Nuovo Grouppo <i class="fa fa-plus"></i>
+        </a>
+    </div>
     <table class="w3-table-all w3-card w3-margin-bottom w3-margin-top">
         {% for group in groups %}
             <tr>
@@ -45,6 +50,10 @@
                 <td>
                     <a href="{% url 'core.group.edit' id=group.id %}" class="w3-btn w3-round w3-card w3-theme">
                         Modifica <i class="fa fa-edit"></i>
+                    </a>
+
+                    <a href="{% url 'core.group.delete' id=group.id %}" class="w3-btn w3-round w3-card w3-red">
+                        Elimina <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>

@@ -32,6 +32,18 @@ def user_delete(request, id):
     })
 
 @admin_required
+def group_delete(request, id):
+    group = get_object_or_404(Group, id=id)
+    if request.method == 'POST':
+        group.delete()
+        return redirect(reverse('dashboard'))
+    return render(request, 'ask.html', {
+        'title': 'Delete Pawn',
+        'text': f'You\'re deleting the Group: <b>{group}</b>?',
+        'url_back': reverse('dashboard')
+    })
+
+@admin_required
 def user_reset(request, id):
     user = get_object_or_404(User, id=id)
     password = user.reset_password()
@@ -72,3 +84,16 @@ def group_edit(request, id):
         form = GroupMembersForm(instance=group)  # Precompila il form con i partecipanti attuali
     
     return render(request, 'admin/form.html', {'form': form, 'group': group})
+
+def group_new(request):
+    if request.method == 'POST':
+        # Se è un POST, stiamo creando un nuovo gruppo con i dati inviati
+        form = GroupMembersForm(request.POST)
+        if form.is_valid():
+            form.save()  # Crea il nuovo gruppo e i membri associati
+            return redirect('dashboard')  # Reindirizza alla pagina desiderata, es. 'dashboard'
+    else:
+        # Altrimenti, mostra un form vuoto per creare un nuovo gruppo
+        form = GroupMembersForm()
+    
+    return render(request, 'admin/form.html', {'form': form})

@@ -11,4 +11,6 @@ urlpatterns = [
     path('accounts/sign-up', views.signup, name='signup'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('edit-group/<int:id>', views.group_edit, name='core.group.edit'),
+    path('new-group', views.group_new, name='core.group.new'),
+    path('delete-group/<int:id>', views.group_delete, name='core.group.delete'),
 ]

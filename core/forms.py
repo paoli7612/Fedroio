@@ -23,6 +23,7 @@ class UserForm(UserCreationForm):
         return user
     
 class GroupMembersForm(forms.ModelForm):
+    name = forms.CharField(label="Nome del gruppo", max_length=150)
     users = forms.ModelMultipleChoiceField(
         queryset=User.objects.all(),  # Elenca tutti gli utenti disponibili
         widget=forms.CheckboxSelectMultiple,  # Usa una lista di checkbox per selezionare più utenti
@@ -31,10 +32,23 @@ class GroupMembersForm(forms.ModelForm):
 
     class Meta:
         model = Group
-        fields = []  # Non modifichiamo il nome del gruppo, solo i partecipanti
+        fields = ['name']  # Includiamo il campo 'name' del gruppo e i membri
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.instance.pk:
-            # Pre-compila il campo users con gli utenti attualmente associati al gruppo
+            # Se è un gruppo esistente, pre-compila gli utenti associati
             self.fields['users'].initial = self.instance.user_set.all()
+
+    def save(self, commit=True):
+        # Salva prima il gruppo, che include il nome
+        group = super().save(commit=False)
+        
+        if commit:
+            group.save()
+        
+        # Aggiorna i membri del gruppo (gli utenti selezionati)
+        if self.cleaned_data['users']:
+            group.user_set.set(self.cleaned_data['users'])
+        
+        return group
