@@ -4,19 +4,21 @@ from django.urls import reverse
 from django.db import models
 from django.contrib.auth.hashers import make_password
 
-
-
 class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
 
     def url(self):
-        return reverse('user', kwargs={'id': self.id})
+        return reverse('user', kwargs={'username': self.username})
 
     def url_delete(self):
-        return reverse('user.delete', kwargs={'id': self.id})
+        return reverse('user.delete', kwargs={'username': self.username})
 
     def url_reset(self):
-        return reverse('user.reset', kwargs={'id': self.id})
+        return reverse('user.reset', kwargs={'username': self.username})
+
+    def pawns(self):
+        from pawns.models import Pawn
+        return Pawn.objects.filter(user=self, parent=None)
 
     def reset_password(self):
         new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))

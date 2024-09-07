@@ -6,8 +6,8 @@
         <h1 class="w3-left">{{ pawn }}</h1>
     </div>
     <div class="w3-col m3">
-        {% if user.is_superuser %}
-            <div class="w3-right w3-margin">
+        <div class="w3-right w3-margin">
+            {% if user == pawn.user %}
                 {% url 'pawn.new' slug=pawn.slug as url %}
                 {% include 'partials/abutton-admin.html' with url=url title='New pawn' icon='plus'%}
                 
@@ -16,8 +16,8 @@
                 
                 {% url 'pawn.delete' slug=pawn.slug as url %}
                 {% include 'partials/abutton-admin.html' with url=url title='Delete pawn' icon='trash'%}
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </div>
 

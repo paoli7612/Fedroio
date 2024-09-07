@@ -9,19 +9,18 @@ from .decorators import admin_required
 
 # Create your views here.
 def account(request):
-    return render(request, 'registration/account.html', {
-        'answers': request.user.answers.all().order_by('-wrongly', 'correctly')
-    })
-
-@admin_required
-def user(request, id):
     return render(request, 'registration/user.html', {
-        'user': get_object_or_404(User, id=id)
+        'user': request.user
+    })
+
+def user(request, username):
+    return render(request, 'registration/user.html', {
+        'user': get_object_or_404(User, username=username)
     })
 
 @admin_required
-def user_delete(request, id):
-    user = get_object_or_404(User, id=id)
+def user_delete(request, username):
+    user = get_object_or_404(User, username=username)
     if request.method == 'POST':
         user.delete()
         return redirect(reverse('dashboard'))
@@ -32,8 +31,8 @@ def user_delete(request, id):
     })
 
 @admin_required
-def group_delete(request, id):
-    group = get_object_or_404(Group, id=id)
+def group_delete(request, username):
+    group = get_object_or_404(Group, username=username)
     if request.method == 'POST':
         group.delete()
         return redirect(reverse('dashboard'))

@@ -8,7 +8,7 @@ from .forms import PawnForm, SentenceForm, QuestionForm
 
 def index(request):
     return render(request, 'pawns/index.html', {
-        'pawns': Pawn.objects.filter(parent=None)
+        'pawns': Pawn.objects.filter(parent=None),
     })
 
 def pawn(request, slug):
@@ -86,6 +86,7 @@ def edit_question(request, id):
 
 def edit_pawn(request, slug):
     pawn = get_object_or_404(Pawn, slug=slug)
+    print(pawn.user)
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES, instance=pawn)
         if form.is_valid():

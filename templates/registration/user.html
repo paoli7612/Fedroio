@@ -1,13 +1,61 @@
 
 {% extends "layout/base.html" %}
 
-{% block title %}{{ user.last_name }}{% endblock %}
+{% block title %}{{ user }}{% endblock %}
 
 {% block content %}
-{% load static %}
+    <div class="w3-row">
+        <div class="w3-col m3 w3-padding">
+            <div class="w3-panel w3-white w3-card-4 w3-round">
+                <h1>{{ user }}</h1>
+                <h3>{{ user.email }}</h3>
+            </div>
+        </div>
+        <div class="w3-col m9 w3-padding">
+            <div class="w3-panel w3-white w3-card-4 w3-round">
+                <strong>Gruppi: </strong>
+                {{ user.groups.all|join:', ' }}
+            </div>
+        </div>
+        {% include 'pawns/_childs.html' with pawns=user.pawns %}
+    </div>
+
+    
+
     <div class="w3-panel w3-white w3-card-4 w3-round">
-        <h2>
-            {{ user }}
-        </h2>
+        <h1>I miei Pawns</h1>
+        <ul class="w3-ul">
+            {% for pawn in user.pawns.filter %}
+                <li>{{ pawn }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1 class="w3-left">{{ user }}</h1>
+        <form action="{% url 'logout' %}" method="post" class="w3-right w3-margin">
+            {% csrf_token %}
+            <input type="submit" value="Logout" class="w3-btn w3-red w3-round w3-card">
+        </form>
+        <table class="w3-table-all w3-panel w3-card">
+            <tr>
+                <th>Question</th>
+                <th>Correctly</th>
+                <th>Wrongly <i class="fa fa-arrow-down"></i></th>
+            </tr>
+            {% for answer in answers %}
+            <tr>
+                <td>
+                    {{ answer.question.text }}
+                </td>
+                <td>
+                    <span class="w3-text-green">{{ answer.correctly }}</span>
+                </td>
+                <td>
+                    <span class="w3-text-red">{{ answer.wrongly }}</span>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}

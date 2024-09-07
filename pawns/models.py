@@ -3,13 +3,15 @@ from django.shortcuts import get_object_or_404
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.contrib.auth.models import Group
+
 
 from core.models import User
 
 class Pawn(models.Model):
     name = models.CharField(max_length=128)
     text = models.TextField(max_length=512, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs')
     slug = models.SlugField(max_length=512, unique=True, blank=True)
     image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # Add this line
@@ -17,6 +19,7 @@ class Pawn(models.Model):
     hide = models.BooleanField(default=True)
     quiz = models.BooleanField(default=False)
     coze = models.BooleanField(default=False)
+    groups = models.ManyToManyField(Group, related_name='pawns', blank=True)  # Relazione con il modello Group
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -29,6 +32,9 @@ class Pawn(models.Model):
     def url(self):
         return reverse('pawn', kwargs={'slug': self.slug})
     
+    def users(self):
+        return User.objects.filter(groups__in=self.groups.all()).distinct()
+
     def parent_url(self):
         if self.parent:
             return self.parent.url()
