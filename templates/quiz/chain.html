@@ -3,18 +3,6 @@
 {% block title %}Catena{% endblock %}
 
 {% block content %}
-    <div class="w3-row">
-        {% if user.is_superuser %}
-        <div class="w3-right w3-margin">
-            <a href="{% url 'question.edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn">
-                <i class="fa fa-edit"></i>
-            </a>
-            <a href="{% url 'question.delete' id=question.id %}" class="w3-btn w3-round w3-theme" title="delete pawn">
-                <i class="fa fa-trash"></i>
-            </a>
-        </div>
-        {% endif %}
-    </div>
     <div class="w3-panel w3-quarter">
         <ul class="w3-ul w3-white w3-round w3-card w3-bottombar w3-border-theme">
             {% for question in questions %}

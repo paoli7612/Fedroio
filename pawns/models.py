@@ -43,6 +43,12 @@ class Pawn(models.Model):
     def url_newSentence(self):
         return reverse('pawn.sentence-new', kwargs={'uuid': self.uuid})
 
+    def url_quizPoints(self):
+        return reverse('pawn.quiz-points', kwargs={'uuid': self.uuid})
+    
+    def url_quizChain(self):
+        return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
+
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 
