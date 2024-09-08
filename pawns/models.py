@@ -37,6 +37,12 @@ class Pawn(models.Model):
     def url_edit(self):
         return reverse('pawn.edit', kwargs={'uuid': self.uuid})
 
+    def url_newQuestion(self):
+        return reverse('pawn.question-new', kwargs={'uuid': self.uuid})
+
+    def url_newSentence(self):
+        return reverse('pawn.sentence-new', kwargs={'uuid': self.uuid})
+
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 

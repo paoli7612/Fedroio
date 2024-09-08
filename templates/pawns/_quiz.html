@@ -7,8 +7,7 @@
     
     {% if user.is_superuser %}
     <div class="w3-right w3-margin">
-        {% url 'pawn.question-new' slug=pawn.slug as url %}
-        {% include 'partials/abutton-admin.html' with url=url title='New questions' icon='plus'%}
+        {% include 'partials/abutton-admin.html' with url=pawn.url_newQuestion title='New questions' icon='plus'%}
         {% url 'pawn.edit-questions' slug=pawn.slug as url %}
         {% include 'partials/abutton-admin.html' with url=url title='Edit questions' icon='edit'%}
     </div>
