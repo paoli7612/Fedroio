@@ -260,7 +260,7 @@ def coze(request, uuid, difficulty=4):
             sentence = random.choice(pawn.all_sentences())
             corrects = list()
         else:
-            messages.error(request, 'Riprova' + str(corrects))
+            messages.error(request, 'Riprova')
     else:
         sentence = random.choice(pawn.all_sentences())
         corrects = list()

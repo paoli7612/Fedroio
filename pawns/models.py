@@ -49,6 +49,9 @@ class Pawn(models.Model):
     def url_quizChain(self):
         return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
 
+    def url_cozePlay(self):
+        return reverse('pawn.coze', kwargs={'uuid': self.uuid})
+
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 

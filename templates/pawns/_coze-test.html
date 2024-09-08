@@ -13,8 +13,7 @@
     </div>
     <div class="w3-panel w3-center">
         {% if pawn.all_sentences %}
-            {% url 'pawn.coze' slug=pawn.slug as url %}
-            {% include 'partials/abutton.html' with url=url title='Play' icon='play' label='Play'%}
+            {% include 'partials/abutton.html' with url=pawn.url_cozePlay title='Play' icon='play' label='Play'%}
             {% url 'pawn.coze-choice' slug=pawn.slug as url %}
             {% include 'partials/abutton.html' with url=url title='Scegli' icon='check-square-o' label='Scegli'%}
         {% endif %}
