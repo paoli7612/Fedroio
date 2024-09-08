@@ -6,7 +6,14 @@ from django.contrib.auth.hashers import make_password
 
 class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
-
+    THEME_CHOICES = [
+        ('red', 'Red'),
+        ('blue', 'Blue'),
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+    ]
+    theme = models.CharField(max_length=6, choices=THEME_CHOICES, default='blue')
+    
     def url(self):
         return reverse('user', kwargs={'username': self.username})
 

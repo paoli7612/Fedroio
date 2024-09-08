@@ -4,6 +4,20 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from .models import User  # Import your custom User model
 
+class SettingsForm(forms.Form):
+    class Meta:
+        model = User
+        fields = ['theme']
+        widgets = {
+            'theme': forms.RadioSelect(choices=[('dark', 'Dark Theme'), ('light', 'Light Theme')]),
+        }
+    theme = forms.ChoiceField(choices=[
+        ('blue', 'Blue'),
+        ('red', 'Red'),
+        ('green', 'Green'),
+        ('yellow', 'Yellow')
+    ])
+
 class UserForm(UserCreationForm):
     usable_password = None
     email = forms.EmailField(required=True, help_text="Enter a valid email address.")

@@ -1,0 +1,29 @@
+
+{% extends "layout/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+{% load static %}
+    <div class="w3-half w3-panel">
+
+        <div class="w3-panel w3-white w3-card-4 w3-round">
+            <h3 class="w3-center">Settings</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="w3-right w3-panel">
+                    <a href="{% url "signup" %}" class="w3-btn">
+                        <i class="fa fa-arrow-left"></i>
+                        Back
+                    </a>
+                    <button type="submit" class="w3-btn w3-theme w3-round w3-card">
+                        Save
+                        <i class="fa fa-save"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+ 
+{% endblock %}

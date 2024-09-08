@@ -4,13 +4,13 @@ from . import views
 urlpatterns = [
     path('', views.index, name='pawns'),
     path('new', views.new_pawn, name='pawn.new'),
-    path('<str:slug>', views.pawn, name='pawn'),
-    path('<str:slug>/new', views.new_pawn, name='pawn.new'),
-    path('<str:slug>/edit', views.edit_pawn, name='pawn.edit'),
-    path('<str:slug>/delete', views.delete_pawn, name='pawn.delete'),
+    path('<uuid:uuid>', views.pawn, name='pawn'),
+    path('<uuid:uuid>/new', views.new_pawn, name='pawn.new'),
+    path('<uuid:uuid>/edit', views.edit_pawn, name='pawn.edit'),
+    path('<uuid:uuid>/delete', views.delete_pawn, name='pawn.delete'),
 
-    path('<str:slug>/new-sentence', views.new_sentence, name='pawn.sentence-new'),
-    path('<str:slug>/new-question', views.new_question, name='pawn.question-new'),
+    path('<uuid:uuid>/new-sentence', views.new_sentence, name='pawn.sentence-new'),
+    path('<uuid:uuid>/new-question', views.new_question, name='pawn.question-new'),
     
     path('sentence/<int:id>/edit', views.edit_sentence, name='pawns.sentence-edit'),
     path('question/<int:id>/edit', views.edit_question, name='pawns.question-edit'),

@@ -4,6 +4,20 @@
 {% block title %}{{ user }}{% endblock %}
 
 {% block content %}
+<div class="w3-center">
+    
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <a href="{% url 'settings' %}" class="w3-btn w3-theme w3-round w3-card">
+            <i class="fa fa-cog"></i>
+            Settings
+        </a>
+        <button type="submit" class="w3-btn w3-red w3-round w3-card">
+            <i class="fa fa-sign-out"></i>
+            Logout
+        </button>
+    </form>
+</div>
     <div class="w3-row">
         <div class="w3-col m3 w3-padding">
             <div class="w3-panel w3-white w3-card-4 w3-round">
@@ -20,8 +34,6 @@
         {% include 'pawns/_childs.html' with pawns=user.pawns %}
     </div>
 
-    
-
     <div class="w3-panel w3-white w3-card-4 w3-round">
         <h1>I miei Pawns</h1>
         <ul class="w3-ul">
@@ -33,10 +45,7 @@
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
         <h1 class="w3-left">{{ user }}</h1>
-        <form action="{% url 'logout' %}" method="post" class="w3-right w3-margin">
-            {% csrf_token %}
-            <input type="submit" value="Logout" class="w3-btn w3-red w3-round w3-card">
-        </form>
+
         <table class="w3-table-all w3-panel w3-card">
             <tr>
                 <th>Question</th>

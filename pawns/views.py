@@ -11,16 +11,16 @@ def index(request):
         'pawns': Pawn.objects.filter(parent=None, is_public=True),
     })
 
-def pawn(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def pawn(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     return render(request, 'pawns/pawn.html', {
         'pawn': pawn
     })
 
-def new_pawn(request, slug=None):
+def new_pawn(request, uuid=None):
     parent_pawn = None
-    if slug:
-        parent_pawn = get_object_or_404(Pawn, slug=slug)
+    if uuid:
+        parent_pawn = get_object_or_404(Pawn, uuid=uuid)
         back_url = parent_pawn.url
     else:
         back_url = reverse('pawns')
@@ -84,8 +84,8 @@ def edit_question(request, id):
         'back_url': quesiton.pawn.url()
     })
 
-def edit_pawn(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def edit_pawn(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     print(pawn.user)
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES, instance=pawn)
@@ -101,8 +101,8 @@ def edit_pawn(request, slug):
         'back_url': pawn.url
     })
 
-def delete_pawn(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def delete_pawn(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     if request.method == 'POST':
         url = pawn.parent_url()
         pawn.delete()
@@ -157,15 +157,15 @@ def edit_questions(request, slug):
         'pawn': pawn
     })
 
-def new_sentence(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def new_sentence(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     if request.method == 'POST':
         form = SentenceForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 form.save()
                 messages.success(request, 'New sentence created!')
-                return redirect(reverse('pawn', args=[pawn.slug]))
+                return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
             except IntegrityError as e:
                 form.fields['slug'].initial = form.cleaned_data['slug']
                 if 'UNIQUE constraint failed' in str(e):
@@ -181,8 +181,8 @@ def new_sentence(request, slug):
         'back_url': pawn.url()
     })
 
-def new_question(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def new_question(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
         if form.is_valid():
@@ -250,13 +250,17 @@ def coze(request, slug, difficulty=4):
 
     if request.method == 'POST':
         sentence = get_object_or_404(Sentence, id=int(request.POST.get('sentence_id')))
-        if sentence.control({key: value for key, value in request.POST.items() if key.startswith('word_')}):
+        input_words = request.POST.getlist('words[]')
+        corrects, result = sentence.control(input_words)
+        if result:
             messages.success(request, 'Corretto')
             sentence = random.choice(pawn.all_sentences())
+            corrects = list()
         else:
-            messages.error(request, 'Riprova')
+            messages.error(request, 'Riprova' + str(corrects))
     else:
         sentence = random.choice(pawn.all_sentences())
+        corrects = list()
 
     options = set()
     words = pawn.all_words()
@@ -267,7 +271,8 @@ def coze(request, slug, difficulty=4):
 
     return render(request, 'quiz/coze.html', {
         'sentence': sentence,
-        'words': options
+        'words': options,
+        'corrects': corrects
     })
 
 def coze_choice(request, slug):

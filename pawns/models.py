@@ -1,4 +1,5 @@
-import random, re
+import random, re, uuid
+import uuid
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
 from django.utils.text import slugify
@@ -7,29 +8,35 @@ from django.db import models
 from core.models import User
 
 class Pawn(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     groups = models.ManyToManyField(Group, related_name='pawns', blank=True)  # Relazione con il modello Group
-    slug = models.SlugField(max_length=512, unique=True, blank=True)
+
+    number = models.PositiveIntegerField(null=True, blank=True)
     name = models.CharField(max_length=128)
     text = models.TextField(max_length=512, null=True, blank=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs')
     image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # Add this line
-    number = models.PositiveIntegerField(null=True, blank=True)
+    
     is_public = models.BooleanField(default=False)
     quiz = models.BooleanField(default=False)
     coze = models.BooleanField(default=False)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
     def url(self):
-        return reverse('pawn', kwargs={'slug': self.slug})
+        return reverse('pawn', kwargs={'uuid': self.uuid})
+
+    def url_new(self):
+        return reverse('pawn.new', kwargs={'uuid': self.uuid})
     
+    def url_delete(self):
+        return reverse('pawn.delete', kwargs={'uuid': self.uuid})
+
+    def url_edit(self):
+        return reverse('pawn.edit', kwargs={'uuid': self.uuid})
+
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 
@@ -87,19 +94,20 @@ class Sentence(models.Model):
         return reverse('pawns.sentence-delete', kwargs={'id': self.id})
 
     def hide_words(self):
-        parti = re.split(r'(\*.*?\*)', self.text)
-        risultato = ['___' if part.startswith('*') and part.endswith('*') else part for part in parti]
-        return risultato
+        return ['___' if part.startswith('*') and part.endswith('*') else part for part in re.split(r'(\*.*?\*)', self.text)]
 
     def __str__(self):
         return re.sub(r'\*(.*?)\*', r'<strong>\1</strong>', self.text)
 
-    def control(self, dict):
-        correct = {f'word_{i+1}': parola.strip('*') for i, parola in enumerate(self.text.split())}
-        for k, w in dict.items():
-            if w.lower() != correct[k].lower():
-                return False
-        return True
+    def control(self, words):
+        final = list()
+        result = True
+        corrects = [word.lower().strip() for word in self.words()]  
+        for word in words:
+            if not word.lower() in corrects:
+                result = False
+            final.append(word)
+        return final, result
 
 class Question(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='questions')
@@ -125,9 +133,6 @@ class Question(models.Model):
         answers = list(enumerate([self.correct, self.a1, self.a2, self.a3]))
         random.shuffle(answers)
         return answers
-
-    def delete_url(self):
-        return reverse('question.delete', kwargs={'section_slug': self.section.slug, 'chapter_slug': self.chapter.slug, 'question_id': self.id})
 
     def userAnswered(self, user, state):
         if user.is_authenticated:

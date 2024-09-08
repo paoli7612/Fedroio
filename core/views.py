@@ -4,13 +4,31 @@ from django.contrib.auth import login
 from django.contrib.auth.models import Group
 from django.urls import reverse
 from .models import User
-from .forms import UserForm, GroupMembersForm
-from .decorators import admin_required
+from .forms import UserForm, GroupMembersForm, SettingsForm
+from .decorators import admin_required, login_required
 
 # Create your views here.
+@login_required
 def account(request):
     return render(request, 'registration/user.html', {
         'user': request.user
+    })
+
+@login_required
+def settings(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            user.theme = form.cleaned_data['theme']
+            user.save()
+            return redirect('account')
+    else:
+        form = SettingsForm(initial={'theme': user.theme})
+
+    return render(request, 'registration/settings.html', {
+        'form': form
     })
 
 def user(request, username):

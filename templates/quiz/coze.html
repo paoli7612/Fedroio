@@ -3,7 +3,6 @@
 {% block title %}Catena{% endblock %}
 
 {% block content %}
-
     <div class="w3-panel w3-white w3-card w3-round">
         <h1>Cloze Test</h1>
         <form method="post">
@@ -12,7 +11,7 @@
             <div class="w3-threequarter">
                 {% for word in sentence.hide_words %}
                     {% if word == '___' %}
-                        <input class="w3-input w3-card w3-round" style="display: inline-block; max-width: 200px;" type="text" name="word_{{ forloop.counter }}">
+                        <input class="w3-input w3-card w3-round" style="display: inline-block; max-width: 200px;" type="text" name="words[]">
                     {% else %}
                         {{ word }}
                     {% endif %}
@@ -38,7 +37,11 @@
 
     <script>
         $("input:text:visible:first").focus();
+        {% for word in corrects %}
+            $("input:text").eq({{ forloop.counter }}-1).val("{{ word }}");
+        {% endfor %}
     </script>
+
 
 {% endblock %}
 
