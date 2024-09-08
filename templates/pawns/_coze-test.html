@@ -2,7 +2,7 @@
     <div class="w3-row">
         <h3 class="w3-left">Coze test
             <sub>
-                <span class="w3-small">{{ pawn.sentences.count }} Frasi</span>
+                <span class="w3-small">{{ pawn.all_sentences|length }} Frasi</span>
             </sub>
         </h3>
         {% if user.is_superuser %}
