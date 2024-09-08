@@ -8,7 +8,7 @@ from .forms import PawnForm, SentenceForm, QuestionForm
 
 def index(request):
     return render(request, 'pawns/index.html', {
-        'pawns': Pawn.objects.filter(parent=None),
+        'pawns': Pawn.objects.filter(parent=None, is_public=True),
     })
 
 def pawn(request, slug):

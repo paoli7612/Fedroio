@@ -3,23 +3,23 @@
 {% block title %}Pawns{% endblock %}
 
 {% block content %}
-
-    <div class="w3-panel w3-white w3-card-4 w3-round">
+    <div class="w3-panel w3-white w3-card w3-round">
         <h1 class="w3-left">Pawns</h1>
-        <div class="w3-right w3-margin">
-            <a href="{% url 'pawn.new' %}" class="w3-btn w3-round w3-theme" title="add pawn">
-                <i class="fa fa-plus"></i>
-                Nuovo Pawn
-            </a>
-        </div>
+        {% if user.is_superuser %}
+            <div class="w3-right w3-margin">
+                <a href="{% url 'pawn.new' %}" class="w3-btn w3-round w3-theme" title="add pawn">
+                    <i class="fa fa-plus"></i>
+                    Nuovo Pawn
+                </a>
+            </div>
+        {% endif %}
     </div>
-
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
         <div class="w3-row w3-panel">
             {% for pawn in pawns %}
                 <div class="w3-col m4 l3 w3-margin {% if user in pawn.users %}w3-green{% endif %}">
-                    <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-border w3-border-theme w3-card-4">
+                    <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-border w3-border-theme w3-card">
                         {% if pawn.image %}
                         <div class="w3-container w3-padding">
                             <img src="{{ pawn.image.url }}" style="height: 5em;" class="w3-round">
