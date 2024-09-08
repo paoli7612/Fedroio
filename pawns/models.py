@@ -77,6 +77,9 @@ class Sentence(models.Model):
     text = models.TextField(max_length=512)
     image = models.ImageField(null=True, blank=True)
 
+    def words(self):
+        return re.findall(r'\*(.*?)\*', self.text)
+
     def url_edit(self):
         return reverse('pawns.sentence-edit', kwargs={'id': self.id})
 

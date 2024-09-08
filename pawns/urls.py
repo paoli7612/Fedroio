@@ -19,7 +19,7 @@ urlpatterns = [
     path('question/<int:id>/delete', views.delete_question, name='pawns.question-delete'),
     path('<str:slug>/quiz/punti', views.quiz_points, name='pawn.quiz-points'),
     #path('<str:pawn_slug>/catena', views.chain, name='quiz.chain'),
-    path('<str:slug>/coze', views.coze_test, name='pawn.coze'),
+    path('<str:slug>/coze', views.coze, name='pawn.coze'),
     path('<str:slug>/coze-choice', views.coze_choice, name='pawn.coze-choice')
 
    

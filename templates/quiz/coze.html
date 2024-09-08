@@ -10,7 +10,6 @@
             <input type="hidden" name="sentence_id" value="{{ sentence.id }}">
             {% csrf_token %}
             <div class="w3-threequarter">
-
                 {% for word in sentence.hide_words %}
                     {% if word == '___' %}
                         <input class="w3-input w3-card w3-round" style="display: inline-block; max-width: 200px;" type="text" name="word_{{ forloop.counter }}">
@@ -19,12 +18,12 @@
                     {% endif %}
                 {% endfor %}
             </div>
-                <div class="w3-quarter">
+            <div class="w3-quarter">
                 <ul class="w3-ul w3-card w3-round">
                     {% for word in words %}
-                    <li class="w3-center">
-                        {{ word }} 
-                    </li>
+                        <li class="w3-center">
+                            {{ word }} 
+                        </li>
                     {% endfor %}
                 </ul>
             </div>

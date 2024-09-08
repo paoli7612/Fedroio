@@ -245,14 +245,12 @@ def quiz_points(request, slug):
         'question': question
     })
 
-def coze_test(request, slug):
+def coze(request, slug, difficulty=4):
     pawn = get_object_or_404(Pawn, slug=slug)
-    words = pawn.all_words()
 
     if request.method == 'POST':
         sentence = get_object_or_404(Sentence, id=int(request.POST.get('sentence_id')))
-        kw = {key: value for key, value in request.POST.items() if key.startswith('word_')}
-        if sentence.control(kw):
+        if sentence.control({key: value for key, value in request.POST.items() if key.startswith('word_')}):
             messages.success(request, 'Corretto')
             sentence = random.choice(pawn.all_sentences())
         else:
@@ -260,9 +258,16 @@ def coze_test(request, slug):
     else:
         sentence = random.choice(pawn.all_sentences())
 
-    return render(request, 'quiz/coze-test.html', {
+    options = set()
+    words = pawn.all_words()
+    for w in sentence.words():
+        options.add(w)
+    while len(options) < difficulty:
+        options.add(random.choice(words))
+
+    return render(request, 'quiz/coze.html', {
         'sentence': sentence,
-        'words': words
+        'words': options
     })
 
 def coze_choice(request, slug):
