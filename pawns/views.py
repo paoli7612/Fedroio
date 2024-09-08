@@ -35,7 +35,7 @@ def new_pawn(request, uuid=None):
                     pawn.parent = parent_pawn
                 pawn.save()
                 messages.success(request, 'New pawn created!')
-                return redirect(reverse('pawn', argw={'uuid': pawn.uuid}))
+                return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
             except IntegrityError as e:
                 form.add_error(None, 'An error occurred while creating the pawn.')
     else:
@@ -157,7 +157,7 @@ def new_question(request, uuid):
         if form.is_valid():
             form.save()
             messages.success(request, 'New sentence created!')
-            return redirect(reverse('pawn', argw={'uuid': pawn.uuid}))
+            return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
     else:
         form = QuestionForm(initial={'pawn': pawn})
 
