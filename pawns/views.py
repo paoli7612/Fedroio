@@ -35,13 +35,9 @@ def new_pawn(request, uuid=None):
                     pawn.parent = parent_pawn
                 pawn.save()
                 messages.success(request, 'New pawn created!')
-                return redirect(reverse('pawn', args=[pawn.slug]))
+                return redirect(reverse('pawn', argw={'uuid': pawn.uuid}))
             except IntegrityError as e:
-                form.fields['slug'].initial = form.cleaned_data['slug']
-                if 'UNIQUE constraint failed' in str(e):
-                    form.add_error('slug', f'{pawn.slug}: A pawn with this slug already exists.')
-                else:
-                    form.add_error(None, 'An error occurred while creating the pawn.')
+                form.add_error(None, 'An error occurred while creating the pawn.')
     else:
         if parent_pawn:
             form = PawnForm(initial={'parent': parent_pawn})
@@ -137,41 +133,14 @@ def delete_sentence(request, id):
         'url_back': sentence.pawn.url()
     })
 
-def edit_questions(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
-    if request.method == 'POST':
-        messages.success(request, 'Questions updated successfully!')
-        questions_text = request.POST.get('questions').strip()
-        pawn.questions.all().delete()
-        for r in questions_text.split('.'):
-            if not '?' in r: continue
-            try:
-                r = r.strip()
-                t, a = r.split('?')
-                c, a1, a2, a3 = a.split(';')
-                Question.objects.create(pawn = pawn, user = request.user, text = t, correct = c, a1 = a1, a2 = a2, a3 = a3)
-            except:
-                messages.error(request, "error at: " + r)
-        return redirect(pawn.url())
-    return render(request, 'pawns/edit-questions.html', {
-        'pawn': pawn
-    })
-
 def new_sentence(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
     if request.method == 'POST':
         form = SentenceForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                form.save()
-                messages.success(request, 'New sentence created!')
-                return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
-            except IntegrityError as e:
-                form.fields['slug'].initial = form.cleaned_data['slug']
-                if 'UNIQUE constraint failed' in str(e):
-                    form.add_error('slug', f'{pawn.slug}: A pawn with this slug already exists.')
-                else:
-                    form.add_error(None, 'An error occurred while creating the pawn.')
+            form.save()
+            messages.success(request, 'New sentence created!')
+            return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
     else:
         form = SentenceForm(initial={'pawn': pawn})
 
@@ -186,16 +155,9 @@ def new_question(request, uuid):
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                form.save()
-                messages.success(request, 'New sentence created!')
-                return redirect(reverse('pawn', args=[pawn.slug]))
-            except IntegrityError as e:
-                form.fields['slug'].initial = form.cleaned_data['slug']
-                if 'UNIQUE constraint failed' in str(e):
-                    form.add_error('slug', f'{pawn.slug}: A pawn with this slug already exists.')
-                else:
-                    form.add_error(None, 'An error occurred while creating the pawn.')
+            form.save()
+            messages.success(request, 'New sentence created!')
+            return redirect(reverse('pawn', argw={'uuid': pawn.uuid}))
     else:
         form = QuestionForm(initial={'pawn': pawn})
 
@@ -205,8 +167,8 @@ def new_question(request, uuid):
         'back_url': pawn.url()
     })
 
-def quiz_points(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def quiz_points(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     questions = pawn.all_questions() # prendo tutte le domande di questo pawns o i figli
     if request.method == 'GET': # Nuova partita
         request.session['points'] = 0
@@ -220,7 +182,7 @@ def quiz_points(request, slug):
 
             if question_id in request.session['answered_questions']: # Se è gia stata risposta questa domanda durante questa partita riavvia la partita (probabile abuso della applicazione)
                 messages.error(request, 'Hai già risposto a questa domanda!')
-                return redirect(reverse('pawn.quiz-points', kwargs={'slug': slug}))
+                return redirect(reverse('pawn.quiz-points', kwargs={'uuid': uuid}))
             else: # non dovrebbe avere imbrogliato
                 request.session['points'] += 1 # un punto nella session
                 messages.success(request, 'Corretto') # messaggio "corretto"
@@ -245,8 +207,8 @@ def quiz_points(request, slug):
         'question': question
     })
 
-def coze(request, slug, difficulty=4):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def coze(request, uuid, difficulty=4):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
 
     if request.method == 'POST':
         sentence = get_object_or_404(Sentence, id=int(request.POST.get('sentence_id')))
@@ -275,8 +237,8 @@ def coze(request, slug, difficulty=4):
         'corrects': corrects
     })
 
-def coze_choice(request, slug):
-    pawn = get_object_or_404(Pawn, slug=slug)
+def coze_choice(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
     sentences = pawn.all_sentences()
     words = pawn.all_words()
 
