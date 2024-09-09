@@ -51,6 +51,9 @@ class Pawn(models.Model):
 
     def url_cozePlay(self):
         return reverse('pawn.coze', kwargs={'uuid': self.uuid})
+        
+    def url_cozeChoice(self):
+        return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
 
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
