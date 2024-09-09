@@ -9,7 +9,7 @@ from .forms import PawnForm, SentenceForm, QuestionForm
 
 def index(request):
     return render(request, 'pawns/index.html', {
-        'pawns': Pawn.objects.filter(parent=None, is_public=True),
+        'pawns': Pawn.objects.filter(parent=None, is_public=True).order_by('number'),
     })
 
 def pawn(request, uuid):
