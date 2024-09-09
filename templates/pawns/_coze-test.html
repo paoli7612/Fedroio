@@ -19,22 +19,17 @@
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom">
         {% for sentence in pawn.sentences.all %}
-        <tr>
-            <td>
-                {{ sentence|safe }}
-            </td>
-            {% if user.is_superuser %}
-            <td>
-                <a href="{{ sentence.url_edit }}" class="w3-btn w3-round w3-theme w3-right" title="edit sentence">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a href="{{ sentence.url_delete }}" class="w3-btn w3-round w3-theme" title="delete sentence">
-                    <i class="fa fa-trash"></i>
-                </a>
-            </td>
-            {% endif %}
-            
-        </tr>
+            <tr>
+                <td>
+                    {{ sentence|safe }}
+                </td>
+                {% if user.is_superuser %}
+                <td>
+                    {% include 'partials/abutton-admin.html' with url=sentence.url_edit title='Edit sentence' icon='edit'%}
+                    {% include 'partials/abutton-admin.html' with url=sentence.url_delete title='Delete sentence' icon='trash'%}
+                </td>
+                {% endif %}
+            </tr>
         {% endfor %}
     </table>
 </div>

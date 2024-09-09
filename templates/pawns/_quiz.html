@@ -26,12 +26,8 @@
                         <span class="w3-text-green">{{ question.correct }}</span>
                     </td>
                     <td>
-                        <a href="{{ question.url_edit }}" class="w3-btn w3-round w3-theme" title="add question">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="{{ question.url_delete }}" class="w3-btn w3-round w3-theme" title="delete question">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                        {% include 'partials/abutton-admin.html' with url=question.url_edit title='New question' icon='plus'%}
+                        {% include 'partials/abutton-admin.html' with url=question.url_delete title='Delete question' icon='trash'%}
                     </td>
                 </tr>
             {% endfor %}
