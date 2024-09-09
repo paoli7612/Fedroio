@@ -15,7 +15,8 @@ def index(request):
 def pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
     return render(request, 'pawns/pawn.html', {
-        'pawn': pawn
+        'pawn': pawn,
+        'pawns': pawn.childs.order_by('number')
     })
 
 def new_pawn(request, uuid=None):
