@@ -8,20 +8,24 @@
     {% include './_bar-coming-soon.html' %}
     {% include './_header.html' %}
     <div class="w3-row">
+        {% if pawn.image %}
         <div class="w3-col m3 w3-padding">
             <div class="w3-white w3-padding w3-card w3-round">
-                {% if pawn.image %}
                     <img src="{{ pawn.image.url }}" class="w3-round w3-block">
-                {% else %}
-                    <img src="rfdsf" alt=""  class="w3-round w3-block">
-                {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="w3-col m9 w3-padding">
-            <div class="w3-card w3-round w3-white w3-padding w3-large">
-                {{ pawn.text|safe|default:'[Nessuna descrizione]' }}
+            <div class="w3-col m9 w3-padding">
+                <div class="w3-card w3-round w3-white w3-padding w3-large">
+                    {{ pawn.text|safe|default:'[Nessuna descrizione]' }}
+                </div>
             </div>
-        </div>
+            {% else %}
+            <div class="w3-padding">
+                <div class="w3-card w3-round w3-white w3-padding w3-large">
+                    {{ pawn.text|safe|default:'[Nessuna descrizione]' }}
+                </div>
+            </div>
+        {% endif %}
     </div>
     {% include './_childs.html' with pawns=pawns %}
     <div class="w3-row">
