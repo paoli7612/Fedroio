@@ -77,12 +77,25 @@ WSGI_APPLICATION = 'Fedroio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3'
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'fedro',
+            'USER': 'fedro',
+            'PASSWORD': 'tua_password_mysql',
+            'HOST': 'localhost', 
+            'PORT': '3306', 
+        }
+    }
+
 
 
 # Password validation
