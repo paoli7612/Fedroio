@@ -16,5 +16,13 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ['pawn', 'text', 'correct', 'a1', 'a2', 'a3']  
 
+class QuestionsForm(forms.Form):
+    text = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'placeholder': 'questions?'}
+        ),
+        label='domanda??rispostagiusta;;rispostasbagliata;;rispostasbagliata;;rispostasbagliata..',
+        max_length=500, 
+    )
 
     

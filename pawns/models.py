@@ -40,6 +40,9 @@ class Pawn(models.Model):
     def url_newQuestion(self):
         return reverse('pawn.question-new', kwargs={'uuid': self.uuid})
 
+    def url_newQuestions(self):
+        return reverse('pawn.questions-new', kwargs={'uuid': self.uuid})
+
     def url_newSentence(self):
         return reverse('pawn.sentence-new', kwargs={'uuid': self.uuid})
 
@@ -57,6 +60,24 @@ class Pawn(models.Model):
 
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
+
+    def newQuestions_byText(self, text):
+        errors = str()
+        for q in text.split('..'):
+            try:
+                q.strip()
+                if not q: continue
+                text, answers = q.split('??')
+                correct, a1, a2, a3 = answers.split(';;')
+                Question.objects.create(
+                    pawn = self,
+                    text = text,
+                    correct = correct,
+                    a1 = a1, a2 = a2, a3 = a3
+                )
+            except:
+                errors += q
+
 
     def parent_url(self):
         if self.parent:

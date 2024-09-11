@@ -11,12 +11,13 @@ urlpatterns = [
 
     path('<uuid:uuid>/new-sentence', views.new_sentence, name='pawn.sentence-new'),
     path('<uuid:uuid>/new-question', views.new_question, name='pawn.question-new'),
+    path('<uuid:uuid>/new-questions', views.new_questions, name='pawn.questions-new'),
     
     path('sentence/<int:id>/edit', views.edit_sentence, name='pawns.sentence-edit'),
     path('question/<int:id>/edit', views.edit_question, name='pawns.question-edit'),
-
     path('sentence/<int:id>/delete', views.delete_sentence, name='pawns.sentence-delete'),
     path('question/<int:id>/delete', views.delete_question, name='pawns.question-delete'),
+
     path('<uuid:uuid>/quiz/punti', views.quiz_points, name='pawn.quiz-points'),
     path('<uuid:uuid>/quiz/catena', views.quiz_chain, name='pawn.quiz-chain'),
     path('<uuid:uuid>/coze', views.coze, name='pawn.coze'),

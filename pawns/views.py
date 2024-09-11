@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.urls import reverse
 from django.contrib import messages
 from .models import Pawn, Sentence, Question
-from .forms import PawnForm, SentenceForm, QuestionForm
+from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm
 
 def index(request):
     return render(request, 'pawns/index.html', {
@@ -162,6 +162,25 @@ def new_question(request, uuid):
             return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
     else:
         form = QuestionForm(initial={'pawn': pawn})
+
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'pawn': pawn,
+        'back_url': pawn.url()
+    })
+
+def new_questions(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
+    if request.method == 'POST':
+        form = QuestionsForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            errors = pawn.newQuestions_byText(text)
+            if errors:
+                messages.error(request, errors)
+            return redirect(pawn.url())
+    else:
+        form = QuestionsForm()
 
     return render(request, 'pawns/form.html', {
         'form': form,
