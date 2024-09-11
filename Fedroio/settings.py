@@ -90,7 +90,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'fedro',
             'USER': 'fedro',
-            'PASSWORD': 'tua_password_mysql',
+            'PASSWORD': 'fedro',
             'HOST': 'localhost', 
             'PORT': '3306', 
         }
