@@ -21,8 +21,7 @@ class QuestionsForm(forms.Form):
         widget=forms.Textarea(
             attrs={'placeholder': 'questions?'}
         ),
-        label='domanda??rispostagiusta;;rispostasbagliata;;rispostasbagliata;;rispostasbagliata..',
-        max_length=500, 
+        label='domanda??rispostagiusta;;rispostasbagliata;;rispostasbagliata;;rispostasbagliata..'
     )
 
     
