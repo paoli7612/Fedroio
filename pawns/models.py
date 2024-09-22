@@ -159,6 +159,10 @@ class Question(models.Model):
     def __str__(self):
         return self.text
     
+    def error(self):
+        print(len(self.correct), max(map(len, [self.correct, self.a1, self.a2, self.a3])))
+        return len(self.correct) > max(map(len, [self.a1, self.a2, self.a3]))+1
+
     def url_edit(self):
         return reverse('pawns.question-edit', kwargs={'id': self.id})
 

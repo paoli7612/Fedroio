@@ -21,7 +21,7 @@
     {% if user.is_superuser %}
         <table class="w3-table-all w3-card w3-margin-bottom">
             {% for question in pawn.questions.all %}
-                <tr>
+                <tr {% if question.error %}class="w3-text-red"{% endif %}>
                     <td>
                         {{ question }}
                         <span class="w3-text-green">{{ question.correct }}</span>
