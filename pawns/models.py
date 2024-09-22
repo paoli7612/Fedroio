@@ -160,8 +160,9 @@ class Question(models.Model):
         return self.text
     
     def error(self):
-        dif = abs(len(self.correct) - max(map(len, [self.a1, self.a2, self.a3])))
-        return dif > len(self.correct)/10
+        dif = len(self.correct) - max(map(len, [self.a1, self.a2, self.a3]))
+        print(dif, len(self.correct))
+        return dif > len(self.correct)/4
 
     def url_edit(self):
         return reverse('pawns.question-edit', kwargs={'id': self.id})
