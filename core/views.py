@@ -81,9 +81,11 @@ def signup(request):
     })
 
 def dashboard(request):
+    from pawns.models import Question
     return render(request, 'dashboard.html', {
         'users': User.objects.filter(is_superuser=False),
-        'groups': Group.objects.all()
+        'groups': Group.objects.all(),
+        'questions': Question.objects.all()
     })
 
 @admin_required

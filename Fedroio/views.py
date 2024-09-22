@@ -10,7 +10,5 @@ def home(request):
         'pawns': Pawn.objects.filter(parent=None, is_public=True)[:2]
     })
 
-
-
 def info(request):
     return render(request, 'info.html')
