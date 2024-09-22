@@ -220,8 +220,9 @@ def quiz_points(request, uuid):
         else: # Se la risposta non è corretta
             if request.user.is_authenticated:
                 request.user.answer(question, False)
-
             messages.error(request, 'Errore')
+            request.session['points'] = 0
+            request.session['answered_questions'] = [] 
 
     return render(request, 'quiz/points.html', {
         'points': request.session['points'],
