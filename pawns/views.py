@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db import IntegrityError
 from django.urls import reverse
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from .models import Pawn, Sentence, Question
 from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm
 
@@ -74,7 +75,7 @@ def edit_question(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Sentence updated successfully!')
-            return redirect(quesiton.pawn.url())
+            return HttpResponseRedirect(request.POST.get('next'))
     else:
         form = QuestionForm(instance=quesiton)
     return render(request, 'pawns/form.html', {
