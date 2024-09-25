@@ -1,0 +1,9 @@
+<div class="w3-row">
+    {% if pawn.image %}
+        {% include './_image.html' with col=3 %}
+        {% include './_text.html' with col=9 %}
+    {% else %}
+        {% include './_text.html' with col=12 %}
+    {% endif %}
+</div>
+

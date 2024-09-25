@@ -1,0 +1,9 @@
+{% extends "_panel.html" %}
+
+{% block content %}
+    <div class="w3-display-container" style="height: 300px;">
+        <span class="w3-display-middle" style="width: 80%">
+            {{ pawn.text|safe|default:'[Nessuna descrizione]' }}
+        </span>
+    </div>
+{% endblock %}

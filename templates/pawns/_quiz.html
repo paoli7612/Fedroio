@@ -1,24 +1,25 @@
-<div class="w3-panel w3-white w3-card-4 w3-round">
-    <h3 class="w3-left">Quiz
-        <sub>
-            <span class="w3-small">{{ pawn.all_questions|length }} Domande</span>
-        </sub>
-    </h3>
-    
-    {% if user.is_superuser %}
-        <div class="w3-right w3-margin">
-            {% include 'partials/abutton-admin.html' with url=pawn.url_newQuestion title='New questions' icon='plus'%}
-            {% include 'partials/abutton-admin.html' with url=pawn.url_newQuestions title='New questions' icon='plus-circle'%}
-        </div>
-    {% endif %}
-    
-    <div class="w3-panel w3-center">
-        {% if pawn.all_questions %}
-            {% include 'partials/abutton.html' with url=pawn.url_quizPoints title='Play points' icon='play' label='Punti'%}
-            {% include 'partials/abutton.html' with url=pawn.url_quizChain title='Play chain' icon='chain' label='Catena'%}
+{% extends "_panel.html" %}
+
+{% block content %}
+        <h3 class="w3-left">Quiz
+            <sub class="w3-small">{{ pawn.all_questions|length }} Domande</sub>
+        </h3>
+        
+        {% if user.is_superuser %}
+            <div class="w3-right w3-margin">
+                {% include 'partials/abutton-admin.html' with url=pawn.url_newQuestion title='New questions' icon='plus'%}
+                {% include 'partials/abutton-admin.html' with url=pawn.url_newQuestions title='New questions' icon='plus-circle'%}
+            </div>
         {% endif %}
-    </div>
-    {% if user.is_superuser %}
+        
+        {% if pawn.all_questions %}
+            <div class="w3-panel w3-center">
+                {% include 'partials/abutton.html' with url=pawn.url_quizPoints title='Play points' icon='play' label='Punti'%}
+                {% include 'partials/abutton.html' with url=pawn.url_quizChain title='Play chain' icon='chain' label='Catena'%}
+            </div>
+        {% endif %}
+
+        {% if user.is_superuser %}
         <table class="w3-table-all w3-card w3-margin-bottom">
             {% for question in pawn.questions.all %}
                 <tr {% if question.error %}class="w3-text-red"{% endif %}>
@@ -33,5 +34,5 @@
                 </tr>
             {% endfor %}
         </table>
-    {% endif %}
-</div>
+        {% endif %}
+{% endblock %}

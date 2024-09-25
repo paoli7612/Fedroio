@@ -118,6 +118,10 @@ class Pawn(models.Model):
         random.shuffle(words)
         return words
 
+class Link(models.Model):
+    pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='links')
+    value = models.TextField(max_length=128)
+
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')
     text = models.TextField(max_length=512)
