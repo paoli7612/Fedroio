@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from pawns.models import Pawn
-from pawns.models import Question
+from pawns.models import Pawn, Question, Sentence
 
 def index(request):
     return redirect(reverse('home'))
@@ -13,5 +12,6 @@ def home(request):
 
 def info(request):
     return render(request, 'info.html', {
-        'questions': Question.objects.all()
+        'questions': Question.objects.all(),
+        'sentences': Sentence.objects.all()
     })
