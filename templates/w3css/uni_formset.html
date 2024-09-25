@@ -1,0 +1,23 @@
+{% load crispy_forms_tags %}
+
+<table class="w3-table-all">
+    <tr>
+        <th>Articolo</th>
+        <th>Testo</th>
+    </tr>
+    {% for form in formset %}
+        <tr>
+            <td>{{ form }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<script>
+    $(document).ready(function() {
+        $('input[type="checkbox"]').addClass('w3-check');
+        $('textarea').prop('rows', 2);
+        $('input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select').addClass('w3-input w3-card w3-round');
+        $('input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select').first().focus();
+
+    });
+</script>

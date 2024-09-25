@@ -85,7 +85,6 @@ def edit_question(request, id):
 
 def edit_pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
-    print(pawn.user)
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES, instance=pawn)
         if form.is_valid():

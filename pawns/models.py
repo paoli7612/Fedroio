@@ -11,12 +11,13 @@ class Pawn(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    groups = models.ManyToManyField(Group, related_name='pawns', blank=True)  # Relazione con il modello Group
+    groups = models.ManyToManyField(Group, related_name='pawns', blank=True) 
 
     number = models.PositiveIntegerField(null=True, blank=True)
     name = models.CharField(max_length=128)
     text = models.TextField(max_length=512, null=True, blank=True)
-    image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # Add this line
+    image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  
+    link = models.TextField(max_length=256, blank=True, null=True)
     
     is_public = models.BooleanField(default=False)
     quiz = models.BooleanField(default=False)
@@ -36,7 +37,7 @@ class Pawn(models.Model):
 
     def url_edit(self):
         return reverse('pawn.edit', kwargs={'uuid': self.uuid})
-
+    
     def url_newQuestion(self):
         return reverse('pawn.question-new', kwargs={'uuid': self.uuid})
 
@@ -117,10 +118,6 @@ class Pawn(models.Model):
                     words.append(w[1:-1])
         random.shuffle(words)
         return words
-
-class Link(models.Model):
-    pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='links')
-    value = models.TextField(max_length=128)
 
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')

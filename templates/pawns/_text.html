@@ -2,6 +2,9 @@
 
 {% block content %}
     <div class="w3-display-container" style="height: 300px;">
+        {% if pawn.link %}
+            {% include "partials/abutton.html" with url=pawn.link icon='link' class="w3-right w3-margin-top w3-card" %}
+        {% endif %}
         <span class="w3-display-middle" style="width: 80%">
             {{ pawn.text|safe|default:'[Nessuna descrizione]' }}
         </span>
