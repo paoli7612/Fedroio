@@ -2,7 +2,9 @@
 
 {% block content %}
     <a href="{{ pawn.url }}" class="w3-btn w3-display-container w3-block w3-hover-theme">
-        <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
+        {% if pawn.number %}
+            <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
+        {% endif %}
         <span class="w3-display-bottomright w3-padding w3-round w3-border w3-border-theme w3-white w3-margin w3-card">
             {{ pawn.all_questions|length }}
             <i class="fa fa-question-circle"></i>
