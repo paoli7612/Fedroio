@@ -13,19 +13,25 @@ def index(request):
         'pawns': Pawn.objects.filter(parent=None, is_public=True).order_by('number'),
     })
 
+def build_tree(node):
+    return {
+        'name': node.name,
+        'url': node.url(),
+        'children': [
+            {
+                'name': child.name,
+                'url': child.url(),
+                'children': [{'name': grandchild.name,
+                              'url': grandchild.url()
+                              } for grandchild in child.childs.all()]  # Aggiungi l'URL per i nipoti
+            } 
+            for child in node.childs.all()
+        ]
+    }
+
 def pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
-    def build_tree(node):
-        return {
-            'name': node.name,
-            'children': [
-                {
-                    'name': child.name,
-                    'children': [{'name': grandchild.name} for grandchild in child.childs.all()]
-                } 
-                for child in node.childs.all()
-            ]
-        }
+    print(build_tree(pawn))
     return render(request, 'pawns/pawn.html', {
         'pawn': pawn,
         'pawns': pawn.childs.order_by('number'),
