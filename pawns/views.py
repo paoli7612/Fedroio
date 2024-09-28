@@ -18,7 +18,13 @@ def pawn(request, uuid):
     def build_tree(node):
         return {
             'name': node.name,
-            'children': [build_tree(child) for child in node.childs.all()]
+            'children': [
+                {
+                    'name': child.name,
+                    'children': [{'name': grandchild.name} for grandchild in child.childs.all()]
+                } 
+                for child in node.childs.all()
+            ]
         }
     return render(request, 'pawns/pawn.html', {
         'pawn': pawn,
