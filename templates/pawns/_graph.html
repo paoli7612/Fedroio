@@ -24,94 +24,100 @@
 
 <script>
 
-function truncateText(text, maxLength) {
-    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
-}
+    function truncateText(text, maxLength) {
+        return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    }
 
-// Imposta le dimensioni dell'SVG
-const width = 800;
-const radius = width / 2;
+    // Imposta le dimensioni dell'SVG
+    const width = 800;
+    const radius = width / 2;
+    
+    // I dati JSON sono passati direttamente da Django al template come variabile data
+    const data = {{ data|safe }};
+    
+    // Funzione per costruire il Sunburst Diagram
+    function createSunburst(data) {
 
-// I dati JSON sono passati direttamente da Django al template come variabile data
-const data = {{ data|safe }};
+        const w3colors = [
+        "#f44336", // w3-red
+        "#2196F3", // w3-blue
+        "#4CAF50", // w3-green
+        "#FFEB3B", // w3-yellow
+        "#FF9800", // w3-orange
+        "#9C27B0", // w3-purple
+        "#00BCD4", // w3-cyan
+        "#E91E63", // w3-pink
+        "#795548", // w3-brown
+        "#8BC34A"  // w3-light-green
+    ];
 
-// Funzione per costruire il Sunburst Diagram
-function createSunburst(data) {
-
-    const w3colors = [
-    "#f44336", // w3-red
-    "#2196F3", // w3-blue
-    "#4CAF50", // w3-green
-    "#FFEB3B", // w3-yellow
-    "#FF9800", // w3-orange
-    "#9C27B0", // w3-purple
-    "#00BCD4", // w3-cyan
-    "#E91E63", // w3-pink
-    "#795548", // w3-brown
-    "#8BC34A"  // w3-light-green
-];
-
-// Crea la scala di colori usando i colori di W3.CSS
-const color = d3.scaleOrdinal(w3colors);    
-  const root = d3.partition()
-      .size([2 * Math.PI, radius])
-      (d3.hierarchy(data)
-          .sum(d => 1)
-          .sort((a, b) => b.value - a.value));
-
-  const svg = d3.select("svg")
-      .attr("viewBox", [-radius, -radius, width, width])
-      .style("font", "12px sans-serif");
-
-  const arc = d3.arc()
-      .startAngle(d => d.x0)
-      .endAngle(d => d.x1)
-      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
-      .padRadius(radius / 2)
-      .innerRadius(d => d.y0)
-      .outerRadius(d => d.y1);
-
-  const path = svg.append("g")
-      .selectAll("path")
-      .data(root.descendants())
-      .join("path")
-      .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-      .attr("d", arc)
-      .on("click", (event, d) => window.location.href = d.data.url)  // Aggiungi l'URL qui per rendere il nodo cliccabile
-      .append("title")
-      .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${d.value}`);
-
-      svg.append("g")
-      .attr("pointer-events", "none")
-      .attr("text-anchor", "middle")
-      .selectAll("text")
-      .data(root.descendants().filter(d => d.x1 - d.x0 > 0.03))
-      .join("text")
-      .attr("transform", function(d) {
-          const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-          const y = (d.y0 + d.y1) / 2;
-          return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-      })
-      .attr("dy", "0.35em")
-      .text(d => truncateText(d.data.name, 15));  // Testo troncato, senza link
-
-  function clicked(event, p) {
-    svg.transition()
-        .duration(750)
-        .tween("scale", () => {
-          const xd = d3.interpolate(root.x0, root.x1),
-                yd = d3.interpolate(root.y0, root.y1);
-          return t => { root.x0 = xd(t); root.y0 = yd(t); };
-        });
-
-    path.transition()
-        .duration(750)
-        .attrTween("d", d => {
-          const i = d3.interpolate(d.current, d);
-          return t => arc(i(t));
-        });
-  }
-}
+    // Crea la scala di colori usando i colori di W3.CSS
+    const color = d3.scaleOrdinal(w3colors);    
+      const root = d3.partition()
+          .size([2 * Math.PI, radius])
+          (d3.hierarchy(data)
+              .sum(d => 1)
+              .sort((a, b) => b.value - a.value));
+    
+      const svg = d3.select("svg")
+          .attr("viewBox", [-radius, -radius, width, width])
+          .style("font", "12px sans-serif");
+    
+      const arc = d3.arc()
+          .startAngle(d => d.x0)
+          .endAngle(d => d.x1)
+          .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+          .padRadius(radius / 2)
+          .innerRadius(d => d.y0)
+          .outerRadius(d => d.y1);
+    
+      const path = svg.append("g")
+          .selectAll("path")
+          .data(root.descendants())
+          .join("path")
+          .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+          .attr("d", arc)
+          .on("click", (event, d) => window.location.href = d.data.url)  // Aggiungi l'URL qui per rendere il nodo cliccabile
+          .append("title")
+          .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${d.value}`);
+    
+          svg.append("g")
+          .attr("pointer-events", "none")
+          .attr("text-anchor", "middle")
+          .selectAll("text")
+          .data(root.descendants().filter(d => d.x1 - d.x0 > 0.03))
+          .join("text")
+          .attr("transform", function(d) {
+              if (d.depth === 0) {
+                  // Orientamento orizzontale per il nodo centrale
+                  return `translate(0, 0)`;
+              } else {
+                  // Orientamento per gli altri nodi
+                  const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+                  const y = (d.y0 + d.y1) / 2;
+                  return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+              }
+          })
+          .attr("dy", "0.35em")
+          .text(d => truncateText(d.data.name, 15));  // Testo troncato, senza link
+    
+      function clicked(event, p) {
+        svg.transition()
+            .duration(750)
+            .tween("scale", () => {
+              const xd = d3.interpolate(root.x0, root.x1),
+                    yd = d3.interpolate(root.y0, root.y1);
+              return t => { root.x0 = xd(t); root.y0 = yd(t); };
+            });
+    
+        path.transition()
+            .duration(750)
+            .attrTween("d", d => {
+              const i = d3.interpolate(d.current, d);
+              return t => arc(i(t));
+            });
+      }
+    }
 
 // Crea il Sunburst Diagram con i dati passati
 createSunburst(data);
