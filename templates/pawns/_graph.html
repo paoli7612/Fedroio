@@ -35,6 +35,10 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <script>
+
+    function truncateText(text, maxLength) {
+        return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+      }
     // Imposta le dimensioni dell'SVG
     const width = 800;
     const radius = width / 2;
@@ -86,7 +90,7 @@
               return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
           })
           .attr("dy", "0.35em")
-          .text(d => d.data.name);
+          .text(d => truncateText(d.data.name, 15)); 
     
       function clicked(event, p) {
         svg.transition()
