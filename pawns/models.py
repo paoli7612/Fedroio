@@ -76,7 +76,8 @@ class Pawn(models.Model):
                     correct = correct,
                     a1 = a1, a2 = a2, a3 = a3
                 )
-            except:
+            except Exception as e:
+                print(e)
                 errors += q
 
 

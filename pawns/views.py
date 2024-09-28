@@ -15,9 +15,15 @@ def index(request):
 
 def pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
+    def build_tree(node):
+        return {
+            'name': node.name,
+            'children': [build_tree(child) for child in node.childs.all()]
+        }
     return render(request, 'pawns/pawn.html', {
         'pawn': pawn,
-        'pawns': pawn.childs.order_by('number')
+        'pawns': pawn.childs.order_by('number'),
+        'data': build_tree(pawn)
     })
 
 def new_pawn(request, uuid=None):

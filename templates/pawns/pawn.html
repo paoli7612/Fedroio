@@ -1,16 +1,21 @@
 {% extends 'layout/base.html' %}
 
 {% block title %}
-    Pawn - {{ pawn }}
+  Pawn - {{ pawn }}
 {% endblock %}
 
 {% block content %}
-    {% include './_bar-coming-soon.html' %} <!-- da verificare -->
-    {% include './_header.html' %}
-    {% include './_content.html' %}
-    {% include './_childs.html' %}
-    {% if pawn.quiz %}
-        {% include './_quiz.html' with col=6 %} {% endif %}
-    {% if pawn.coze %}
-        {% include './_coze.html' with col=6 %} {% endif %}
+  {% if pawn.is_public %}
+    {% include './_graph.html' %}
+  {% endif %}
+  {% include './_bar-coming-soon.html' %} <!-- da verificare -->
+  {% include './_header.html' %}
+  {% include './_content.html' %}
+  {% include './_childs.html' %}
+  {% if pawn.quiz %}
+    {% include './_quiz.html' with col=6 %}
+  {% endif %}
+  {% if pawn.coze %}
+    {% include './_coze.html' with col=6 %}
+  {% endif %}
 {% endblock %}

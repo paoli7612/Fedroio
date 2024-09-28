@@ -1,0 +1,112 @@
+<style>
+    body {
+      font-family: sans-serif;
+    }
+    
+    path {
+      stroke: #fff;
+      fill-opacity: 0.9;
+    }
+    
+    path:hover {
+      fill-opacity: 1;
+    }
+    
+    .node--root {
+      fill: #999;
+    }
+    
+    .node--leaf {
+      fill: steelblue;
+    }
+    
+    .highlighted {
+      fill: orange;
+    }
+    
+    text {
+      font-size: 12px;
+      font-family: sans-serif;
+    }
+  </style>
+  <svg width="800" height="800"></svg>
+
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script>
+    // Imposta le dimensioni dell'SVG
+    const width = 800;
+    const radius = width / 2;
+    
+    // I dati JSON sono passati direttamente da Django al template come variabile data
+    const data = {{ data|safe }};
+    
+    // Funzione per costruire il Sunburst Diagram
+    function createSunburst(data) {
+      const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
+    
+      const root = d3.partition()
+          .size([2 * Math.PI, radius])
+          (d3.hierarchy(data)
+              .sum(d => 1)
+              .sort((a, b) => b.value - a.value));
+    
+      const svg = d3.select("svg")
+          .attr("viewBox", [-radius, -radius, width, width])
+          .style("font", "12px sans-serif");
+    
+      const arc = d3.arc()
+          .startAngle(d => d.x0)
+          .endAngle(d => d.x1)
+          .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+          .padRadius(radius / 2)
+          .innerRadius(d => d.y0)
+          .outerRadius(d => d.y1);
+    
+      const path = svg.append("g")
+          .selectAll("path")
+          .data(root.descendants())
+          .join("path")
+          .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+          .attr("d", arc)
+          .on("click", clicked)
+          .append("title")
+          .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${d.value}`);
+    
+      svg.append("g")
+          .attr("pointer-events", "none")
+          .attr("text-anchor", "middle")
+          .selectAll("text")
+          .data(root.descendants().filter(d => d.x1 - d.x0 > 0.03))
+          .join("text")
+          .attr("transform", function(d) {
+              const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+              const y = (d.y0 + d.y1) / 2;
+              return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+          })
+          .attr("dy", "0.35em")
+          .text(d => d.data.name);
+    
+      function clicked(event, p) {
+        svg.transition()
+            .duration(750)
+            .tween("scale", () => {
+              const xd = d3.interpolate(root.x0, root.x1),
+                    yd = d3.interpolate(root.y0, root.y1);
+              return t => { root.x0 = xd(t); root.y0 = yd(t); };
+            });
+    
+        path.transition()
+            .duration(750)
+            .attrTween("d", d => {
+              const i = d3.interpolate(d.current, d);
+              return t => arc(i(t));
+            });
+      }
+    }
+    
+    // Crea il Sunburst Diagram con i dati passati
+    createSunburst(data);
+    
+    </script>
