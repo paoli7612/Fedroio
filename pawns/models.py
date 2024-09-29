@@ -22,6 +22,9 @@ class Pawn(models.Model):
     is_public = models.BooleanField(default=False)
     quiz = models.BooleanField(default=False)
     coze = models.BooleanField(default=False)
+    exam = models.BooleanField(default=False)
+    exam_count = models.IntegerField(default=36)
+    exam_time = models.IntegerField(default=45)
 
     def __str__(self):
         return self.name
@@ -58,6 +61,9 @@ class Pawn(models.Model):
         
     def url_cozeChoice(self):
         return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
+
+    def url_exam(self):
+        return reverse('pawn.exam', kwargs={'uuid': self.uuid})
 
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()

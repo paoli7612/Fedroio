@@ -1,0 +1,133 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+<form method="post" class="w3-white w3-panel w3-padding w3-round">
+    <div class="w3-panel w3-theme w3-card w3-round">
+    {% csrf_token %}
+    <h1>Prova esame</h1>
+    <div class="w3-row">
+        <!-- questions -->
+        <div class="w3-twothird" id="questions">
+            {% for question in questions %}
+            {% with forloop.counter as qq %}
+                <div class="w3-hide" id="d{{ qq }}">
+                    {{ question }}
+                    {% for id, text in question.get_random_answers  %}
+                        <label class="w3-block w3-hover-white w3-panel w3-padding w3-round-large w3-hover-shadow">
+                            <input onchange="answer({{ qq }})" class="w3-radio" type="radio" name="{{ question.id }}" value="{{ id }}">
+                            {{ text }}
+                        </label class="w3-block w3-hover-white">
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+        <!-- timer -->
+        <div class="w3-third">
+            <div class="w3-block w3-center">
+                <input readonly="readonly" type="text" name="time" id="timer"></input>
+            </div>
+            <div class="w3-panel w3-center">
+                <button type="button" class="w3-btn w3-round-large w3-white w3-rounc w3-card" onclick="next_question()">
+                    Prossima domanda
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTONS -->
+    <div id="buttons" class="w3-center w3-panel" style="max-width: 750px; margin: auto">
+        {% for question in questions %}
+            <button type="button" style="margin-bottom: 4px;" id="b{{ forloop.counter }}" class="w3-bottombar w3-white w3-hover-shadow w3-padding w3-btn w3-round-large" onclick="show({{ forloop.counter }})">
+                {{ forloop.counter }}
+            </button>
+        {% endfor %}
+    </div>
+    <!-- SUBMIT -->
+    <div class="w3-panel w3-card-4 w3-margin w3-padding w3-white">
+        <div class="w3-panel w3-center" style="margin: auto; max-width: 600px;">
+            <button id="submit" class="w3-btn w3-theme w3-round-large w3-white w3-margin" disabled>
+                Conferma e visualizza il risultato
+                <i class="fa fa-check"></i>
+            </button>
+        </div>
+    </div>
+</div>
+</form>
+
+<script>
+    var lq = 1;
+    function show(id) {
+        $('#d' + lq).addClass('w3-hide');
+        $('#b' + lq).removeClass('w3-border-black')
+        $('#d' + id).removeClass('w3-hide');
+        $('#b' + id).addClass('w3-border-black')
+        lq = id
+    }
+    $('#d1').toggleClass('w3-hide');
+    $('#b1').addClass('w3-border-black')
+
+    function answer(question) {
+        if ($('#b' + question).hasClass('w3-white')) {
+            $('#b' + question).addClass('w3-green');
+            $('#b' + question).removeClass('w3-white');
+        }
+        if ($('#buttons button').length == $('#buttons button.w3-green').length) {
+            $('#submit').removeAttr('disabled');
+        } else {
+            $('#submit').attr('disabled', 'disabled');
+        }
+    }
+    
+    function next_question() {
+        var buttons = $('#buttons button');
+        var halfIndex = lq
+        for (var i = halfIndex; i < buttons.length; i++) {
+            var button = $(buttons[i]);
+            if (!button.hasClass('w3-green')) {
+                button.click();
+                return;
+            }
+        }
+        for (var i = 0; i < halfIndex; i++) {
+            var button = $(buttons[i]);
+            if (!button.hasClass('w3-green')) {
+                button.click();
+                return;
+            }
+        }
+    }
+
+    var timerInterval;
+    var remainingSeconds = 2700; // Imposta qui il tempo iniziale del timer
+
+    function displayTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        var seconds = seconds % 60;
+        
+        // Formatta il tempo per avere due cifre
+        minutes = String(minutes).padStart(2, '0');
+        seconds = String(seconds).padStart(2, '0');
+        
+        $('#timer').val(`${minutes}:${seconds}`);
+    }
+
+    function startTimer() {
+        displayTime(remainingSeconds);
+        timerInterval = setInterval(function() {
+            remainingSeconds--;
+            displayTime(remainingSeconds);
+            if (remainingSeconds <= 0) {
+                clearInterval(timerInterval);
+            }
+        }, {{ time }});
+    }
+
+    startTimer(); 
+
+</script>
+
+{% endblock %}
+    

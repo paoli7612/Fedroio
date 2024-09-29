@@ -18,6 +18,7 @@ urlpatterns = [
     path('sentence/<int:id>/delete', views.delete_sentence, name='pawns.sentence-delete'),
     path('question/<int:id>/delete', views.delete_question, name='pawns.question-delete'),
 
+    path('<uuid:uuid>/esame', views.exam, name='pawn.exam'),
     path('<uuid:uuid>/quiz/punti', views.quiz_points, name='pawn.quiz-points'),
     path('<uuid:uuid>/quiz/catena', views.quiz_chain, name='pawn.quiz-chain'),
     path('<uuid:uuid>/coze', views.coze, name='pawn.coze'),

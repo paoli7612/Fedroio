@@ -4,7 +4,7 @@ from .models import Pawn, Sentence, Question
 class PawnForm(forms.ModelForm):
     class Meta:
         model = Pawn
-        fields = ['is_public', 'name', 'text', 'parent', 'image', 'number', 'quiz', 'coze', 'link']  
+        fields = ['is_public', 'name', 'text', 'parent', 'image', 'number', 'quiz', 'coze', 'link', 'exam']  
 
 class SentenceForm(forms.ModelForm):
     class Meta:

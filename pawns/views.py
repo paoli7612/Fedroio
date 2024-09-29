@@ -13,7 +13,7 @@ def index(request):
         'pawns': Pawn.objects.filter(parent=None, is_public=True).order_by('number'),
     })
 
-def build_tree(node):
+def _build_tree(node):
     return {
         'name': node.name,
         'url': node.url(),
@@ -31,11 +31,10 @@ def build_tree(node):
 
 def pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
-    print(build_tree(pawn))
     return render(request, 'pawns/pawn.html', {
         'pawn': pawn,
         'pawns': pawn.childs.order_by('number'),
-        'data': build_tree(pawn)
+        'data': _build_tree(pawn)
     })
 
 def new_pawn(request, uuid=None):
@@ -341,3 +340,28 @@ def coze_choice(request, uuid):
         'sentences': sentences,
         'words': words
     }) 
+
+def exam(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
+    questions = pawn.all_questions()[pawn.exam_count]
+    time = pawn.exam_time
+
+    if request.method == 'POST':
+        questions = list()
+        for k, v in request.POST.items():
+            try:
+                id = int(k)
+                question = get_object_or_404(Question, id=id)
+                question.slected = int(v)
+                questions.append(question)
+            except: pass
+        return render(request, 'pawns/exam-result.html', {
+            'questions': questions,
+            'time': request.POST.get('time')
+        })
+    
+    return render(request, 'pawns/exam.html', {
+        'questions': questions,
+        'time': time
+    })
+

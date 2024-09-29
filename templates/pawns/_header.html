@@ -9,15 +9,18 @@
             <h1 class="w3-right">{{ pawn }}</h1>
         </div>
     </div>
-    {% if user == pawn.user or user.is_superuser %}
-        <div class="w3-col m4">
-            <div class="w3-right w3-margin">
+    <div class="w3-col m4">
+        <div class="w3-right w3-margin">
+            {% if pawn.exam %}
+                {% include 'partials/abutton.html' with url=pawn.url_exam label='Esame' title='Try exam' icon='asterisk'%}
+            {% endif %}
+            {% if user == pawn.user or user.is_superuser %}
                 {% include 'partials/abutton-admin.html' with url=pawn.url_new title='New pawn' icon='plus'%}
                 {% include 'partials/abutton-admin.html' with url=pawn.url_edit title='Edit pawn' icon='edit'%}
                 {% include 'partials/abutton-admin.html' with url=pawn.url_delete title='Delete pawn' icon='trash'%}
-            </div>
+            {% endif %}
         </div>
-    {% endif %}
+    </div>
 {% endblock %}
 
     
