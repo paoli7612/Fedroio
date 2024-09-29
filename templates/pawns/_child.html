@@ -14,15 +14,20 @@
         {% endif %}
         <div class="w3-margin-bottom">
             {% if pawn.quiz %}
-                <span title="questions" class="w3-padding w3-round w3-border w3-border-theme w3-white w3-margin-right w3-card">
+                <span title="questions" class="w3-padding w3-round w3-white">
                     {{ pawn.all_questions|length }}
                     <i class="fa fa-question-circle"></i>
                 </span>
             {% endif %}
             {% if pawn.coze %}
-                <span title="coze" class="w3-padding w3-round w3-border w3-border-theme w3-white w3-margin-right w3-card">
+                <span title="coze" class="w3-padding w3-round w3-white">
                     {{ pawn.all_sentences|length }}
                     <i class="fa fa-th-list"></i>
+                </span>
+            {% endif %}
+            {% if pawn.exam %}
+                <span title="exam" class="w3-padding w3-round w3-white">
+                    <i class="fa fa-asterisk"></i>
                 </span>
             {% endif %}
         </div>
