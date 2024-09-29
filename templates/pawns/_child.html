@@ -5,8 +5,14 @@
         {% if pawn.number %}
             <b class="w3-round w3-black w3-display-topleft w3-padding w3-card">{{ pawn.number }}</b>
         {% endif %}
-        <div class="w3-display-bottomright w3-margin-bottom">
 
+        {% if pawn.image %}
+            <img src="{{ pawn.image.url }}" style="max-width: 40%; max-height: 150px;" class="w3-round w3-border w3-border-theme w3-card w3-white w3-padding w3-left">
+            <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+        {% else %}
+            <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
+        {% endif %}
+        <div class="w3-margin-bottom">
             {% if pawn.quiz %}
                 <span title="questions" class="w3-padding w3-round w3-border w3-border-theme w3-white w3-margin-right w3-card">
                     {{ pawn.all_questions|length }}
@@ -20,11 +26,5 @@
                 </span>
             {% endif %}
         </div>
-        {% if pawn.image %}
-            <img src="{{ pawn.image.url }}" style="max-width: 40%; max-height: 150px;" class="w3-round w3-border w3-border-theme w3-card w3-white w3-padding w3-left">
-            <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
-        {% else %}
-            <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
-        {% endif %}
     </a>
 {% endblock %}

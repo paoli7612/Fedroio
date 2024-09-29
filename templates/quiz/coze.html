@@ -20,8 +20,10 @@
         <h1>Coze Test </h1>
     
         {% if sentence.image %}
-        <div class="w3-panel w3-center w3-left">
-            <img src="{{ sentence.image.url }}" class="w3-block w3-round" alt="">
+        <div class="w3-row">
+            <div style="margin:auto; max-width: 300px; max-width: 200px;">
+                <img src="{{ sentence.image.url }}" class="w3-block w3-round" alt="">
+            </div>
         </div>
         {% endif %}
 
