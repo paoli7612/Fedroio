@@ -5,25 +5,36 @@
 
 {% block content %}
 {% load static %}
+<form method="post">
     <div class="w3-half w3-panel">
-
         <div class="w3-panel w3-white w3-card-4 w3-round">
-            <h3 class="w3-center">Signup</h3>
-            <form method="post">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <div class="w3-right w3-panel">
-                    <a href="{% url "signup" %}" class="w3-btn">
-                        <i class="fa fa-user-plus"></i>
-                        Sign up
-                    </a>
-                    <button type="submit" class="w3-btn w3-theme w3-round w3-card">
-                        Login
-                        <i class="fa fa-sign-in"></i>
-                    </button>
-                </div>
-            </form>
+            <h3 class="w3-center">Registrati</h3>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="w3-right w3-panel">
+                <a href="{% url "signup" %}" class="w3-btn">
+                    <i class="fa fa-user-plus"></i>
+                    Sign up
+                </a>
+                <button type="submit" class="w3-btn w3-theme w3-round w3-card">
+                    Login
+                    <i class="fa fa-sign-in"></i>
+                </button>
+            </div>
         </div>
     </div>
- 
+    <div class="w3-half w3-panel">
+        <div class="w3-panel w3-white w3-card w3-round w3-bottobar">
+            <h3 class="w3-center">Termini di licenza</h3>
+            Iscrivendoti, dichiari di aver letto e di accettare i nostri <a href="#"> Termini e Condizioni</a> e la nostra <a href="#">Informativa sulla Privacy</a>, ai sensi del Regolamento UE 2016/679 (GDPR) e delle normative vigenti in Italia.<br><br>
+            Ti informiamo inoltre che il trattamento dei tuoi dati personali sarà effettuato in conformità con le disposizioni legislative vigenti.
+            (Checkbox obbligatoria)
+            <div class="w3-panel">
+                <input type="checkbox" required="required">
+                Ho letto e accetto i <b>Termini e Condizioni</b> e l'<b>Informativa sulla Privacy</b>.
+            </div>
+        </div>
+    </div>
+</form>
+
 {% endblock %}
