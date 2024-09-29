@@ -155,7 +155,7 @@ class Sentence(models.Model):
         for word in words:
             if not word.lower() in corrects:
                 result = False
-            final.append(word)
+                final.append(word)
         return final, result
 
 class Question(models.Model):
