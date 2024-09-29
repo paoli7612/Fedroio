@@ -344,9 +344,9 @@ def coze_choice(request, uuid):
 def exam(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
     try:
-        questions = pawn.all_questions(random=True)[:pawn.exam_count]
+        questions = pawn.all_questions(isRandom=True)[:pawn.exam_count]
     except:
-        questions = pawn.all_questions(random=True)
+        questions = pawn.all_questions(isRandom=True)
         messages.error(request, 'Non ci sono abbastanza domande per un esame completo')
     time = pawn.exam_time
 

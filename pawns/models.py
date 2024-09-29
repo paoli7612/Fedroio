@@ -99,13 +99,13 @@ class Pawn(models.Model):
         else:
             return [self]
         
-    def all_questions(self, random=False):
+    def all_questions(self, isRandom=False):
         questions = list(self.questions.all())
         for child in self.childs.all():
             questions_child = child.all_questions()
             if questions_child:
                 questions += questions_child
-        if random:
+        if isRandom:
             random.shuffle(questions)
         return questions
     
