@@ -343,7 +343,7 @@ def coze_choice(request, uuid):
 
 def exam(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
-    questions = pawn.all_questions()[:pawn.exam_count]
+    questions = pawn.all_questions(random=True)[:pawn.exam_count]
     time = pawn.exam_time
 
     if request.method == 'POST':
