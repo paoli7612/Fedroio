@@ -346,7 +346,7 @@ def exam(request, uuid):
     try:
         questions = pawn.all_questions(random=True)[:pawn.exam_count]
     except:
-        questions = pawn.all_questions(rendom=True)
+        questions = pawn.all_questions(random=True)
         messages.error(request, 'Non ci sono abbastanza domande per un esame completo')
     time = pawn.exam_time
 
