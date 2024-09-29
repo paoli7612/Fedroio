@@ -155,6 +155,7 @@ class Sentence(models.Model):
         for word in words:
             if not word.lower() in corrects:
                 result = False
+            else:
                 final.append(word)
         return final, result
 
