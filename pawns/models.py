@@ -56,8 +56,8 @@ class Pawn(models.Model):
     def url_quizChain(self):
         return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
 
-    def url_cozePlay(self):
-        return reverse('pawn.coze', kwargs={'uuid': self.uuid})
+    def url_cozePoints(self):
+        return reverse('pawn.coze-points', kwargs={'uuid': self.uuid})
         
     def url_cozeChoice(self):
         return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
@@ -150,14 +150,11 @@ class Sentence(models.Model):
 
     def control(self, words):
         final = list()
-        result = True
         corrects = [word.lower().strip() for word in self.words()]  
         for word in words:
-            if not word.lower() in corrects:
-                result = False
-            else:
+            if word.lower() in corrects:
                 final.append(word)
-        return final, result
+        return final
 
 class Question(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='questions')
