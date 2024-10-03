@@ -69,31 +69,63 @@
     $('#d1').toggleClass('w3-hide');
     $('#b1').addClass('w3-border-black')
 
-    var remainingSeconds = {{ time }} * 60; // Imposta qui il tempo iniziale del timer
-
-function displayTime(seconds) {
-    var minutes = Math.floor(seconds / 60);
-    var seconds = seconds % 60;
-    
-    // Formatta il tempo per avere due cifre
-    minutes = String(minutes).padStart(2, '0');
-    seconds = String(seconds).padStart(2, '0');
-    
-    $('#timer').val(`${minutes}:${seconds}`);
-}
-
-function startTimer() {
-    displayTime(remainingSeconds);
-    timerInterval = setInterval(function() {
-        remainingSeconds--;
-        displayTime(remainingSeconds);
-        if (remainingSeconds <= 0) {
-            clearInterval(timerInterval);
+    function answer(question) {
+        if ($('#b' + question).hasClass('w3-white')) {
+            $('#b' + question).addClass('w3-green');
+            $('#b' + question).removeClass('w3-white');
         }
-    }, 1000);
-}
+        if ($('#buttons button').length == $('#buttons button.w3-green').length) {
+            $('#submit').removeAttr('disabled');
+        } else {
+            $('#submit').attr('disabled', 'disabled');
+        }
+    }
+    
+    function next_question() {
+        var buttons = $('#buttons button');
+        var halfIndex = lq
+        for (var i = halfIndex; i < buttons.length; i++) {
+            var button = $(buttons[i]);
+            if (!button.hasClass('w3-green')) {
+                button.click();
+                return;
+            }
+        }
+        for (var i = 0; i < halfIndex; i++) {
+            var button = $(buttons[i]);
+            if (!button.hasClass('w3-green')) {
+                button.click();
+                return;
+            }
+        }
+    }
 
-startTimer(); 
+    var timerInterval;
+    var remainingSeconds = 2700; // Imposta qui il tempo iniziale del timer
+
+    function displayTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        var seconds = seconds % 60;
+        
+        // Formatta il tempo per avere due cifre
+        minutes = String(minutes).padStart(2, '0');
+        seconds = String(seconds).padStart(2, '0');
+        
+        $('#timer').val(`${minutes}:${seconds}`);
+    }
+
+    function startTimer() {
+        displayTime(remainingSeconds);
+        timerInterval = setInterval(function() {
+            remainingSeconds--;
+            displayTime(remainingSeconds);
+            if (remainingSeconds <= 0) {
+                clearInterval(timerInterval);
+            }
+        }, 1000);
+    }
+
+    startTimer(); 
 
 </script>
 
