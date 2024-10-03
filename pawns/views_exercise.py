@@ -44,6 +44,45 @@ def quiz_points(request, uuid):
         'question': question
     })
 
+def quiz_pointsHard(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
+    questions = pawn.worst_questions()
+
+    if request.method == 'GET': 
+        request.session['quiz-points'] = 0
+        request.session['quiz-answered'] = [] 
+        question = random.choice(questions)
+
+    elif request.method == 'POST':
+        question_id = request.POST.get('id')
+        question = get_object_or_404(Question, id=question_id)
+
+        if request.POST.get('answer') == '0':
+            if question_id in request.session['quiz-answered']:
+                messages.error(request, 'Hai già risposto a questa domanda!')
+                return redirect(reverse('pawn.quiz-points', kwargs={'uuid': uuid}))
+            else: 
+                question.answer(True)
+                request.session['quiz-points'] += 1 
+                messages.success(request, 'Corretto')
+                request.session['quiz-answered'].append(question_id)
+                questions_filtered = [question for question in questions if str(question.id) not in request.session['quiz-answered']] # prendo le domande che non ho ancora risposto
+                if len(questions_filtered) == 0: 
+                    messages.success(request, 'Risposte più difficili completate :D')
+                    return redirect(reverse('account'))
+                else: 
+                    question = random.choice(questions_filtered)
+        else: 
+            question.answer(False)
+            messages.error(request, 'Errore')
+            request.session['quiz-points'] = 0
+            request.session['quiz-answered'] = [] 
+
+    return render(request, 'quiz/points.html', {
+        'points': request.session['quiz-points'],
+        'question': question
+    })
+
 def quiz_chain(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
     questions = pawn.all_questions()

@@ -3,16 +3,16 @@
 {% block title %}Punti{% endblock %}
 
 {% block content %}
-{% if user.is_superuser %}
-    <div class="w3-right w3-margin">
-        <a href="{% url 'pawns.question-edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn">
-            <i class="fa fa-edit"></i>
-        </a>
-        <a href="{% url 'pawns.question-delete' id=question.id %}" class="w3-btn w3-round w3-theme" title="delete pawn">
-            <i class="fa fa-trash"></i>
-        </a>
-    </div>
-{% endif %}
+    {% if user.is_superuser %}
+        <div class="w3-right w3-margin">
+            <a href="{% url 'pawns.question-edit' id=question.id %}" class="w3-btn w3-round w3-theme" title="add pawn">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a href="{% url 'pawns.question-delete' id=question.id %}" class="w3-btn w3-round w3-theme" title="delete pawn">
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+    {% endif %}
     <form method="post">
         {% csrf_token %}
         <input type="hidden" name="id" value="{{ question.id }}">

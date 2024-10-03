@@ -37,13 +37,20 @@
             {% endfor %}
         </table>
         {% endif %}
-        <h4>Più sbagliate</h4>
-        <table class="w3-table-all">
-            {% for question in pawn.worst_questions %}
+        <div class="w3-panel">
+
+            <h4>Più sbagliate</h4>
+            <table class="w3-table-all w3-card w3-margin-bottom">
+                {% for question in pawn.worst_questions %}
                 <tr>
                     <td>{{ question }}</td>
                     <td>{{ question.correctness }}%</td>
                 </tr>
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
+            <div class="w3-right">
+                {% include 'partials/abutton.html' with url=pawn.url_quizHard title='Hard questions' icon='play' label='Difficili'%}
+            </div>
+        </div>
+
 {% endblock %}

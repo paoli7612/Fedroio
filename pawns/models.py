@@ -53,6 +53,10 @@ class Pawn(models.Model):
     def url_quizPoints(self):
         return reverse('pawn.quiz-points', kwargs={'uuid': self.uuid})
     
+    def url_quizHard(self):
+        return reverse('pawn.quiz-pointsHard', kwargs={'uuid': self.uuid})
+    
+
     def url_quizChain(self):
         return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
 
