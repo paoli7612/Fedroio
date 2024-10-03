@@ -23,9 +23,9 @@ def quiz_points(request, uuid):
                 messages.error(request, 'Hai già risposto a questa domanda!')
                 return redirect(reverse('pawn.quiz-points', kwargs={'uuid': uuid}))
             else: 
+                question.answer(True)
                 request.session['quiz-points'] += 1 
                 messages.success(request, 'Corretto')
-                question.userAnswered(request.user, True)
                 request.session['quiz-answered'].append(question_id)
                 questions_filtered = [question for question in questions if str(question.id) not in request.session['quiz-answered']] # prendo le domande che non ho ancora risposto
                 if len(questions_filtered) == 0: 
@@ -34,8 +34,7 @@ def quiz_points(request, uuid):
                 else: 
                     question = random.choice(questions_filtered)
         else: 
-            if request.user.is_authenticated:
-                request.user.answer(question, False)
+            question.answer(False)
             messages.error(request, 'Errore')
             request.session['quiz-points'] = 0
             request.session['quiz-answered'] = [] 
@@ -61,8 +60,8 @@ def quiz_chain(request, uuid):
         order = Case(*[When(id=pk, then=pos) for pos, pk in enumerate(chain_ids)])
         chain = list(Question.objects.filter(id__in=chain_ids).order_by(order))
         if request.POST.get('answer') == '0':
+            question.wrong_answerw
             messages.success(request, 'Corretto') # messaggio "corretto"
-            question.userAnswered(request.user, True)
             request.session['points'] += 1
             if len(chain) == request.session['points']:
                 questions_filtered = [question for question in questions if question not in chain] # prendo le domande che non ho ancora messo in chain
@@ -76,7 +75,6 @@ def quiz_chain(request, uuid):
                 nextQuestion = get_object_or_404(Question, id=request.session['chain'][request.session['points']])
         else:
             messages.error(request, 'Errore')
-            question.userAnswered(request.user, False)
             request.session['points'] = 0
             nextQuestion = chain[0]
         

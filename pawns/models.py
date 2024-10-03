@@ -110,6 +110,11 @@ class Pawn(models.Model):
             random.shuffle(questions)
         return questions
     
+    def worst_questions(self):
+        questions = self.all_questions()
+        questions = sorted(questions, key=lambda q: q.wrongly, reverse=True)
+        return questions[:10]
+    
     def all_sentences(self):
         sentences = list(self.sentences.all())
         for child in self.childs.all():
@@ -164,15 +169,12 @@ class Question(models.Model):
     a1 = models.CharField(max_length=128)
     a2 = models.CharField(max_length=128)
     a3 = models.CharField(max_length=128)
+    wrongly = models.PositiveIntegerField(default=0)
+    correctly = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.text
     
-    def error(self):
-        dif = len(self.correct) - max(map(len, [self.a1, self.a2, self.a3]))
-        print(dif, len(self.correct))
-        return dif > len(self.correct)/4
-
     def url_edit(self):
         return reverse('pawns.question-edit', kwargs={'id': self.id})
 
@@ -186,15 +188,20 @@ class Question(models.Model):
         answers = list(enumerate([self.correct, self.a1, self.a2, self.a3]))
         random.shuffle(answers)
         return answers
+    
+    def error(self):
+        dif = len(self.correct) - max(map(len, [self.a1, self.a2, self.a3]))
+        return dif > len(self.correct)/4
+    
+    def answer(self, result):
+        if result:
+            self.correctly += 1
+        else:
+            self.wrongly += 1
+        self.save()
 
-    def userAnswered(self, user, state):
-        if user.is_authenticated:
-            user.answer(self, state)
-
-class QuestionSubmitted(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
-    correctly = models.IntegerField(default=0)
-    wrongly = models.IntegerField(default=0)
-
-
+    def correctness(self):
+        try:
+            return round((self.correctly / (self.correctly + self.wrongly)) * 100)
+        except ZeroDivisionError:
+            return 100

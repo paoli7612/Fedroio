@@ -37,4 +37,13 @@
             {% endfor %}
         </table>
         {% endif %}
+        <h4>Più sbagliate</h4>
+        <table class="w3-table-all">
+            {% for question in pawn.worst_questions %}
+                <tr>
+                    <td>{{ question }}</td>
+                    <td>{{ question.correctness }}%</td>
+                </tr>
+            {% endfor %}
+        </table>
 {% endblock %}
