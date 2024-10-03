@@ -15,8 +15,9 @@
     </div>
     <div class="w3-panel w3-center">
         {% if pawn.all_sentences|length > 4 %}
-            {% include 'partials/abutton.html' with url=pawn.url_cozePoints title='Play' icon='play' label='Play'%}
-            {% include 'partials/abutton.html' with url=pawn.url_cozeChoice title='Scegli' icon='check-square-o' label='Scegli'%}
+            {% include 'partials/abutton.html' with url=pawn.url_cozeEasy title='Facile' icon='play-circle' label='Facile'%}
+            {% include 'partials/abutton.html' with url=pawn.url_cozeNormal title='Normale' icon='play-circle' label='Normale'%}
+            {% include 'partials/abutton.html' with url=pawn.url_cozeHard title='Difficile' icon='play-circle' label='Difficile'%}
         {% endif %}
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom">

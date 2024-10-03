@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core', 'pawns',
+    'core', 'pawns', 'achievements',
     'crispy_forms'
 ]
 

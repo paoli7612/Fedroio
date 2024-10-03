@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+  Ask
+{% endblock %}
+
+{% block content %}
+  <div class="w3-panel w3-white w3-card-4 w3-round">
+      <a href="{% url 'achievements.leaderboard' %}" class="w3-btn w3-right w3-margin w3-theme w3-card w3-round">
+          <i class="fa fa-th-list"></i>
+          Classifiche
+      </a>
+    <h1>Achievements</h1>
+  </div>
+
+  <div class="w3-panel w3-white w3-card-4 w3-round w3-padding w3-text-red w3-center w3-border-red w3-bottombar">
+      <a href="{% url 'login' %}" class="w3-btn w3-left w3-margin-left w3-border w3-border-theme w3-card w3-round w3-text-theme">
+        <i class="fa fa-user"></i>
+        Accedi
+    </a>
+
+    <a href="{% url 'signup' %}" class="w3-btn w3-left w3-margin-left w3-border w3-border-theme w3-card w3-round w3-text-theme">
+        <i class="fa fa-user-plus"></i>
+        Registrati
+    </a>
+    L'accesso a questa sezione è riservato agli utenti registrati.<br>
+    <a href="{% url 'login' %}">Accedi</a> qui per effettuare il login e iniziare a raccogliere i tuoi risultati.
+  </div>
+
+  <div class="w3-panel w3-white w3-card-4 w3-round" style="max-width: 800px; margin: auto;">
+    <p>Benvenuto nella sezione <strong>Achievements</strong>, dove puoi tenere traccia dei tuoi progressi attraverso la piattaforma.
+        <br>
+        Ogni volta che completi una sfida, sblocchi nuovi obiettivi e guadagni punti che ti consentono di avanzare nelle classifiche.</p>
+    <p>Gli Achievements rappresentano il riconoscimento delle tue competenze e conoscenze acquisite. Confronta i tuoi risultati con quelli degli altri utenti e continua a migliorare il tuo punteggio.</p>
+
+
+  </div>
+{% endblock %}

@@ -86,7 +86,7 @@ def quiz_chain(request, uuid):
         'questions': chain
     })
 
-def coze_points(request, uuid, difficulty=4):
+def coze_points(request, uuid, difficulty):
     pawn = get_object_or_404(Pawn, uuid=uuid)
 
     if request.method == 'POST':
@@ -121,14 +121,15 @@ def coze_points(request, uuid, difficulty=4):
     words = pawn.all_words()
     for w in sentence.words():
         options.add(w)
-    while len(options) < difficulty:
+    while len(options) < difficulty*4:
         options.add(random.choice(words))
 
     return render(request, 'quiz/coze.html', {
         'sentence': sentence,
         'options': options,
         'corrects': corrects,
-        'points': request.session['coze-points']
+        'points': request.session['coze-points'],
+        'difficulty': difficulty
     })
 
 def coze_choice(request, uuid):

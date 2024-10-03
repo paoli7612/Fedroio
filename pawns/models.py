@@ -56,15 +56,17 @@ class Pawn(models.Model):
     def url_quizChain(self):
         return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
 
-    def url_cozePoints(self):
-        return reverse('pawn.coze-points', kwargs={'uuid': self.uuid})
+    def url_cozeEasy(self):
+        return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 1})
+    def url_cozeNormal(self):
+        return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 2})
+    def url_cozeHard(self):
+        return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 3})
         
     def url_cozeChoice(self):
         return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
-
     def url_exam(self):
         return reverse('pawn.exam', kwargs={'uuid': self.uuid})
-
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 
@@ -85,7 +87,6 @@ class Pawn(models.Model):
             except Exception as e:
                 print(e)
                 errors += q
-
 
     def parent_url(self):
         if self.parent:
