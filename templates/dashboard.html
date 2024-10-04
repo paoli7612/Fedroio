@@ -61,6 +61,7 @@
                     <td>{{ question }}</td>
                     <td>
                         {% include 'partials/abutton-admin.html' with url=question.url_edit title='Edit question' icon='edit'%}
+                        {% include 'partials/abutton-admin.html' with url=question.url_delete title='Delete question' icon='trash'%}
                     </td>
                 </tr>
             {% endif %}
