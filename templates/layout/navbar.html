@@ -14,14 +14,11 @@
                 <span class="w3-hide-small">Pawns</span>
             </a>
 
-            {% url 'achievements' as url %}
+            {% comment %} {% url 'achievements' as url %}
             <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
-                <i class="fa fa-star-half-o"></i>
-                <span class="w3-hide-small">Achievements</span>
-            </a>
-
-
-
+                <i class="fa fa-signal"></i>
+                <span class="w3-hide-small">Classifica</span>
+            </a> {% endcomment %}
             {% if user.is_superuser %}
                 {% url 'dashboard' as url %}
                 <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
