@@ -1,0 +1,2049 @@
+[
+{
+    "model": "pawns.pawn",
+    "pk": 1,
+    "fields": {
+        "uuid": "40fe8b0a-f321-4b56-a8a3-8ca614a13984",
+        "parent": null,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "ICDL",
+        "text": "I moduli per le certificazioni ICDL coprono diverse aree, come l'uso di software, la gestione dati e la sicurezza informatica. Superare questi esami permette di ottenere una certificazione internazionale che attesta le competenze digitali sia per scopi personali che professionali. <br>",
+        "image": "pawn_images/icdl_PayIMDT.png",
+        "link": "https://drive.google.com/drive/folders/1bHQvRC15ykYPsjFQfy6PTK9qkNNgYUQV?usp=sharing",
+        "is_public": true,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 2,
+    "fields": {
+        "uuid": "4ceda8bd-d411-4d76-a4f8-5c61d4a791bf",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Computer Essentials",
+        "text": "Computer Essentials copre i concetti base dell'hardware e software, l'uso di dispositivi, la gestione di file, e la configurazione delle impostazioni. Include anche la sicurezza informatica, la protezione dei dati e l'uso sicuro di reti e Internet.",
+        "image": "pawn_images/compes_zxbXrSy.png",
+        "link": "https://drive.google.com/file/d/1DGNDQtgQy4zNR5VARP-h25NjeJmljKvt/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": true,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 3,
+    "fields": {
+        "uuid": "b0f2ca8d-00e0-4820-9938-5563071c606b",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Online Essentials",
+        "text": "Secondo modulo principale delle ICDL. Riguarda il funzionamento delle reti, l'utilizzo dei principali software online, ...",
+        "image": "pawn_images/online_Xa1U8x0.png",
+        "link": "https://drive.google.com/file/d/1exrz_BbrMrBfihd2L23s8GWcW5IyVF8L/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 4,
+    "fields": {
+        "uuid": "5c0ff6fa-9fa2-4f19-bd12-72084ab8e5d7",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Spreadsheet",
+        "text": "Il modulo <strong>Spreadsheet</strong> tratta la gestione di fogli di calcolo, l'uso di formule e funzioni, l'analisi dei dati, e la creazione di grafici e tabelle, per organizzare e visualizzare i dati efficacemente.",
+        "image": "pawn_images/excel_C6dYwlV.png",
+        "link": "https://drive.google.com/file/d/1He1pABftId7j0NjnSRa6dlVJwLBeCsWL/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 5,
+    "fields": {
+        "uuid": "991cf03f-f73e-4986-8f88-7542d1d4046e",
+        "parent": 2,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Computer e dispositivi",
+        "text": "I componenti hardware e software principali comprendono il processore, la memoria e i dispositivi di input/output. Le differenze tra desktop, portatili e dispositivi mobili, come tablet e smartphone, sono fondamentali per capire le varie tipologie di computer. Anche le periferiche, come stampanti, scanner e dispositivi di archiviazione esterna, svolgono un ruolo importante nell'uso quotidiano della tecnologia.",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1WabMvlEUrVSwCqndezUoFH6uD5695Zib/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 6,
+    "fields": {
+        "uuid": "32166c9a-fa3b-4edb-a012-eed9afb55843",
+        "parent": 2,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Desktop, Icone, Impostazioni",
+        "text": "Icone, Collegamenti, Cartelle, Impostazioni, ...",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1YTvYFTcj68X61mrXXv4eVfgMHNHZpr_W/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 13,
+    "fields": {
+        "uuid": "d090d61f-d39b-472b-8fdb-0d2a6085f52c",
+        "parent": 2,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Testi e stampe",
+        "text": "Operazioni fondamentali con testi e stampe in ambiente Windows, apertura, modifica e salvataggio di file con Blocco Note e WordPad. Gestione delle stampanti, dall'installazione e configurazione all'uso delle opzioni di stampa, processi di stampa. Funzionalità funzionalità di base, come copiare e spostare testo, utilizzare scorciatoie da tastiera, e inserire screenshot in documenti, ...",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1eW1QNEWgBtVDRU-bLZsrdhvdU_eOx9k-/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 14,
+    "fields": {
+        "uuid": "6b6c913a-c53d-40b2-a8b7-0b4980aaf4d3",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Presentations",
+        "text": "",
+        "image": "pawn_images/pp_ynvvjGc.png",
+        "link": "https://drive.google.com/file/d/19AlTJnBIOMnuE3HaTEbs9H1puyrLtd3H/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 15,
+    "fields": {
+        "uuid": "c6e4f85d-073e-4a5f-b404-2883f2c8dc6b",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Word Processing",
+        "text": "",
+        "image": "pawn_images/word_VeFTe7Q.png",
+        "link": "https://drive.google.com/file/d/1zaEZ7BbI-VR-DRSzck77s9pTyF5F4HAO/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 16,
+    "fields": {
+        "uuid": "45b15fe5-8340-4f81-8027-d190c769ec7c",
+        "parent": 2,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Gestione di file",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1xWwipmX0ajeJmMSwN2rkLp9Tq6u3S8CK/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 17,
+    "fields": {
+        "uuid": "e71602d3-851e-45fa-80d3-4182bdc04162",
+        "parent": 2,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Reti",
+        "text": "Il capitolo <strong>Reti</strong> tratta tipi di reti (LAN, WAN, Wi-Fi, ...), componenti come router e modem, connessioni (Ethernet e wireless), accesso a internet (ISP, IP, DNS) e nozioni di sicurezza di rete (firewall, crittografia).",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1w_22cTFD8fzGEUthSx0SvrmUJijr3dxP/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 22,
+    "fields": {
+        "uuid": "3844c288-4d20-4086-bec8-9c2ab99c12e7",
+        "parent": null,
+        "user": [
+            "tomaoli"
+        ],
+        "number": null,
+        "name": "Modena",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 24,
+    "fields": {
+        "uuid": "3746accd-3540-45ca-8848-6153ad236718",
+        "parent": 2,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 6,
+        "name": "Sicurezza e Benessere",
+        "text": "Sicurezza informatica, protezione dei dati, backup, malware, ergonomia, risparmio energetico e corretto riciclo elettronico",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1BmsV1DX7owonqZBjf4bgcOt1mDThlRmG/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 25,
+    "fields": {
+        "uuid": "75ce6896-cb1a-4f9d-943f-595efb2073fb",
+        "parent": 3,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Concetti di navigazione in rete",
+        "text": "Internet, URL, browser e altre nozioni base della navigazione in rete. Attività online come e-commerce, e-learning, e-banking. Aspetti di sicurezza, tra cui crittografia, siti sicuri e certificati digitali.",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1YVxuQ5C405wHaU_8UZWS6OVhmRoOe87X/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 26,
+    "fields": {
+        "uuid": "7826fb55-d297-44c4-b175-b54b067bdad6",
+        "parent": 3,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Navigazione sul web",
+        "text": "Navigazione web tramite browser, gestione di URL, schede e finestre, utilizzo di collegamenti ipertestuali, cronologia e moduli online. Strumenti per traduzioni, gestione popup, cookie, segnalibri e file scaricati.",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1WszsRMIEOK1V8Tp2z7pVeLX6jcqR31i2/view?usp=sharing",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 27,
+    "fields": {
+        "uuid": "329f6e92-552a-4732-97c2-0b4607a019b9",
+        "parent": 3,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Informazioni raccolte sul web",
+        "text": "Motori di ricerca, utilizzo di parole chiave per trovare informazioni online, tecniche di ricerca avanzata. Valutazione critica delle fonti online, inclusi autorevolezza, scopo e aggiornamento dei contenuti. Importanza di riconoscere il copyright e rispettare la protezione dei dati personali.",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1t7f6l4yu-xCt2guEtk6ui8yyhqH_vIWq/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 28,
+    "fields": {
+        "uuid": "4520355b-8d01-4468-ba8b-9271f696a0ab",
+        "parent": 3,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Concetti di comunicazione",
+        "text": "Comunità online come social network, forum e chat, condivisione di contenuti su blog, microblog e piattaforme multimediali. Protezione della privacy nelle attività online, messaggistica istantanea, SMS, MMS e VoIP. Uso corretto della comunicazione elettronica e gestione della posta elettronica, con attenzione a problemi come spam, phishing e allegati pericolosi.",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1s1QHw79SP0IkgoGcA5jA8qIygk2jrP78/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 29,
+    "fields": {
+        "uuid": "dc7db2e9-26a8-48b6-b532-36bab5242356",
+        "parent": 3,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Uso della posta elettronica",
+        "text": "Applicazioni per la gestione della posta elettronica, creazione e invio di messaggi, gestione di allegati, contatti e liste di distribuzione. Organizzazione dei messaggi in cartelle, utilizzo di funzioni come \"Rispondi\", \"Inoltra\", \"Priorità\" e \"Copia nascosta\". Strumenti di ricerca e filtro, gestione di spam e posta indesiderata. Utilizzo di calendari per organizzare appuntamenti e inviare inviti.",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1jePgG4AAlXXzZ3BaWclDYX5gPac1_oLo/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 30,
+    "fields": {
+        "uuid": "414656ca-c2f5-4e16-af51-b0801e2abb81",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Utilizzo dell'applicazione",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 31,
+    "fields": {
+        "uuid": "af0318fe-90ec-40f1-a072-8ebf01421ec6",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Celle",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 32,
+    "fields": {
+        "uuid": "cb795587-f132-47a9-8cae-4a52d0343325",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Gestione di fogli di lavoro",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 33,
+    "fields": {
+        "uuid": "b485b90d-39c3-48a2-86e0-eed4d300a615",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Formule e funzioni",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 34,
+    "fields": {
+        "uuid": "a6adb9d2-ec10-4550-9495-64dfd468eea0",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Formattazione",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 35,
+    "fields": {
+        "uuid": "cde413a3-94f0-41c8-96ae-ada4d001de51",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 6,
+        "name": "Grafici",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 36,
+    "fields": {
+        "uuid": "d07b39be-5e94-4733-94d7-ea6227f2c186",
+        "parent": 4,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 7,
+        "name": "Preparazione della stampa",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 40,
+    "fields": {
+        "uuid": "6f9d7588-63b3-4d5b-a1a6-9bd80259a8ce",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 6,
+        "name": "IT Security",
+        "text": "",
+        "image": "pawn_images/itsec.png",
+        "link": "https://drive.google.com/file/d/1srkGjcsi58oq1OZ58VGh-wJFgyWf6hK8/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 41,
+    "fields": {
+        "uuid": "7a32ffc3-db65-46b0-a4fc-f4136dac2d29",
+        "parent": 14,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Lavorare con le presentazioni",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1ZUT-rx912Mw_9Yczbs8PvBC-1ehMU5wE/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 42,
+    "fields": {
+        "uuid": "eb4100cd-62cf-4ae0-9c10-fbcbca5ad28a",
+        "parent": 14,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Sviluppare una presentazione",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1ablqgoPLdYrnHZxMs8iyzqRSZJJZ0oRh/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 43,
+    "fields": {
+        "uuid": "621ae24c-6e70-40ec-bac9-339caa5a1d35",
+        "parent": 14,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Testo",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1lbzExOjyCMLeXwbGwYShIj2JEnaOJ1Pv/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 44,
+    "fields": {
+        "uuid": "a1b7db0d-5452-4123-8aa6-3d41b002e812",
+        "parent": 14,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Oggetti grafici",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 45,
+    "fields": {
+        "uuid": "874260f4-ec27-49f5-ab5d-e94230d907a9",
+        "parent": 14,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 6,
+        "name": "Preparazione alla presentazione",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 46,
+    "fields": {
+        "uuid": "fc381f1a-d881-4a5c-98d3-d6c9d3d96bf0",
+        "parent": null,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Informatica superiori",
+        "text": "Esempio di programma curricolare prima superiore istituti economici 2024-2025",
+        "image": "pawn_images/img.png",
+        "link": "",
+        "is_public": true,
+        "quiz": true,
+        "coze": true,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 47,
+    "fields": {
+        "uuid": "00ec263f-38cc-4159-b904-51532ea69608",
+        "parent": 46,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Componenti Hardware",
+        "text": "L'<strong>hardware</strong> in informatica comprende tutti i componenti fisici, tangibili e concreti, cioè quelli che possiamo toccare. Si tratta di tutto ciò che possiamo maneggiare o, in teoria, far cadere a terra.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": true,
+        "coze": true,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 50,
+    "fields": {
+        "uuid": "a5985bc9-92cb-4233-9cb5-f510106f9f24",
+        "parent": 46,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Componenti software",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 51,
+    "fields": {
+        "uuid": "5139a043-ab63-4bce-8c76-44810fdf747a",
+        "parent": 1,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 7,
+        "name": "Online Collaboration",
+        "text": "Il modulo <strong>Online Collaboration</strong> copre l'uso di strumenti cloud, comunicazione online (email, chat, videoconferenze), collaborazione su documenti in tempo reale, gestione di calendari e sicurezza online per lavorare efficacemente in team digitali.",
+        "image": "pawn_images/Collaboration-icon.png",
+        "link": "https://drive.google.com/file/d/13gVJB-cJ4JElPWZPnpq251hHKNtmEZfy/view?usp=drive_link",
+        "is_public": true,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 52,
+    "fields": {
+        "uuid": "3f60bfb5-3828-44a4-9cce-3a5d5f005040",
+        "parent": 51,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Concetti di collaborazione",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 53,
+    "fields": {
+        "uuid": "380c7cee-ce9a-46bd-80de-e4b93a4e7c21",
+        "parent": 51,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Preparazione per la collaborazione online",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 54,
+    "fields": {
+        "uuid": "675a792f-1211-4bd7-95b1-154bb6660ff7",
+        "parent": 51,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Uso di strumenti di massa online e produttività",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 55,
+    "fields": {
+        "uuid": "a7477119-dce0-4dcf-95d7-85b3f7b5a20a",
+        "parent": 51,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Collaborazione mobile",
+        "text": "",
+        "image": "",
+        "link": null,
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 56,
+    "fields": {
+        "uuid": "53a08dee-5d65-4cf6-b9fa-e3b0722c7644",
+        "parent": 15,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Utilizzo dell'applicazione",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1ykCwg24jny-BFc9xaN1ycxFfwfvQIUh6/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 57,
+    "fields": {
+        "uuid": "411680c4-c889-462c-ac9c-93b6b76954b0",
+        "parent": 15,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Creazione di un documento",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/11ZL4_6ZourJJPFD7VljA8SMimrovh4XO/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 58,
+    "fields": {
+        "uuid": "d0d57807-6987-499c-8413-09209b155479",
+        "parent": 15,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Formattazione",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1gy9f9f54dgJPVXQ7n4xMT7JGVqEjn8Ob/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 59,
+    "fields": {
+        "uuid": "18d17cc7-f1ad-498b-978e-ef0afa5a9933",
+        "parent": 15,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Oggetti",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1YiSLdDPNr7nqqKuuRsELmTatNL9TT-KT/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 60,
+    "fields": {
+        "uuid": "3d131851-709b-48b7-ae3d-b5e262522870",
+        "parent": 15,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Stampa unione",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1bVwrt31On0edlUu93eRT33wPjsRD9mro/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 61,
+    "fields": {
+        "uuid": "d8828462-444e-43bb-b833-6bac73901542",
+        "parent": 15,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 6,
+        "name": "Preparazione della stampa",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1riyh2T3zvmH1yDYFzcWbb6CpCw6ZQdly/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 62,
+    "fields": {
+        "uuid": "1be05ecb-c092-4961-922c-16a3b9a5c6d1",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 1,
+        "name": "Concetti di sicurezza",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1eIL4l8x3nzRpGu3JtSjYT0i0aihiWNKV/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 63,
+    "fields": {
+        "uuid": "986185d3-f1fb-4310-b895-aa9bde8fd70b",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 2,
+        "name": "Malware",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1WDwPqkHYqD0Y4FTrQd86rOy-jYBxO07K/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 64,
+    "fields": {
+        "uuid": "ba0d0aac-fad2-4ff6-8d7f-9c70b9d55780",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Sicurezza in rete",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1HiemL1TLwiig-Er7S37KYScyBBGTm035/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 65,
+    "fields": {
+        "uuid": "b644a7fc-70de-4b79-8617-0f1e8d90d6b6",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Controllo di accesso",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1yO3kiIc_nlOBTghmVtal2BqmCa3k0Vvq/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 66,
+    "fields": {
+        "uuid": "c2fdae3e-8b4d-4179-9caa-647b8949aa00",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 5,
+        "name": "Uso sicuro del web",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1eziiM2jjeFn-Xg1E3tEiId--RlpfU5cp/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 67,
+    "fields": {
+        "uuid": "092e2a4d-8478-41ad-80de-2ca09f9d3da9",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 6,
+        "name": "Comunicazioni",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1wN98L7Oy7flHjadHJ2yIti_lR60BkfCb/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 68,
+    "fields": {
+        "uuid": "d0f56697-d663-4fb9-b5ad-c0f770d9aef5",
+        "parent": 40,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 7,
+        "name": "Gestione sicura dei dati",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1wz6TgmLXry_envdAfaL6igRrtjCTWqu6/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 69,
+    "fields": {
+        "uuid": "faef593b-c5b4-43ec-822e-1633a26577c1",
+        "parent": 47,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Modello di con Neumann",
+        "text": "Il <strong>Modello di von Neumann</strong> è l'architettura su cui si basano i computer moderni",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": true,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 70,
+    "fields": {
+        "uuid": "98dd3a19-c5ed-4356-87df-ac844a09833b",
+        "parent": 69,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Processore",
+        "text": "Il <strong>processore</strong> è l'unità che esegue le istruzioni e gestisce i dati, coordinando il funzionamento del computer.",
+        "image": "pawn_images/cpu.png",
+        "link": "",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 71,
+    "fields": {
+        "uuid": "a7fa29b5-9046-4506-9811-1de31f5690c1",
+        "parent": 69,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Memoria",
+        "text": "La <strong>memoria</strong> è lo spazio dove possono essere salvati dei dati",
+        "image": "pawn_images/mem.jpg",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 72,
+    "fields": {
+        "uuid": "ed65a737-5699-4828-ac69-49a70df1af2e",
+        "parent": 69,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Input/ouput",
+        "text": "L'input/output è la parte che riceve o manda dati all'esterno del computer",
+        "image": "pawn_images/Screenshot_from_2024-09-28_02-08-25.png",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 73,
+    "fields": {
+        "uuid": "d6cc8ec9-7dd0-466a-a93f-1199ddfc809b",
+        "parent": 70,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Control Unit",
+        "text": "La <strong>CU</strong> (Unità di Controllo) gestisce il flusso di istruzioni e coordina le operazioni all'interno del processore.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 74,
+    "fields": {
+        "uuid": "1830db5a-03a9-4fe8-9cb3-346ce4cb0949",
+        "parent": 70,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Arithmetic logic unit",
+        "text": "La <strong>ALU</strong> (Unità Aritmetica e Logica) esegue operazioni matematiche e logiche, come addizioni, sottrazioni e confronti.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 75,
+    "fields": {
+        "uuid": "6171f82c-6445-457c-bf22-fd22bd490a66",
+        "parent": 71,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Memoria principale",
+        "text": "La <strong>memoria principale</strong> è la parte più veloce della memoria, dedicata ai dati attualmente in uso. Essendo più costosa della memoria secondaria, è più rapida ma ha una capacità inferiore. È una memoria volatile, il che significa che perde i dati quando manca l'alimentazione: una volta spento il computer, i dati vengono cancellati.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 76,
+    "fields": {
+        "uuid": "efdb3659-5a01-4027-91dc-8fa6c4f7f3e9",
+        "parent": 71,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Memoria secondaria",
+        "text": "La <strong>memoria secondaria</strong> è utilizzata per l'archiviazione a lungo termine dei dati e ha una capacità maggiore rispetto alla memoria principale. Sebbene sia più lenta, è meno costosa e non volatile, il che significa che conserva i dati anche quando il computer è spento.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 77,
+    "fields": {
+        "uuid": "24c6253c-8535-425d-b852-617cd2dbeafa",
+        "parent": 75,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "RAM",
+        "text": "La <strong>RAM</strong> (Random Access Memory) è un dispositivo di memoria principale che contiene i dati attualmente utilizzati dal computer (come i programmi in esecuzione)",
+        "image": "pawn_images/ram.png",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 78,
+    "fields": {
+        "uuid": "daaf16eb-b8da-4f30-b58c-f77a23a54a01",
+        "parent": 47,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Periferiche",
+        "text": "Una <strong>periferica</strong> è un dispositivo hardware che mette in comunicazione il computer con gli utenti o con altri computer",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 85,
+    "fields": {
+        "uuid": "d6d6de60-ab56-4028-835e-521d7bed0f2c",
+        "parent": 14,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 4,
+        "name": "Grafici",
+        "text": "",
+        "image": "",
+        "link": "https://drive.google.com/file/d/1gsgL1YbwRAZMsJsQU5Z6eC9ysArpukXU/view?usp=drive_link",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 86,
+    "fields": {
+        "uuid": "adfa85c0-c528-42e4-baa8-046bfeb2cf5b",
+        "parent": 50,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Software di sistema",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 87,
+    "fields": {
+        "uuid": "be4b0dd2-dedc-42f3-a468-76e9e11331bb",
+        "parent": 50,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Software applicativi",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 88,
+    "fields": {
+        "uuid": "25f56008-8340-4794-a288-ef43924f113f",
+        "parent": 46,
+        "user": [
+            "paoli7612"
+        ],
+        "number": 3,
+        "name": "Reti informatiche",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": true,
+        "coze": false,
+        "exam": true,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 89,
+    "fields": {
+        "uuid": "996f1903-8893-4b8d-a512-807fa0730c5d",
+        "parent": 88,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Topologia",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 90,
+    "fields": {
+        "uuid": "e3a22d23-edc4-466e-a2e4-0de25ac698ef",
+        "parent": 88,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Hardware",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 91,
+    "fields": {
+        "uuid": "7cddb3f8-0849-4a52-8762-6a3f46b2cc37",
+        "parent": 88,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Protocolli",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 92,
+    "fields": {
+        "uuid": "1d688641-ae28-4747-b023-283b6f47773e",
+        "parent": 47,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Componenti computer desktop",
+        "text": "Si vedono le componenti principali interne al case di un computer",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": true,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 93,
+    "fields": {
+        "uuid": "e5ce4efe-df3d-41da-afc3-cdd59418f08a",
+        "parent": 5,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "ICT (Information and Communication Technology)",
+        "text": "L'<strong>ICT</strong> (Information and Communication Technology) è l'insieme delle tecnologie utilizzate per archiviare, elaborare e trasmettere informazioni tramite dispositivi elettronici.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 94,
+    "fields": {
+        "uuid": "2ed1ee60-15fe-4d25-8974-1e027992452d",
+        "parent": 93,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "E-banking",
+        "text": "Consente ai clienti di una banca di effettuare operazioni finanziarie online senza recarsi in filiale",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 95,
+    "fields": {
+        "uuid": "aa20f3b7-21a5-4499-ab31-789a9d6da7b0",
+        "parent": 93,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "E-government",
+        "text": "Si riferisce ai servizi pubblici offerti ai cittadini tramite Internet, come la richiesta di certificati o l'invio di dichiarazioni fiscali",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 96,
+    "fields": {
+        "uuid": "0dd46b9d-9b0b-4fff-b4bd-ffe353b69727",
+        "parent": 93,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "E-learning",
+        "text": "Indica le tecniche di apprendimento basate su strumenti elettronici e Internet, favorendo l'interattività e la creatività degli studenti",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 97,
+    "fields": {
+        "uuid": "c4343dce-d7b6-411a-9949-dc53e00de7e2",
+        "parent": 5,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Hardware",
+        "text": "L'hardware è l'insieme delle componenti fisiche, elettriche, elettroniche e meccaniche di un computer o dispositivo elettronico",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 98,
+    "fields": {
+        "uuid": "3c695241-bd12-447c-bee8-8cb3e43da448",
+        "parent": 97,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "RAM",
+        "text": "La <strong>RAM</strong> (Random Access Memory) è una memoria volatile che memorizza temporaneamente i dati durante l'esecuzione delle applicazioni, migliorando le prestazioni del dispositivo.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 99,
+    "fields": {
+        "uuid": "8d9d343b-894e-4b93-97ae-1650b7f496c5",
+        "parent": 97,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Processore",
+        "text": "Il <strong>processore</strong>, o CPU (Central Processing Unit), è il componente centrale di un computer che esegue calcoli e gestisce le operazioni delle applicazioni.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 100,
+    "fields": {
+        "uuid": "c28c5663-7007-4ae9-a862-282f0f66a60d",
+        "parent": 97,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Memoria di massa",
+        "text": "Un dispositivo di <strong>memoria di massa</strong> è un'unità di archiviazione, come un disco rigido, pendrive o scheda di memoria, che conserva grandi quantità di dati in modo permanente.",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 101,
+    "fields": {
+        "uuid": "03b79739-c07b-4305-a177-718ec6ac8ed3",
+        "parent": 97,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Periferiche",
+        "text": "Una <strong>periferica</strong> è un dipositivo hardware che, collegato al computer, comunica e permette di comunicare con l'esterno",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 102,
+    "fields": {
+        "uuid": "55f57d68-2464-41cb-b3b6-795fc905960b",
+        "parent": 6,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Desktop",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 103,
+    "fields": {
+        "uuid": "c40ee68f-6ca9-4624-b2c5-093fe672ec55",
+        "parent": 6,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Barra delle applicazioni",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 104,
+    "fields": {
+        "uuid": "3b21d167-5ae0-4c73-89b4-1bac554b1713",
+        "parent": 13,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Stampare",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 105,
+    "fields": {
+        "uuid": "073fb7af-1a9f-40aa-a56c-752b9b940669",
+        "parent": 16,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "File",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 106,
+    "fields": {
+        "uuid": "23773849-5f70-4cff-af17-2e62310c99ad",
+        "parent": 105,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Estensioni",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 107,
+    "fields": {
+        "uuid": "950883c6-0c91-417a-b9dc-7812716ee819",
+        "parent": 16,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Cartelle",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 108,
+    "fields": {
+        "uuid": "db9f6a44-bd38-4a77-8363-f4fa61e266cf",
+        "parent": 17,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Internet",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 109,
+    "fields": {
+        "uuid": "21e3b8a3-bcca-4f5a-a85c-a2c571e680bb",
+        "parent": 24,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Cybersecurity",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 110,
+    "fields": {
+        "uuid": "606cdaae-ed07-4832-9365-76119c431269",
+        "parent": 24,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Ergonomia",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+},
+{
+    "model": "pawns.pawn",
+    "pk": 111,
+    "fields": {
+        "uuid": "c8ff03f1-699a-4d2a-98d8-757eb920e40f",
+        "parent": 24,
+        "user": [
+            "paoli7612"
+        ],
+        "number": null,
+        "name": "Accessibilità",
+        "text": "",
+        "image": "",
+        "link": "",
+        "is_public": false,
+        "quiz": false,
+        "coze": false,
+        "exam": false,
+        "exam_count": 36,
+        "exam_time": 45,
+        "groups": []
+    }
+}
+]
