@@ -22,7 +22,11 @@
             {id: "{{ pawn }}", url: "{{ pawn.parent.url_explore }}", main: true, imgUrl: "{{ pawn.image.url }}"}
         ];
         {% for child in pawn.childs.all %}
-            nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false, imgUrl: "{{ child.image.url }}" });
+            {% if child.image %}
+                nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false, imgUrl: "{{ child.image.url }}" });
+            {% else %}
+                nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false});
+            {% endif %}
         {% endfor %}
     
         const links = [];
