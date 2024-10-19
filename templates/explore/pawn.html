@@ -19,7 +19,11 @@
     
         // Aggiungi il campo imgUrl per l'immagine che vuoi mostrare
         const nodes = [
-            {id: "{{ pawn }}", url: "{{ pawn.parent.url_explore }}", main: true, imgUrl: "{{ pawn.image.url }}"}
+            {% if pawn.image %}
+                {id: "{{ pawn }}", url: "{{ pawn.parent.url_explore }}", main: true, imgUrl: "{{ pawn.image.url }}"}
+            {% else %}
+                {id: "{{ pawn }}", url: "{{ pawn.parent.url_explore }}", main: true}
+            {% endif %}
         ];
         {% for child in pawn.childs.all %}
             {% if child.image %}
