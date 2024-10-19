@@ -14,6 +14,9 @@
             {% if pawn.exam %}
                 {% include 'partials/abutton.html' with url=pawn.url_exam label='Esame' title='Try exam' icon='asterisk'%}
             {% endif %}
+            {% if pawn.is_public %}
+                {% include 'partials/abutton.html' with url=pawn.url_explore label='Esplora' title='Explore' icon='crosshairs'%}
+            {% endif %}
             {% if user == pawn.user or user.is_superuser %}
                 {% include 'partials/abutton-admin.html' with url=pawn.url_new title='New pawn' icon='plus'%}
                 {% include 'partials/abutton-admin.html' with url=pawn.url_edit title='Edit pawn' icon='edit'%}

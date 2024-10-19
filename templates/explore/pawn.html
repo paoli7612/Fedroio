@@ -1,0 +1,105 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+  Explore - {{ pawn }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <svg width="1400" height="700"></svg>
+        
+    {% load static %}
+    <script>
+        const width = 1400;
+        const height = 700;
+    
+        const svg = d3.select("svg");
+    
+        // Aggiungi il campo imgUrl per l'immagine che vuoi mostrare
+        const nodes = [
+            {id: "{{ pawn }}", url: "{{ pawn.parent.url_explore }}", main: true, imgUrl: "{{ pawn.image.url }}"}
+        ];
+        {% for child in pawn.childs.all %}
+            nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false, imgUrl: "{{ child.image.url }}" });
+        {% endfor %}
+    
+        const links = [];
+        {% for child in pawn.childs.all %}
+            links.push({ source: "{{ child }}", target: "{{ pawn }}" });
+        {% endfor %}
+    
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(200))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+    
+        const link = svg.append("g")
+            .attr("stroke", "#999")
+            .selectAll("line")
+            .data(links)
+            .join("line")
+            .attr("stroke-width", 2);
+    
+        // Usa <image> invece di <circle>
+        const node = svg.append("g")
+            .selectAll("image")
+            .data(nodes)
+            .join("image")
+            .attr("xlink:href", d => d.imgUrl)  // Usa l'URL dell'immagine
+            .attr("width", d => d.main ? 60 : 40)  // Dimensioni diverse per il nodo principale
+            .attr("height", d => d.main ? 60 : 40)
+            .attr("x", d => d.x - (d.main ? 30 : 20))  // Centra l'immagine
+            .attr("y", d => d.y - (d.main ? 30 : 20))  // Centra l'immagine
+            .on("click", (event, d) => {
+                window.location = d.url;
+            })
+            .call(drag(simulation));
+    
+        const label = svg.append("g")
+            .selectAll("text")
+            .data(nodes)
+            .join("text")
+            .attr("dy", -45)  // Modifica la posizione del testo rispetto all'immagine
+            .attr("text-anchor", "middle")
+            .text(d => d.id)
+            .style("font-size", "12px")
+            .style("fill", "black");
+    
+        simulation.on("tick", () => {
+            link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+    
+            node
+            .attr("x", d => d.x - (d.main ? 30 : 20))  // Centra l'immagine
+            .attr("y", d => d.y - (d.main ? 30 : 20));  // Centra l'immagine
+    
+            label
+            .attr("x", d => d.x)
+            .attr("y", d => d.y);
+        });
+    
+        function drag(simulation) {
+            return d3.drag()
+            .on("start", event => {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                event.subject.fx = event.subject.x;
+                event.subject.fy = event.subject.y;
+            })
+            .on("drag", event => {
+                event.subject.fx = event.x;
+                event.subject.fy = event.y;
+            })
+            .on("end", event => {
+                if (!event.active) simulation.alphaTarget(0);
+                event.subject.fx = null;
+                event.subject.fy = null;
+            });
+        }
+        </script>
+    </div>
+{% endblock %}

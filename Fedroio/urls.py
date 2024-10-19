@@ -28,6 +28,7 @@ urlpatterns = [
     path('info/', views.info, name='info'),
     path('admin/', admin.site.urls),
     path('pawns/', include('pawns.urls')),
+    path('explore/', include('explore.urls')),
     path('achievments/', include('achievements.urls')),
     
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
