@@ -99,7 +99,6 @@ def quiz_chain(request, uuid):
         order = Case(*[When(id=pk, then=pos) for pos, pk in enumerate(chain_ids)])
         chain = list(Question.objects.filter(id__in=chain_ids).order_by(order))
         if request.POST.get('answer') == '0':
-            question.wrong_answerw
             messages.success(request, 'Corretto') # messaggio "corretto"
             request.session['points'] += 1
             if len(chain) == request.session['points']:
