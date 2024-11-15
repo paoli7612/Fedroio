@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, get_list_or_40
 from django.db import IntegrityError
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Pawn, Sentence, Question
 from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm
@@ -233,3 +234,8 @@ def exam(request, uuid):
         'time': time
     })
 
+@login_required
+def partis(request, uuid):
+    return render(request, 'partis/index.html', {
+        'pawn': get_object_or_404(Pawn, uuid=uuid)
+    })

@@ -24,6 +24,8 @@ urlpatterns = [
     path('<uuid:uuid>/quiz/catena', views.quiz_chain, name='pawn.quiz-chain'),
     path('<uuid:uuid>/coze/<int:difficulty>', views.coze_points, name='pawn.coze'),
 
+    path('<uuid:uuid>/partis', views.partis, name='pawn.partis')
+
    
 ]
 

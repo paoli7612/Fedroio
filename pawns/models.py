@@ -20,9 +20,12 @@ class Pawn(models.Model):
     link = models.TextField(max_length=256, blank=True, null=True)
     
     is_public = models.BooleanField(default=False)
+
     quiz = models.BooleanField(default=False)
     coze = models.BooleanField(default=False)
     exam = models.BooleanField(default=False)
+    partis = models.BooleanField(default=False)
+
     exam_count = models.IntegerField(default=36)
     exam_time = models.IntegerField(default=45)
 
@@ -61,6 +64,9 @@ class Pawn(models.Model):
 
     def url_quizChain(self):
         return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
+
+    def url_partis(self):
+        return reverse('pawn.partis', kwargs={'uuid': self.uuid})
 
     def url_cozeEasy(self):
         return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 1})
@@ -139,6 +145,10 @@ class Pawn(models.Model):
                     words.append(w[1:-1])
         random.shuffle(words)
         return words
+
+class OpenQuestion(models.Model):
+    pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='openQuesions')
+    text = models.TextField(max_length=512, blank=False)
 
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')

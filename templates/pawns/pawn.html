@@ -10,10 +10,13 @@
     {% include './_content.html' %}
     {% include './_childs.html' %}
     {% if pawn.quiz %}
-    {% include './_quiz.html' with col=6 %}
+      {% include './_quiz.html' with col=4 %}
+    {% endif %}
+    {% if pawn.partis %}
+      {% include './_partis.html' with col=4 %}
     {% endif %}
     {% if pawn.coze %}
-      {% include './_coze.html' with col=6 %}
+      {% include './_coze.html' with col=4 %}
     {% endif %}
 
 
