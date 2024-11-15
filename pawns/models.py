@@ -47,6 +47,9 @@ class Pawn(models.Model):
     def url_newQuestion(self):
         return reverse('pawn.question-new', kwargs={'uuid': self.uuid})
 
+    def url_newOpenQuestion(self):
+        return reverse('pawn.openQuestion-new', kwargs={'uuid': self.uuid})
+
     def url_newQuestions(self):
         return reverse('pawn.questions-new', kwargs={'uuid': self.uuid})
 
@@ -147,8 +150,11 @@ class Pawn(models.Model):
         return words
 
 class OpenQuestion(models.Model):
-    pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='openQuesions')
+    pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='openQuestions')
     text = models.TextField(max_length=512, blank=False)
+
+    def __str__(self):
+        return self.text
 
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')

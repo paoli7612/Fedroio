@@ -9,23 +9,20 @@
         </h3>
         {% if user.is_superuser %}
             <div class="w3-right w3-margin">
-                {% include 'partials/abutton-admin.html' with url=pawn.url_newSentence title='New sentence' icon='plus'%}
+                {% include 'partials/abutton-admin.html' with url=pawn.url_newOpenQuestion title='New open question' icon='plus'%}
             </div>
         {% endif %}
     </div>
-    <div class="w3-panel w3-center">
-        {% include 'partials/abutton.html' with url=pawn.url_cozeEasy title='Facile' icon='play-circle' label='Facile'%}
-    </div>
     <table class="w3-table-all w3-card w3-margin-bottom">
-        {% for sentence in pawn.sentences.all %}
+        {% for question in pawn.openQuestions.all %}
             <tr>
                 <td>
-                    {{ sentence|safe }}
+                    {{ question|safe }}
                 </td>
                 {% if user.is_superuser %}
                 <td>
-                    {% include 'partials/abutton-admin.html' with url=sentence.url_edit title='Edit sentence' icon='edit'%}
-                    {% include 'partials/abutton-admin.html' with url=sentence.url_delete title='Delete sentence' icon='trash'%}
+                    {% include 'partials/abutton-admin.html' with url=question.url_edit title='Edit question' icon='edit'%}
+                    {% include 'partials/abutton-admin.html' with url=question.url_delete title='Delete question' icon='trash'%}
                 </td>
                 {% endif %}
             </tr>

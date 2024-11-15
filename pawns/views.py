@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import Pawn, Sentence, Question
-from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm
+from .models import Pawn, Sentence, Question, OpenQuestion
+from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm, OpenQuestionForm
 
 from .views_exercise import *
 
@@ -199,6 +199,21 @@ def new_questions(request, uuid):
             return redirect(pawn.url())
     else:
         form = QuestionsForm()
+
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'pawn': pawn,
+        'back_url': pawn.url()
+    })
+
+def new_openQuestion(request, uuid):
+    pawn = get_object_or_404(Pawn, uuid=uuid)
+    if request.method == 'POST':
+        print(request.POST)
+        openQuestion = OpenQuestion.objects.create(text=request.POST.get('text'), pawn=pawn)
+        return redirect(pawn.url())
+    else:
+        form = OpenQuestionForm()
 
     return render(request, 'pawns/form.html', {
         'form': form,

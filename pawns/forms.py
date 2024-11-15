@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pawn, Sentence, Question
+from .models import Pawn, Sentence, Question, OpenQuestion
 
 class PawnForm(forms.ModelForm):
     class Meta:
@@ -15,6 +15,11 @@ class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['pawn', 'text', 'correct', 'a1', 'a2', 'a3']  
+
+class OpenQuestionForm(forms.ModelForm):
+    class Meta:
+        model = OpenQuestion
+        fields = ['text']  
 
 class QuestionsForm(forms.Form):
     text = forms.CharField(

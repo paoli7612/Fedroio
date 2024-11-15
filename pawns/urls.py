@@ -12,6 +12,7 @@ urlpatterns = [
     path('<uuid:uuid>/new-sentence', views.new_sentence, name='pawn.sentence-new'),
     path('<uuid:uuid>/new-question', views.new_question, name='pawn.question-new'),
     path('<uuid:uuid>/new-questions', views.new_questions, name='pawn.questions-new'),
+    path('<uuid:uuid>/new-openQuestion', views.new_openQuestion, name='pawn.openQuestion-new'),
     
     path('sentence/<int:id>/edit', views.edit_sentence, name='pawns.sentence-edit'),
     path('question/<int:id>/edit', views.edit_question, name='pawns.question-edit'),
@@ -25,8 +26,6 @@ urlpatterns = [
     path('<uuid:uuid>/coze/<int:difficulty>', views.coze_points, name='pawn.coze'),
 
     path('<uuid:uuid>/partis', views.partis, name='pawn.partis')
-
-   
 ]
 
 
