@@ -12,6 +12,9 @@
                 {% include 'partials/abutton-admin.html' with url=pawn.url_newOpenQuestion title='New open question' icon='plus'%}
             </div>
         {% endif %}
+        <div class="w3-panel w3-center">
+            {% include 'partials/abutton.html' with url=pawn.url_cozeEasy title='Facile' icon='play-circle' label='Rispondi'%}
+        </div>
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom">
         {% for question in pawn.openQuestions.all %}

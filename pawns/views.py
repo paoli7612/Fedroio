@@ -101,6 +101,21 @@ def edit_question(request, id):
         'back_url': quesiton.pawn.url()
     })
 
+def edit_openQuestion(request, id):
+    openQuestion = get_object_or_404(OpenQuestion, id=id)
+    if request.method == 'POST':
+        form = OpenQuestionForm(request.POST, request.FILES, instance=openQuestion)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'OpenQuestion updated successfully!')
+            return HttpResponseRedirect(request.POST.get('next'))
+    else:
+        form = OpenQuestionForm(instance=openQuestion)
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'back_url': openQuestion.pawn.url()
+    })
+
 def edit_pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
     if request.method == 'POST':
@@ -139,6 +154,18 @@ def delete_question(request, id):
         'title': 'Delete Question',
         'text': f'You\'re deleting the Question: <b>{question}</b>?',
         'url_back': question.pawn.url()
+    })
+
+def delete_openQuestion(request, id):
+    openQuestion = get_object_or_404(OpenQuestion, id=id)
+    if request.method == 'POST':
+        url = openQuestion.pawn.url()
+        openQuestion.delete()
+        return redirect(url)
+    return render(request, 'ask.html', {
+        'title': 'Delete openQuestion',
+        'text': f'You\'re deleting the openQuestion: <b>{openQuestion}</b>?',
+        'url_back': openQuestion.pawn.url()
     })
 
 def delete_sentence(request, id):

@@ -16,8 +16,10 @@ urlpatterns = [
     
     path('sentence/<int:id>/edit', views.edit_sentence, name='pawns.sentence-edit'),
     path('question/<int:id>/edit', views.edit_question, name='pawns.question-edit'),
+    path('openQuestion/<int:id>/edit', views.edit_openQuestion, name='pawns.openQuestion-edit'),
     path('sentence/<int:id>/delete', views.delete_sentence, name='pawns.sentence-delete'),
     path('question/<int:id>/delete', views.delete_question, name='pawns.question-delete'),
+    path('openQuestion/<int:id>/delete', views.delete_openQuestion, name='pawns.openQuestion-delete'),
 
     path('<uuid:uuid>/esame', views.exam, name='pawn.exam'),
     path('<uuid:uuid>/quiz/punti-difficile', views.quiz_pointsHard, name='pawn.quiz-pointsHard'),

@@ -153,6 +153,12 @@ class OpenQuestion(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='openQuestions')
     text = models.TextField(max_length=512, blank=False)
 
+    def url_edit(self):
+        return reverse('pawns.openQuestion-edit', kwargs={'id': self.id})
+
+    def url_delete(self):
+        return reverse('pawns.openQuestion-delete', kwargs={'id': self.id})
+
     def __str__(self):
         return self.text
 
