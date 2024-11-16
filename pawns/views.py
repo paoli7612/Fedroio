@@ -4,9 +4,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import Pawn, Sentence, Question, OpenQuestion
-from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm, OpenQuestionForm
-
+from .models import Pawn, Sentence, Question, OpenQuestion, OpenAnswer
+from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm, OpenQuestionForm, OpenAnswerForm
 from .views_exercise import *
 
 def index(request):
@@ -278,6 +277,22 @@ def exam(request, uuid):
 
 @login_required
 def partis(request, uuid):
-    return render(request, 'partis/index.html', {
-        'pawn': get_object_or_404(Pawn, uuid=uuid)
+    pawn = get_object_or_404(Pawn, uuid=uuid)
+    if request.method == 'POST':
+        print(request.POST)
+        question = get_object_or_404(OpenQuestion, id=request.POST.get('openQuestion'))
+        answer = OpenAnswer.objects.create(openQuestion=question, text=request.POST.get('text'), user=request.user)
+        return redirect(pawn.url())
+    else:
+        form = OpenAnswerForm()
+
+    return render(request, 'pawns/form.html', {
+        'form': form,
+        'pawn': pawn,
+        'back_url': pawn.url()
+    })
+
+def openQuestion_answers(request, id):
+    return render(request, 'partis/answers.html', {
+        'openQuestion': get_object_or_404(OpenQuestion, id=id)
     })

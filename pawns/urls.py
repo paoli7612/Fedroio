@@ -20,6 +20,7 @@ urlpatterns = [
     path('sentence/<int:id>/delete', views.delete_sentence, name='pawns.sentence-delete'),
     path('question/<int:id>/delete', views.delete_question, name='pawns.question-delete'),
     path('openQuestion/<int:id>/delete', views.delete_openQuestion, name='pawns.openQuestion-delete'),
+    path('openQuestion/<int:id>/answers', views.openQuestion_answers, name='pawns.openQuestion-answers'),
 
     path('<uuid:uuid>/esame', views.exam, name='pawn.exam'),
     path('<uuid:uuid>/quiz/punti-difficile', views.quiz_pointsHard, name='pawn.quiz-pointsHard'),

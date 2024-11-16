@@ -159,8 +159,22 @@ class OpenQuestion(models.Model):
     def url_delete(self):
         return reverse('pawns.openQuestion-delete', kwargs={'id': self.id})
 
+    def url_answers(self):
+        return reverse('pawns.openQuestion-answers', kwargs={'id': self.id})
+
     def __str__(self):
         return self.text
+
+class OpenAnswer(models.Model):
+    openQuestion = models.ForeignKey(OpenQuestion, on_delete=models.CASCADE, related_name='answers')
+    text = models.TextField(max_length=1024, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class JudgeQuestion(models.Model):
+    openAnswer = models.ForeignKey(OpenAnswer, on_delete=models.CASCADE, related_name='judges')
+    value = models.IntegerField()
+    note = models.TextField(max_length=512)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')
