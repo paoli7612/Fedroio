@@ -171,9 +171,16 @@ class OpenAnswer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
     group = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        unique_together = ('user', 'openQuestion')
+
     def url_edit(self):
         url = reverse('pawn.partis', kwargs={'uuid': self.openQuestion.pawn.uuid})
         return f"{url}?question={self.openQuestion.id}"
+
+    def url_delete(self):
+        return reverse('openAnswer.delete', kwargs={'id': self.id})
+
 
 class JudgeQuestion(models.Model):
     openAnswer = models.ForeignKey(OpenAnswer, on_delete=models.CASCADE, related_name='judges')

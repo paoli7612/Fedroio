@@ -55,6 +55,7 @@
                     </td>
                     <td>
                         {% include "partials/abutton.html" with icon='edit' url=answer.url_edit %}
+                        {% include "partials/abutton.html" with icon='trash' color='red' url=answer.url_delete %}
                     </td>
                 </tr>
             {% endfor %}

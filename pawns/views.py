@@ -278,17 +278,24 @@ def exam(request, uuid):
 @login_required
 def partis(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
+    question = None
+    open_answer = None
+
+    if request.GET.get('question'):
+        question = get_object_or_404(OpenQuestion, id=request.GET.get('question'))
+        open_answer = OpenAnswer.objects.filter(openQuestion=question, user=request.user).first()
 
     if request.method == 'POST':
-        form = OpenAnswerForm(request.POST)
+        form = OpenAnswerForm(request.POST, instance=open_answer)
         if form.is_valid():
             open_answer = form.save(commit=False)
             open_answer.user = request.user
-            open_answer.save() 
+            open_answer.save()
             return redirect(pawn.url())
     else:
-        if request.GET.get('question'):
-            question = get_object_or_404(OpenQuestion, id=request.GET.get('question'))
+        if open_answer:
+            form = OpenAnswerForm(instance=open_answer)
+        elif question:
             form = OpenAnswerForm(initial={'openQuestion': question})
         else:
             form = OpenAnswerForm()
@@ -296,10 +303,21 @@ def partis(request, uuid):
     return render(request, 'pawns/form.html', {
         'form': form,
         'pawn': pawn,
-        'back_url': pawn.url()
+        'back_url': pawn.url(),
     })
 
 def openQuestion_answers(request, id):
     return render(request, 'partis/answers.html', {
         'openQuestion': get_object_or_404(OpenQuestion, id=id)
+    })
+
+def answer_delete(request, id):
+    openAnswer = get_object_or_404(OpenAnswer, id=id)
+    if request.method == 'POST':
+        openAnswer.delete()
+        return redirect(reverse('account'))
+    return render(request, 'ask.html', {
+        'title': 'Delete Pawn',
+        'text': f'You\'re deleting that answer?: <b>{openAnswer}</b>?',
+        'url_back': openAnswer.openQuestion.pawn.url()
     })
