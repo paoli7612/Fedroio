@@ -43,6 +43,25 @@
     </div>
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1 class="w3-left">Le mie risposte</h1>
+        <table class="w3-table-all w3-card">
+            {% for answer in user.answers.all %}
+                <tr>
+                    <th>
+                        {{ answer.openQuestion.text }}
+                    </th>
+                    <td>
+                        {{ answer.text }}
+                    </td>
+                    <td>
+                        {% include "partials/abutton.html" with icon='edit' url=answer.url_edit %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
         <h1 class="w3-left">{{ user }}</h1>
 
         <table class="w3-table-all w3-panel w3-card">

@@ -10,7 +10,7 @@ from .decorators import admin_required, login_required
 # Create your views here.
 @login_required
 def account(request):
-    return render(request, 'registration/user.html', {
+    return render(request, 'registration/account.html', {
         'user': request.user
     })
 
@@ -61,8 +61,8 @@ def group_delete(request, username):
     })
 
 @admin_required
-def user_reset(request, id):
-    user = get_object_or_404(User, id=id)
+def user_reset(request, username):
+    user = get_object_or_404(User, username=username)
     password = user.reset_password()
     messages.success(request, f"{user}: new password = {password}")
     return redirect(reverse('dashboard'))

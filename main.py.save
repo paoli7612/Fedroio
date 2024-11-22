@@ -1,0 +1,5 @@
+ = int(input("Inserisci il primo numero: "))
+b = int(input("Inserisci il secondo numero: "))
+print("il prodotto è", a * b)
+b)
+while 

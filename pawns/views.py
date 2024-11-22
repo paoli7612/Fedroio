@@ -278,13 +278,20 @@ def exam(request, uuid):
 @login_required
 def partis(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
+
     if request.method == 'POST':
-        print(request.POST)
-        question = get_object_or_404(OpenQuestion, id=request.POST.get('openQuestion'))
-        answer = OpenAnswer.objects.create(openQuestion=question, text=request.POST.get('text'), user=request.user)
-        return redirect(pawn.url())
+        form = OpenAnswerForm(request.POST)
+        if form.is_valid():
+            open_answer = form.save(commit=False)
+            open_answer.user = request.user
+            open_answer.save() 
+            return redirect(pawn.url())
     else:
-        form = OpenAnswerForm()
+        if request.GET.get('question'):
+            question = get_object_or_404(OpenQuestion, id=request.GET.get('question'))
+            form = OpenAnswerForm(initial={'openQuestion': question})
+        else:
+            form = OpenAnswerForm()
 
     return render(request, 'pawns/form.html', {
         'form': form,

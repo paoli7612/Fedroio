@@ -13,7 +13,9 @@
             </div>
         {% endif %}
         <div class="w3-panel w3-center">
-            {% include 'partials/abutton.html' with url=pawn.url_partis title='Facile' icon='play-circle' label='Rispondi'%}
+            {% if user.groups.all %}
+                {% include 'partials/abutton.html' with url=pawn.url_partis title='Facile' icon='play-circle' label='Rispondi'%}
+            {% endif %}
         </div>
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom">

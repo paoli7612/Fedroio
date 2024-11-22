@@ -168,13 +168,18 @@ class OpenQuestion(models.Model):
 class OpenAnswer(models.Model):
     openQuestion = models.ForeignKey(OpenQuestion, on_delete=models.CASCADE, related_name='answers')
     text = models.TextField(max_length=1024, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
+    group = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL)
+
+    def url_edit(self):
+        url = reverse('pawn.partis', kwargs={'uuid': self.openQuestion.pawn.uuid})
+        return f"{url}?question={self.openQuestion.id}"
 
 class JudgeQuestion(models.Model):
     openAnswer = models.ForeignKey(OpenAnswer, on_delete=models.CASCADE, related_name='judges')
     value = models.IntegerField()
     note = models.TextField(max_length=512)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='judgeAnswers')
 
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')
