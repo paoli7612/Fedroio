@@ -252,7 +252,7 @@ def exam(request, uuid, mode='normal'):
     if mode == 'normal':
         questions = pawn.all_questions(isRandom=True)[:pawn.exam_count]
     elif mode == 'hard':
-        question = pawn.worst_questions()[:pawn.exam_count]
+        questions = pawn.worst_questions()[:pawn.exam_count]
     time = pawn.exam_time
 
     if request.method == 'POST':
