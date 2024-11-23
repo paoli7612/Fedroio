@@ -247,13 +247,12 @@ def new_openQuestion(request, uuid):
         'back_url': pawn.url()
     })
 
-def exam(request, uuid):
+def exam(request, uuid, mode='normal'):
     pawn = get_object_or_404(Pawn, uuid=uuid)
-    try:
+    if mode == 'normal':
         questions = pawn.all_questions(isRandom=True)[:pawn.exam_count]
-    except:
-        questions = pawn.all_questions(isRandom=True)
-        messages.error(request, 'Non ci sono abbastanza domande per un esame completo')
+    elif mode == 'hard':
+        question = pawn.worst_questions()[:pawn.exam_count]
     time = pawn.exam_time
 
     if request.method == 'POST':

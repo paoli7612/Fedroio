@@ -28,6 +28,7 @@ urlpatterns = [
     path('info/', views.info, name='info'),
     path('admin/', admin.site.urls),
     path('pawns/', include('pawns.urls')),
+    path('interpares/', include('interpares.urls')),
     path('explore/', include('explore.urls')),
     path('achievments/', include('achievements.urls')),
     

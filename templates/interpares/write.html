@@ -1,0 +1,24 @@
+
+{% extends "layout/base.html" %}
+
+{% block title %}Ask{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>Interpares</h1>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round w3-padding">
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="text" class="w3-input w3-car w3-round" rows="20" style=" resize: none;"></textarea>
+            <div class="w3-right">
+                <button type="submit" class="w3-btn w3-card w3-round w3-theme">
+                    Conferma
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -19,6 +19,14 @@
                 <i class="fa fa-signal"></i>
                 <span class="w3-hide-small">Classifica</span>
             </a> {% endcomment %}
+
+            {% url 'interpares' as url %}
+            <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">
+                <i class="fa fa-signal"></i>
+                <span class="w3-hide-small">Inter Pares</span>
+            </a> 
+
+
             {% if user.is_superuser %}
                 {% url 'dashboard' as url %}
                 <a href="{{ url }}" class="w3-bar-item w3-btn {% if request.path == url %} w3-white {% endif %}">

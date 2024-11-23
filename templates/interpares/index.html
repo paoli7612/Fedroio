@@ -1,0 +1,21 @@
+
+{% extends "layout/base.html" %}
+
+{% block title %}Ask{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>Interpares</h1>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <p>
+            Tema 1
+        </p>
+        {% url "interpares.write" as url %}
+        {% include 'partials/abutton.html' with label='Scrivi' icon='plus' %}
+        {% url "interpares.evaluate" as url %}
+        {% include 'partials/abutton.html' with label='Valuta' color='yellow' icon='eye' %}
+    </div>
+{% endblock %}

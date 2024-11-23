@@ -1,0 +1,68 @@
+
+{% extends "layout/base.html" %}
+
+{% block title %}Ask{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>Interpares</h1>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round w3-padding">
+        <p>
+            {{ tema.text }}
+        </p>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round w3-padding">
+        <form method="post">
+            {% csrf_token %}
+            <table class="w3-table-all w3-card">
+                <tr>
+                    <td style="font-size: 24px" rowspan="3">Forma</td>
+                    <td>Ortografia</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10" name="forma-ortografia"></td>
+                </tr>
+                <tr>
+                    <td>Sintassi</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10" name="forma-sintassi"></td>
+                </tr>
+                <tr>
+                    <td>Semantica</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10" name="forma-semantica"></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 24px" rowspan="3">Contenuto</td>
+                    <td>Informazioni sbagliate</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td>Informazioni in eccesso</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td>Informazioni mancanti</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 24px" rowspan="2">Diviedi formali riassunto</td>
+                    <td>Discorso diretto</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td>Figure retoriche</td>
+                    <td><input type="number" name="" class="w3-input w3-card" min="0" max="10"></td>
+                </tr>
+            </table>
+
+            <div class="w3-right w3-panel">
+                <button type="submit" class="w3-theme w3-btn w3-card w3-round">
+                    Salva
+                    <i class="fa fa-save"></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

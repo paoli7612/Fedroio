@@ -1,5 +1,4 @@
 import random, re, uuid
-import uuid
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
 from django.utils.text import slugify
@@ -82,6 +81,8 @@ class Pawn(models.Model):
         return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
     def url_exam(self):
         return reverse('pawn.exam', kwargs={'uuid': self.uuid})
+    def url_examPlus(self):
+        return reverse('pawn.examPlus', kwargs={'uuid': self.uuid})
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 
@@ -180,7 +181,6 @@ class OpenAnswer(models.Model):
 
     def url_delete(self):
         return reverse('openAnswer.delete', kwargs={'id': self.id})
-
 
 class JudgeQuestion(models.Model):
     openAnswer = models.ForeignKey(OpenAnswer, on_delete=models.CASCADE, related_name='judges')

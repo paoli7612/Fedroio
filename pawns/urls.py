@@ -23,6 +23,7 @@ urlpatterns = [
     path('openQuestion/<int:id>/answers', views.openQuestion_answers, name='pawns.openQuestion-answers'),
 
     path('<uuid:uuid>/esame', views.exam, name='pawn.exam'),
+    path('<uuid:uuid>/esame/<str:mode>', views.exam, name='pawn.examPlus'),
     path('<uuid:uuid>/quiz/punti-difficile', views.quiz_pointsHard, name='pawn.quiz-pointsHard'),
     path('<uuid:uuid>/quiz/punti', views.quiz_points, name='pawn.quiz-points'),
     path('<uuid:uuid>/quiz/catena', views.quiz_chain, name='pawn.quiz-chain'),
