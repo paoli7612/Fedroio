@@ -103,7 +103,7 @@
                 <th>Risposta giusta</th>
             </tr>
             {% for question in questions %}
-                {% if question.slected == 0 %}
+                {% if not question.slected == 0 %}
                     <tr>
                         <td>
                             {{ question }}
