@@ -130,10 +130,9 @@ class Pawn(models.Model):
         questions = self.all_questions()
         questions = sorted(
             questions,
-            key=lambda q: (q.correctly + q.wrongly)/q.wrongly if q.wrongly != 0 else float('-inf'),
-            reverse=True
+            key=lambda q: (q.correctly + q.wrongly)/q.wrongly if q.wrongly != 0 else float('inf')  # float('inf') sposta le domande con wrongly=0 in fondo
         )
-        return questions[:10]
+        return questions[:10]  # Prendi le 10 peggiori
     
     def all_sentences(self):
         sentences = list(self.sentences.all())
