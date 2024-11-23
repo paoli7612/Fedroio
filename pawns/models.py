@@ -128,7 +128,11 @@ class Pawn(models.Model):
     
     def worst_questions(self):
         questions = self.all_questions()
-        questions = sorted(questions, key=lambda q: (q.correctly + q.wrongly)/q.wrongly, reverse=True)
+        questions = sorted(
+            questions,
+            key=lambda q: (q.correctly + q.wrongly)/q.wrongly if q.wrongly != 0 else float('-inf'),
+            reverse=True
+        )
         return questions[:10]
     
     def all_sentences(self):
