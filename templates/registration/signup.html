@@ -12,13 +12,13 @@
             {% csrf_token %}
             {{ form|crispy }}
             <div class="w3-right w3-panel">
-                <a href="{% url "signup" %}" class="w3-btn">
-                    <i class="fa fa-user-plus"></i>
-                    Sign up
+                <a href="{% url "login" %}" class="w3-btn">
+                    <i class="fa fa-sign-in"></i>
+                    Login
                 </a>
                 <button type="submit" class="w3-btn w3-theme w3-round w3-card">
-                    Login
-                    <i class="fa fa-sign-in"></i>
+                    Sign up
+                    <i class="fa fa-user-plus"></i>
                 </button>
             </div>
         </div>
