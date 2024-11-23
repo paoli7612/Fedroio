@@ -36,11 +36,7 @@
     <div id="buttons" class="w3-center w3-panel" style="max-width: 750px; margin: auto">
         {% for question in questions %}
             <button type="button" style="margin-bottom: 4px;" id="b{{ forloop.counter }}" class="w3-bottombar
-            {% if question.slected == 0 %}
-            w3-green
-            {% else %}
-            w3-red
-            {% endif %}
+            {% if question.slected == 0 %}w3-green{% else %}w3-red{% endif %}
             w3-hover-shadow w3-padding w3-btn w3-round-large" onclick="show({{ forloop.counter }})">
                 {{ forloop.counter }}
             </button>
@@ -86,6 +82,53 @@
                 return;
             }
         }
+    }
+</script>
+
+<div class="w3-card w3-round w3-padding w3-white">
+    <div class="w3-panel">
+        <button class="w3-btn w3-theme w3-round w3-card" onclick="showPageArea()">
+            <i class="fa fa-eye"></i>
+            Vedi Errori
+        </button>
+        <button class="w3-btn w3-theme w3-round w3-card" onclick="printPageArea()">
+            <i class="fa fa-print"></i>
+            Stampa Errori
+        </button>
+    </div>
+    <div class="w3-container w3-hide"  id="print">
+        <table class="w3-table-all w3-white">
+            <tr>
+                <th>Domanda</th>
+                <th>Risposta giusta</th>
+            </tr>
+            {% for question in questions %}
+                {% if question.slected == 0 %}
+                    <tr>
+                        <td>
+                            {{ question }}
+                        </td>
+                        <td>
+                            {{ question.correct }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+   
+</div>
+
+<script>
+    function printPageArea(){
+        var printContent = document.getElementById('print').innerHTML;
+        var originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+    }
+    function showPageArea(){
+        $('#print').toggleClass('w3-hide')
     }
 </script>
 
