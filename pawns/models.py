@@ -82,7 +82,7 @@ class Pawn(models.Model):
     def url_exam(self):
         return reverse('pawn.exam', kwargs={'uuid': self.uuid})
     def url_examPlus(self):
-        return reverse('pawn.examPlus', kwargs={'uuid': self.uuid})
+        return reverse('pawn.examPlus', kwargs={'uuid': self.uuid, 'mode': 'hard'})
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 
