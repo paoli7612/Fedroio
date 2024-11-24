@@ -50,8 +50,8 @@ def user_delete(request, username):
     })
 
 @admin_required
-def group_delete(request, username):
-    group = get_object_or_404(Group, username=username)
+def group_delete(request, id):
+    group = get_object_or_404(Group, id=id)
     if request.method == 'POST':
         group.delete()
         return redirect(reverse('dashboard'))
