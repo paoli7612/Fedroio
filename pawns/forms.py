@@ -19,7 +19,7 @@ class QuestionForm(forms.ModelForm):
 class OpenQuestionForm(forms.ModelForm):
     class Meta:
         model = OpenQuestion
-        fields = ['text']
+        fields = ['text', 'correctAnswer']
 
 class OpenAnswerForm(forms.ModelForm):
     question_text = forms.CharField(

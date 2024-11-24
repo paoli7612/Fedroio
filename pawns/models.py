@@ -23,6 +23,7 @@ class Pawn(models.Model):
     exam_count = models.IntegerField(default=36) # count of question for exam
     exam_time = models.IntegerField(default=45) # minutes for each exam
     partis = models.BooleanField(default=False) # allow open question
+    partis_run = models.BooleanField(default=False) # mode to allow autoevaluate users
 
 
     def __str__(self):
@@ -165,6 +166,7 @@ class Pawn(models.Model):
 class OpenQuestion(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='openQuestions')
     text = models.TextField(max_length=512, blank=False)
+    correctAnswer = models.TextField(max_length=512, blank=True)
 
     def url_edit(self):
         return reverse('pawns.openQuestion-edit', kwargs={'id': self.id})
@@ -176,7 +178,10 @@ class OpenQuestion(models.Model):
         return reverse('pawns.openQuestion-answers', kwargs={'id': self.id})
 
     def url_answer(self):
-        return reverse('openAnswer.new', kwargs={'id': self.id})     
+        return reverse('openAnswer.new', kwargs={'id': self.id})  
+
+    def url_eye(self):
+        return reverse('')
 
     def __str__(self):
         return self.text
@@ -186,6 +191,7 @@ class OpenAnswer(models.Model):
     text = models.TextField(max_length=1024, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
     group = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL)
+    freeze = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('user', 'openQuestion')

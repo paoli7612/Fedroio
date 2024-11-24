@@ -13,6 +13,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('edit-group/<int:id>', views.group_edit, name='core.group.edit'),
     path('new-group', views.group_new, name='core.group.new'),
-    path('edit-group/<int:id>/partis', views.group_partis, name='core.group.partis'),
+    path('group/<int:id>/partis', views.group_partis, name='core.group.partis'),
     path('delete-group/<int:id>', views.group_delete, name='core.group.delete'),
 ]

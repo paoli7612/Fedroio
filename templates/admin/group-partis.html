@@ -1,7 +1,7 @@
 {% extends "layout/base.html" %}
-{% load crispy_forms_tags %}
+{% load answered %}
 
-{% block title %}Pawns{% endblock %}
+{% block title %}Partis - {{ group }}{% endblock %}
 
 {% block content %}
 
@@ -11,13 +11,51 @@
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
         {% for pawn in group.pawns.all %}
-            {{ pawn }}
-
+        <div class="w3-panel">
+            <h1 class="w3-left">{{ pawn }}</h1>
+            <div class=" w3-right">
+                <form method="post">
+                    <input type="hidden" name="pawn_id" value="{{ pawn.id }}">
+                    {% csrf_token %}
+                    {% if pawn.partis_run %}
+                        <button type="submit" class="w3-btn w3-card w3-round w3-theme">
+                            <i class="fa fa-star-half-o"></i>
+                            Disabilita autovalutazione
+                        </button>
+                    {% else %}
+                        <button type="submit" class="w3-btn w3-card w3-round w3-border w3-border-theme">
+                            <i class="fa fa-star-half-o"></i>
+                            Abilità autovalutazione
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+        <table class="w3-table-all w3-margin-bottom w3-margin-top">
+            <tr>
+                <td></td>
+                {% for user in group.user_set.all %}
+                    <td>{{ user }}</td>
+                {% endfor %}
+            </tr>
             {% for question in pawn.openQuestions.all %}
-                <li>
+            <tr>
+                <td>
                     {{ question }}
-                </li>
-            {% endfor %}
+                </td>
+                {% for user in group.user_set.all %}
+                    <td>
+                        {% if question|answered:user %} 
+                            <i class="fa fa-check"></i>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %} 
+        </table>
         {% endfor %}
     </div>
+
+
+
 {% endblock %}

@@ -31,14 +31,19 @@
                 {% endif %}
                 {% if pawn|canAnswer:user %}
                 <td>
-                    {% if question|answered:user %} 
-                        {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' color='green' label='Modifica risposta'%}
+                    {% if pawn.partis_run %}
+                        {% include 'partials/abutton.html' with url=question.url_eye title='Facile' icon='eye' label='Valuta'%}
                     {% else %}
-                        {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' label='Rispondi'%}
+                        {% if question|answered:user %} 
+                            {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' color='green' label='Modifica risposta'%}
+                        {% else %}
+                            {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' label='Rispondi'%}
+                        {% endif %}
                     {% endif %}
                 </td>
                 {% endif %}
             </tr>
         {% endfor %}
     </table>
+
 {% endblock %}

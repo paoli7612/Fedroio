@@ -6,6 +6,7 @@ from django.urls import reverse
 from .models import User
 from .forms import UserForm, GroupMembersForm, SettingsForm
 from .decorators import admin_required, login_required
+from pawns.models import Pawn
 
 # Create your views here.
 @login_required
@@ -118,6 +119,16 @@ def group_new(request):
 
 def group_partis(request, id):
     group = get_object_or_404(Group, id=id)
+
+    if request.method == 'POST':
+        pawn_id = request.POST.get('pawn_id')
+        pawn = get_object_or_404(Pawn, id=pawn_id)
+        if pawn.partis_run:
+            pawn.partis_run = False
+        else:
+            pawn.partis_run = True
+        pawn.save()
+
     return render(request, 'admin/group-partis.html', {
         'group': group
     })
