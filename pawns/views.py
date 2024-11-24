@@ -275,34 +275,30 @@ def exam(request, uuid, mode='normal'):
     })
 
 @login_required
-def partis(request, uuid):
-    pawn = get_object_or_404(Pawn, uuid=uuid)
-    question = None
-    open_answer = None
-
-    if request.GET.get('question'):
-        question = get_object_or_404(OpenQuestion, id=request.GET.get('question'))
-        open_answer = OpenAnswer.objects.filter(openQuestion=question, user=request.user).first()
+def partis(request, id):
+    question = get_object_or_404(OpenQuestion, id=id)
+    try:
+        open_answer = OpenAnswer.objects.get(user=request.user, openQuestion=question)
+    except OpenAnswer.DoesNotExist:
+        open_answer = OpenAnswer()
+        open_answer.openQuestion = question
 
     if request.method == 'POST':
         form = OpenAnswerForm(request.POST, instance=open_answer)
         if form.is_valid():
             open_answer = form.save(commit=False)
             open_answer.user = request.user
+            open_answer.openQuestion = question  # Associa la risposta alla domanda
             open_answer.save()
-            return redirect(pawn.url())
+            return redirect(question.pawn.url())
     else:
-        if open_answer:
-            form = OpenAnswerForm(instance=open_answer)
-        elif question:
-            form = OpenAnswerForm(initial={'openQuestion': question})
-        else:
-            form = OpenAnswerForm()
+        
+        form = OpenAnswerForm(instance=open_answer)
 
     return render(request, 'pawns/form.html', {
         'form': form,
-        'pawn': pawn,
-        'back_url': pawn.url(),
+        'pawn': question.pawn,  # Usa la relazione dalla domanda per ottenere il pawn
+        'back_url': question.pawn.url(),
     })
 
 def openQuestion_answers(request, id):

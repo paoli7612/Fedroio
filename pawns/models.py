@@ -7,26 +7,23 @@ from django.db import models
 from core.models import User
 
 class Pawn(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    groups = models.ManyToManyField(Group, related_name='pawns', blank=True) 
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True) # id per l'URL
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs') # pawn padre
+    user = models.ForeignKey(User, on_delete=models.CASCADE) # utente creatore
+    groups = models.ManyToManyField(Group, related_name='pawns', blank=True) # grouppi che possono modificarlo
+    number = models.PositiveIntegerField(null=True, blank=True) # numero tra i fratelli
+    name = models.CharField(max_length=128) # titolo 
+    text = models.TextField(max_length=512, null=True, blank=True) # testo contenuto
+    image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # immagine contenuta
+    link = models.TextField(max_length=256, blank=True, null=True) # link a risorsa esterna
+    is_public = models.BooleanField(default=False) # show in public?
+    quiz = models.BooleanField(default=False) # allow quiz game
+    coze = models.BooleanField(default=False) # allow coze game
+    exam = models.BooleanField(default=False) # allow doing esam
+    exam_count = models.IntegerField(default=36) # count of question for exam
+    exam_time = models.IntegerField(default=45) # minutes for each exam
+    partis = models.BooleanField(default=False) # allow open question
 
-    number = models.PositiveIntegerField(null=True, blank=True)
-    name = models.CharField(max_length=128)
-    text = models.TextField(max_length=512, null=True, blank=True)
-    image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  
-    link = models.TextField(max_length=256, blank=True, null=True)
-    
-    is_public = models.BooleanField(default=False)
-
-    quiz = models.BooleanField(default=False)
-    coze = models.BooleanField(default=False)
-    exam = models.BooleanField(default=False)
-    partis = models.BooleanField(default=False)
-
-    exam_count = models.IntegerField(default=36)
-    exam_time = models.IntegerField(default=45)
 
     def __str__(self):
         return self.name
@@ -67,22 +64,24 @@ class Pawn(models.Model):
     def url_quizChain(self):
         return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
 
-    def url_partis(self):
-        return reverse('pawn.partis', kwargs={'uuid': self.uuid})
-
     def url_cozeEasy(self):
         return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 1})
+    
     def url_cozeNormal(self):
         return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 2})
+    
     def url_cozeHard(self):
         return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 3})
         
     def url_cozeChoice(self):
         return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
+    
     def url_exam(self):
         return reverse('pawn.exam', kwargs={'uuid': self.uuid})
+    
     def url_examPlus(self):
         return reverse('pawn.examPlus', kwargs={'uuid': self.uuid, 'mode': 'hard'})
+    
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
 
@@ -165,6 +164,9 @@ class OpenQuestion(models.Model):
 
     def url_answers(self):
         return reverse('pawns.openQuestion-answers', kwargs={'id': self.id})
+
+    def url_answer(self):
+        return reverse('openAnswer.new', kwargs={'id': self.id})     
 
     def __str__(self):
         return self.text

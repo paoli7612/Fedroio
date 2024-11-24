@@ -22,9 +22,27 @@ class OpenQuestionForm(forms.ModelForm):
         fields = ['text']
 
 class OpenAnswerForm(forms.ModelForm):
+    question_text = forms.CharField(
+        label="Domanda",
+        required=False,
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+    )
+
     class Meta:
         model = OpenAnswer
-        fields = ['openQuestion', 'text']
+        fields = ['question_text', 'text', 'openQuestion']  # Aggiungi il campo visibile
+
+        widgets = {
+            'openQuestion': forms.HiddenInput(),  # Campo nascosto
+        }
+        labels = {
+            'openQuestion': '',  # Rimuove la label
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.openQuestion:
+            self.fields['question_text'].initial = self.instance.openQuestion.text
 
 class QuestionsForm(forms.Form):
     text = forms.CharField(

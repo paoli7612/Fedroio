@@ -1,4 +1,5 @@
 {% extends "_panel.html" %}
+{% load answered %}
 
 {% block content %}
     <div class="w3-row">
@@ -12,21 +13,26 @@
                 {% include 'partials/abutton-admin.html' with url=pawn.url_newOpenQuestion title='New open question' icon='plus'%}
             </div>
         {% endif %}
-        <div class="w3-panel w3-center">
-            {% include 'partials/abutton.html' with url=pawn.url_partis title='Facile' icon='play-circle' label='Rispondi'%}
-        </div>
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom">
         {% for question in pawn.openQuestions.all %}
             <tr>
-                <td>
-                    {{ question|safe }}
+                <td {% if question|answered:user %} class="w3-green" {% endif %}>
+                    {{ question }}
                 </td>
+    
                 {% if user.is_superuser %}
                 <td>
                     {% include 'partials/abutton-admin.html' with url=question.url_edit title='Edit question' icon='edit'%}
                     {% include 'partials/abutton-admin.html' with url=question.url_delete title='Delete question' icon='trash'%}
                     {% include 'partials/abutton-admin.html' with url=question.url_answers title='View answers' icon='list'%}
+                </td>
+                {% else %}
+                <td>
+                    <div class="w3-panel w3-center">
+                        {{ question.url }}
+                        {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' label='Rispondi'%}
+                    </div>
                 </td>
                 {% endif %}
             </tr>
