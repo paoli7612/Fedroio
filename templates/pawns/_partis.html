@@ -1,5 +1,6 @@
 {% extends "_panel.html" %}
 {% load answered %}
+{% load canAnswer %}
 
 {% block content %}
     <div class="w3-row">
@@ -27,14 +28,14 @@
                     {% include 'partials/abutton-admin.html' with url=question.url_delete title='Delete question' icon='trash'%}
                     {% include 'partials/abutton-admin.html' with url=question.url_answers title='View answers' icon='list'%}
                 </td>
-                {% else %}
+                {% endif %}
+                {% if pawn|canAnswer:user %}
                 <td>
                     {% if question|answered:user %} 
                         {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' color='green' label='Modifica risposta'%}
                     {% else %}
                         {% include 'partials/abutton.html' with url=question.url_answer title='Facile' icon='play-circle' label='Rispondi'%}
                     {% endif %}
-                    
                 </td>
                 {% endif %}
             </tr>

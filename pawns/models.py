@@ -191,8 +191,7 @@ class OpenAnswer(models.Model):
         unique_together = ('user', 'openQuestion')
 
     def url_edit(self):
-        url = reverse('pawn.partis', kwargs={'uuid': self.openQuestion.pawn.uuid})
-        return f"{url}?question={self.openQuestion.id}"
+        return reverse('openAnswer.new', kwargs={'id': self.openQuestion.id})     
 
     def url_delete(self):
         return reverse('openAnswer.delete', kwargs={'id': self.id})

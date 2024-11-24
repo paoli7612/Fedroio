@@ -32,21 +32,21 @@
     </div>
     <table class="w3-table-all w3-card w3-margin-bottom w3-margin-top">
         {% for group in groups %}
-            <tr>
-                <td>{{ group }}</td>
-                <td>{{ group.user_set.all|join:', ' }}</td>
-                <td>
-                    <a href="{% url 'core.group.edit' id=group.id %}" class="w3-btn w3-round w3-card w3-theme">
-                        Modifica <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="{% url 'core.group.edit' id=group.id %}" class="w3-btn w3-round w3-card w3-black">
-                        Partis <i class="fa fa-film"></i>
-                    </a>
-                    <a href="{% url 'core.group.delete' id=group.id %}" class="w3-btn w3-round w3-card w3-red">
-                        Elimina <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
+        <tr>
+            <td>{{ group }}</td>
+            <td>{{ group.user_set.all|join:', ' }}</td>
+            <td>
+                <a href="{% url 'core.group.edit' id=group.id %}" class="w3-btn w3-round w3-card w3-theme">
+                    Modifica <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'core.group.partis' id=group.id %}" class="w3-btn w3-round w3-card w3-black">
+                    Partis <i class="fa fa-film"></i>
+                </a>
+                <a href="{% url 'core.group.delete' id=group.id %}" class="w3-btn w3-round w3-card w3-red">
+                    Elimina <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
         {% endfor %}
     </table>
 </div>

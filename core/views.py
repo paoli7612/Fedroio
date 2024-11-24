@@ -106,13 +106,18 @@ def group_edit(request, id):
 
 def group_new(request):
     if request.method == 'POST':
-        # Se è un POST, stiamo creando un nuovo gruppo con i dati inviati
         form = GroupMembersForm(request.POST)
         if form.is_valid():
-            form.save()  # Crea il nuovo gruppo e i membri associati
-            return redirect('dashboard')  # Reindirizza alla pagina desiderata, es. 'dashboard'
+            form.save()  
+            return redirect('dashboard')  
     else:
-        # Altrimenti, mostra un form vuoto per creare un nuovo gruppo
         form = GroupMembersForm()
     
     return render(request, 'admin/form.html', {'form': form})
+
+
+def group_partis(request, id):
+    group = get_object_or_404(Group, id=id)
+    return render(request, 'admin/group-partis.html', {
+        'group': group
+    })
