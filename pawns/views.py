@@ -327,6 +327,7 @@ def openQuestion_eye(request, id):
                 jq, _ = JudgeQuestion.objects.update_or_create(openAnswer=answer, user=request.user)
                 jq.value = v
                 jq.save()
+        return redirect
 
     return render(request, 'pawns/eyeOpenQuestion.html', {
         'openQuestion': openQuestion
