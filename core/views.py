@@ -125,12 +125,27 @@ def group_partis_reset(request, id, pawn_id):
     return redirect(reverse('core.group.partis', kwargs={'id': id}))
 
 def group_partis_stats(request, id, pawn_id):
-    messages.info(request, 'success')
+    stats = dict()
+    group = get_object_or_404(Group, id=id)
+    pawn = get_object_or_404(Pawn, id=pawn_id)
+    for user in group.user_set.all():
+        grade = 0
+        count = 0
+        for answers in user.answers.all().filter(openQuestion__pawn=pawn):
+            value=0
+            for judge in answers.judges.all():
+                value += judge.value
+            if value:
+                value /= answers.judges.all().count()
+                grade += value
+                count += 1
+        if count:
+            stats[user.username] = grade/count
     return render(request, 'admin/group-partis-stats.html', {
-        'group': get_object_or_404(Group, id=id)
+        'group': group,
+        'pawn': pawn,
+        'stats': stats
     })
-
-
 
 
 def group_partis(request, id):

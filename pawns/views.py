@@ -319,6 +319,7 @@ def answer_delete(request, id):
 
 def openQuestion_eye(request, id):
     openQuestion = get_object_or_404(OpenQuestion, id=id)
+    pawn = openQuestion.pawn
     if request.method == 'POST':
         for k, v in request.POST.items():
             if 'answer' == k[:6]:
@@ -327,7 +328,7 @@ def openQuestion_eye(request, id):
                 jq, _ = JudgeQuestion.objects.update_or_create(openAnswer=answer, user=request.user)
                 jq.value = v
                 jq.save()
-        return redirect
+        return redirect(pawn.url())
 
     return render(request, 'pawns/eyeOpenQuestion.html', {
         'openQuestion': openQuestion

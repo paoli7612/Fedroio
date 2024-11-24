@@ -208,6 +208,9 @@ class JudgeQuestion(models.Model):
     note = models.TextField(max_length=512)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='judgeAnswers')
 
+    def __str__(self):
+        return str(self.value)
+
 class Sentence(models.Model):
     pawn = models.ForeignKey(Pawn, on_delete=models.CASCADE, related_name='sentences')
     text = models.TextField(max_length=512)
