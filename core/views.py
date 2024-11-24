@@ -117,6 +117,22 @@ def group_new(request):
     return render(request, 'admin/form.html', {'form': form})
 
 
+def group_partis_reset(request, id, pawn_id):
+    pawn = get_object_or_404(Pawn, id=pawn_id)
+    for question in pawn.openQuestions.all():
+        question.answers.all().delete()
+    messages.success(request, 'Risposte cancellate')
+    return redirect(reverse('core.group.partis', kwargs={'id': id}))
+
+def group_partis_stats(request, id, pawn_id):
+    messages.info(request, 'success')
+    return render(request, 'admin/group-partis-stats.html', {
+        'group': get_object_or_404(Group, id=id)
+    })
+
+
+
+
 def group_partis(request, id):
     group = get_object_or_404(Group, id=id)
 
@@ -125,9 +141,13 @@ def group_partis(request, id):
         pawn = get_object_or_404(Pawn, id=pawn_id)
         if pawn.partis_run:
             pawn.partis_run = False
+            messages.info(request, 'Autovalutazione disattivata')
         else:
             pawn.partis_run = True
+            messages.info(request, 'Autovalutazione attivata')
+
         pawn.save()
+        return redirect(reverse('core.group.partis', kwargs={'id': id}))
 
     return render(request, 'admin/group-partis.html', {
         'group': group

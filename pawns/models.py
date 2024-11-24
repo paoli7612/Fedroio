@@ -181,7 +181,7 @@ class OpenQuestion(models.Model):
         return reverse('openAnswer.new', kwargs={'id': self.id})  
 
     def url_eye(self):
-        return reverse('')
+        return reverse('openQuestion.eye', kwargs={'id': self.id})
 
     def __str__(self):
         return self.text
@@ -204,7 +204,7 @@ class OpenAnswer(models.Model):
 
 class JudgeQuestion(models.Model):
     openAnswer = models.ForeignKey(OpenAnswer, on_delete=models.CASCADE, related_name='judges')
-    value = models.IntegerField()
+    value = models.IntegerField(default=5)
     note = models.TextField(max_length=512)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='judgeAnswers')
 

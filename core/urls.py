@@ -14,5 +14,7 @@ urlpatterns = [
     path('edit-group/<int:id>', views.group_edit, name='core.group.edit'),
     path('new-group', views.group_new, name='core.group.new'),
     path('group/<int:id>/partis', views.group_partis, name='core.group.partis'),
+    path('group/<int:id>/partis/<int:pawn_id>/stats', views.group_partis_reset, name='group_partis_reset'),
+    path('group/<int:id>/partis/<int:pawn_id>', views.group_partis_stats, name='group_partis_stats'),
     path('delete-group/<int:id>', views.group_delete, name='core.group.delete'),
 ]

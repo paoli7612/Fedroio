@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import Pawn, Sentence, Question, OpenQuestion, OpenAnswer
+from .models import Pawn, Sentence, Question, OpenQuestion, OpenAnswer, JudgeQuestion
 from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm, OpenQuestionForm, OpenAnswerForm
 from .views_exercise import *
 
@@ -315,4 +315,19 @@ def answer_delete(request, id):
         'title': 'Delete Pawn',
         'text': f'You\'re deleting that answer?: <b>{openAnswer}</b>?',
         'url_back': openAnswer.openQuestion.pawn.url()
+    })
+
+def openQuestion_eye(request, id):
+    openQuestion = get_object_or_404(OpenQuestion, id=id)
+    if request.method == 'POST':
+        for k, v in request.POST.items():
+            if 'answer' == k[:6]:
+                answer_id = k.split('answer')[1]
+                answer = get_object_or_404(OpenAnswer, id=answer_id)
+                jq, _ = JudgeQuestion.objects.update_or_create(openAnswer=answer, user=request.user)
+                jq.value = v
+                jq.save()
+
+    return render(request, 'pawns/eyeOpenQuestion.html', {
+        'openQuestion': openQuestion
     })

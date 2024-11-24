@@ -13,8 +13,16 @@
         {% for pawn in group.pawns.all %}
         <div class="w3-panel">
             <h1 class="w3-left">{{ pawn }}</h1>
-            <div class=" w3-right">
+            <div class="w3-right">
                 <form method="post">
+                    <a href="{% url 'group_partis_stats' id=group.id pawn_id=pawn.id %}" class="w3-btn w3-card w3-round w3-theme">
+                        <i class="fa fa-list"></i>
+                        Risultati
+                    </a>
+                    <a href="{% url 'group_partis_reset' id=group.id pawn_id=pawn.id %}" class="w3-btn w3-card w3-round w3-theme">
+                        <i class="fa fa-trash"></i>
+                        Cancella risposte
+                    </a>
                     <input type="hidden" name="pawn_id" value="{{ pawn.id }}">
                     {% csrf_token %}
                     {% if pawn.partis_run %}

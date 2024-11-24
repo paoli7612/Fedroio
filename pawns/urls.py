@@ -30,7 +30,8 @@ urlpatterns = [
     path('<uuid:uuid>/coze/<int:difficulty>', views.coze_points, name='pawn.coze'),
 
     path('question-<int:id>/answer', views.partis, name='openAnswer.new'),
-    path('answer/<int:id>/delete', views.answer_delete, name='openAnswer.delete')
+    path('answer/<int:id>/delete', views.answer_delete, name='openAnswer.delete'),
+    path('question-<int:id>/eye', views.openQuestion_eye, name='openQuestion.eye')
 ]
 
 

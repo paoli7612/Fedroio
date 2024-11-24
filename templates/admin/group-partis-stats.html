@@ -1,0 +1,37 @@
+{% extends "layout/base.html" %}
+{% load answered %}
+
+{% block title %}Partis - {{ group }}{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>{{ group }}</h1>
+    </div>
+
+    <div class="w3-panel w3-white w3-card-4 w3-round w3-padding">
+      {% for pawn in group.pawns.all %}
+        {{ pawn }}
+        <div class="w3-container">
+            {% for question in pawn.openQuestions.all %}
+                {{ question}}
+                <div class="w3-container">
+                    {% for answer in question.answers.all %}
+                        {{ answer.text }} - {{ answer.user }}
+                        <div class="w3-container">
+                            {% for judge in answer.judges.all %}
+                                {{ judge.user }}
+                                {{ judge.value }}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+      {% endfor %}
+    </div>
+
+
+
+{% endblock %}

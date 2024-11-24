@@ -1,0 +1,41 @@
+{% extends "layout/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Pawns{% endblock %}
+
+{% block content %}
+
+    <div class="w3-panel w3-white w3-card-4 w3-round">
+        <h1>{{ openQuestion }}</h1>
+        <h1 class="w3-text-green">
+            {{ openQuestion.correctAnswer }}
+        </h1>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="w3-panel w3-white w3-card-4 w3-round">
+            <table class="w3-table-all w3-margin-top">
+                {% for answer in openQuestion.answers.all %}
+                    {% if not answer.user == user %}
+                    <tr>
+                        <td>
+                            {{ answer.text }}
+                        </td>
+                        <td style="width: 150px;">
+                            <input style="max-width: 150px;" type="number" name="answer{{ answer.id }}" class="w3-input w3-card w3-round" min="0" max="10" placeholder="punteggio">
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+            <div class="w3-panel w3-right">
+                <button type="submit" class="w3-btn w3-theme w3-card w3-round">
+                    <i class="fa fa-save"></i>
+                    Salva
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+        
