@@ -10,24 +10,23 @@
     </div>
 
     <div class="w3-panel w3-white w3-card-4 w3-round w3-padding">
-      {% for pawn in group.pawns.all %}
-        {{ pawn }}
-        <div class="w3-container">
-            {% for question in pawn.openQuestions.all %}
-                {{ question }}
-                <div class="w3-container">
-                    {% for answer in question.answers.all %}
-                        {{ answer.text }} - {{ answer.user }}
-                        <div class="w3-container">
-                            {% for judge in answer.judges.all %}
-                                {{ judge.user.id }}: {{ judge.value }} - 
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-        </div>
-
+        {% for pawn in group.pawns.all %}
+            <b>Pawn</b>: {{ pawn }}
+            <div class="w3-container">
+                {% for question in pawn.openQuestions.all %}
+                    <b>Domanda</b>{{ question }}
+                    <div class="w3-container">
+                        {% for answer in question.answers.all %}
+                            <b>Risposta</b>: {{ answer.text }} - <b>Utente</b>: {{ answer.user }}
+                            <div class="w3-container">
+                                {% for judge in answer.judges.all %}
+                                    {{ judge.user.id }}: {{ judge.value }} - 
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
       {% endfor %}
     </div>
 
