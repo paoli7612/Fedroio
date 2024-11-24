@@ -125,6 +125,16 @@ class Pawn(models.Model):
             random.shuffle(questions)
         return questions
     
+    def all_openQuestions(self, isRandom=False):
+        questions = list(self.openQuestions.all())
+        for child in self.childs.all():
+            questions_child = child.all_openQuestions()
+            if questions_child:
+                questions += questions_child
+        if isRandom:
+            random.shuffle(questions)
+        return questions
+    
     def worst_questions(self):
         questions = self.all_questions()
         questions = sorted(
