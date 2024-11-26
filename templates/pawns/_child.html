@@ -12,24 +12,19 @@
         {% else %}
             <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
         {% endif %}
-        <div class="w3-margin-bottom">
+        <span title="questions" class="w3-padding w3-right">
             {% if pawn.quiz %}
-                <span title="questions" class="w3-padding">
-                    {{ pawn.all_questions|length }}
-                    <i class="fa fa-question-circle"></i>
-                </span>
+                <i class="fa fa-question-circle"></i>
             {% endif %}
             {% if pawn.coze %}
-                <span title="coze" class="w3-padding">
-                    {{ pawn.all_sentences|length }}
-                    <i class="fa fa-th-list"></i>
-                </span>
+                <i class="fa fa-th-list"></i>
             {% endif %}
             {% if pawn.exam %}
-                <span title="exam" class="w3-padding">
-                    <i class="fa fa-asterisk"></i>
-                </span>
+                <i class="fa fa-asterisk"></i>
             {% endif %}
-        </div>
+            {% if pawn.partis %}
+                <i class="fa fa-film"></i>
+            {% endif %}
+        </span>
     </a>
 {% endblock %}

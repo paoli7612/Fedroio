@@ -16,24 +16,6 @@
     </div>
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
-        <div class="w3-row w3-panel">
-            {% for pawn in pawns %}
-                <div class="w3-col m4 l3 w3-margin {% if user in pawn.users %}w3-green{% endif %}">
-                    <a href="{{ pawn.url }}" class="w3-btn w3-block w3-round w3-border w3-border-theme w3-card">
-                        {% if pawn.image %}
-                        <div class="w3-container w3-padding">
-                            <img src="{{ pawn.image.url }}" style="height: 5em;" class="w3-round">
-                        </div>
-                        {% endif %}
-                        <h3>
-                            {{ pawn }}
-                        </h3>
-                    </a>
-                    <a href="{{ pawn.user.url }}" class="w3-text-grey w3-right">
-                        {{ pawn.user }}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+        {% include 'pawns/_childs.html' with pawns=user.pawns %}
     </div>
 {% endblock %}
