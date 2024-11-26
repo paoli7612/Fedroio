@@ -15,7 +15,7 @@
                 {% include 'partials/abutton.html' with url=pawn.url_exam label='Esame' title='Try exam' icon='asterisk'%}
                 {% include 'partials/abutton.html' with url=pawn.url_examPlus label='Esame+' title='Try exam' icon='exclamation-circle'%}
             {% endif %}
-            {% if pawn.is_public %}
+            {% if pawn.explore %}
                 {% include 'partials/abutton.html' with url=pawn.url_explore label='Esplora' title='Explore' icon='crosshairs'%}
             {% endif %}
             {% if user == pawn.user or user.is_superuser %}

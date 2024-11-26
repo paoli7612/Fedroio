@@ -12,18 +12,18 @@
         {% else %}
             <p class="w3-center">{{ pawn|truncatechars:32 }}</p>
         {% endif %}
-        <span title="questions" class="w3-padding w3-right">
+        <span class="w3-padding w3-right">
             {% if pawn.quiz %}
-                <i class="fa fa-question-circle"></i>
+                <i title="quiz" class="fa fa-question-circle"></i>
             {% endif %}
             {% if pawn.coze %}
-                <i class="fa fa-th-list"></i>
+                <i title="coze" class="fa fa-th-list"></i>
             {% endif %}
             {% if pawn.exam %}
-                <i class="fa fa-asterisk"></i>
+                <i title="exam" class="fa fa-asterisk"></i>
             {% endif %}
             {% if pawn.partis %}
-                <i class="fa fa-film"></i>
+                <i title="partis" class="fa fa-film"></i>
             {% endif %}
         </span>
     </a>
