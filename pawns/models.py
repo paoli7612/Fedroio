@@ -28,7 +28,13 @@ class Pawn(models.Model):
     partis_run = models.BooleanField(default=False) # mode to allow autoevaluate users
 
     def has_children(self):
-        return 0
+        if self.childs.all().count()>0:
+            return 1
+        else:
+            return 0
+
+    def childs_explore(self):
+        return self.childs.filter(explore=True)
 
     def __str__(self):
         return self.name

@@ -28,16 +28,15 @@
             {id: "{{ pawn }}", url: "{{ pawn.parent.url_explore }}", main: true, final_url: "{{ pawn.url }}"}
         {% endif %}
     ];
-    {% for child in pawn.childs.all %}
-        {% if child.image %}
-            nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false, imgUrl: "{{ child.image.url }}" , final_url: "{{child.url}}", has_children: {{ child.has_children }}});
-        {% else %}
-            nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false, final_url: "{{child.url}}", has_children: {{ child.has_children }}});
-        {% endif %}
+    {% for child in pawn.childs_explore.all %}
+        
+            nodes.push({ id: "{{ child }}", url: "{{ child.url_explore }}", main: false, imgUrl: "{% if child.image %}{{ child.image.url }}{% else %}/media/pawn_images/Screenshot_from_2024-11-26_05-32-54.png{% endif %}" , final_url: "{{child.url}}", has_children: {{ child.has_children }}});
+        
+        
     {% endfor %}
 
     const links = [];
-    {% for child in pawn.childs.all %}
+    {% for child in pawn.childs_explore.all %}
         links.push({ source: "{{ child }}", target: "{{ pawn }}" });
     {% endfor %}
 
