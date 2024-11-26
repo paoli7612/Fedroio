@@ -17,6 +17,7 @@ class Pawn(models.Model):
     image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # immagine contenuta
     link = models.TextField(max_length=256, blank=True, null=True) # link a risorsa esterna
     is_public = models.BooleanField(default=False) # show in public?
+    is_active = models.BooleanField(default=False) # show in active?
     quiz = models.BooleanField(default=False) # allow quiz game
     coze = models.BooleanField(default=False) # allow coze game
     exam = models.BooleanField(default=False) # allow doing esam
