@@ -27,6 +27,8 @@ class Pawn(models.Model):
     partis = models.BooleanField(default=False) # allow open question
     partis_run = models.BooleanField(default=False) # mode to allow autoevaluate users
 
+    def has_children(self):
+        return 0
 
     def __str__(self):
         return self.name
