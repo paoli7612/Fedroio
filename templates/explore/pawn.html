@@ -57,7 +57,7 @@
         .data(nodes)
         .join("image")
         .attr("xlink:href", d => d.imgUrl)
-        .attr("class", d => d.main ? "w3-xlarge" : "")
+        .attr("class", d => d.main ? "w3-blue" : "")
         .attr("width", d => d.main ? 100 : 40)
         .attr("height", d => d.main ? 100 : 40)
         .attr("x", d => d.x - (d.main ? 30 : 20))
@@ -87,12 +87,12 @@
         .selectAll(".w3-card")
         .data(nodes)
         .join("div")
-        .attr("class", d => d.main ? "w3-card w3-padding w3-margin w3-border" : "w3-card w3-padding w3-margin")
+        .attr("class", d => d.main ? "w3-card w3-padding w3-margin w3-border" : "w3-card w3-padding w3-margin w3-border w3-border-theme")
         .style("position", "absolute")
         .style("text-align", "center")
         .style("font-size", "14px")
         .style("background", "white")
-        .style("border-radius", "8px")
+        .style("border-radius", "6px")
         .html(d => `
             ${d.id} 
             <button class="w3-tiny w3-circle w3-btn" onclick="window.location='${d.final_url}'"><i class="fa fa-eye"></i></button>
@@ -110,8 +110,8 @@
             .attr("y", d => d.y - (d.main ? 30 : 20));
 
         labels
-            .style("left", d => `${d.x + 50}px`)
-            .style("top", d => `${d.y + 30}px`);
+            .style("left", d => `${d.x}px`)
+            .style("top", d => `${d.y}px`);
     });
 
     function drag(simulation) {
