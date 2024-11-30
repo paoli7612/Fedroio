@@ -1,0 +1,18 @@
+{% extends "_panel.html" %}
+
+{% block content %}
+    <h1>{{ pawn }}</h1>
+    <table class="w3-table-all">
+        <tr><th>UUID</th><td>{{ pawn.uuid }}</td></tr>
+        <tr><th>User</th><td>{{ pawn.user }}</td></tr>
+        <tr><th>Editors</th><td>{{ pawn.editors.all|join:', ' }}</td></tr>
+        <tr><th>Groups</th><td>{{ pawn.groups.all|join:', ' }}</td></tr>
+        <tr><th>Question count</th> <td>{{ pawn.all_questions|length }} closed questions</td></tr>
+        <tr><th>Open Question count</th> <td>{{ pawn.all_openQuestions|length }} closed questions</td></tr>
+        {% if pawn.exam %}
+            <tr><th rowspan="2">Exam</th><td>{{ pawn.exam_time }} minutes</td></tr>
+            <tr><td>{{ pawn.exam_count }} domande</td></tr>
+        {% endif %}
+        
+    </table>
+{% endblock %}

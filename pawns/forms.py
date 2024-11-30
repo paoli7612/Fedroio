@@ -1,11 +1,11 @@
 from django import forms
 from .models import Pawn, Sentence, Question, OpenQuestion, OpenAnswer
+from django.core.exceptions import NON_FIELD_ERRORS
 
 class PawnForm(forms.ModelForm):
     class Meta:
         model = Pawn
-        fields = ['is_public', 'is_active', 'name', 'text', 'parent', 'image', 'number', 'explore', 'quiz', 'coze', 'partis', 'link', 'exam', 'exam_count', 'groups']  
-
+        fields = ['name', 'text', 'number', 'image', 'link', 'public', 'active', 'explore', 'quiz', 'coze', 'partis', 'exam', 'exam_time', 'exam_count', 'groups', 'editors', 'parent']  
 class SentenceForm(forms.ModelForm):
     class Meta:
         model = Sentence

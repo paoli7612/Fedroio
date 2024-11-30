@@ -7,7 +7,7 @@ def index(request):
 
 def home(request):
     return render(request, 'index.html', {
-        'pawns': Pawn.objects.filter(parent=None, is_public=True)[:2]
+        'pawns': Pawn.objects.filter(parent=None, public=True).order_by('?')[:2]
     })
 
 def info(request):

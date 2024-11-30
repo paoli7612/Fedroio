@@ -9,32 +9,23 @@ from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm, OpenQues
 from .views_exercise import *
 
 def index(request):
+    print(Pawn.objects.filter(parent=None, public=True).order_by('number'))
     return render(request, 'pawns/index.html', {
-        'pawns': Pawn.objects.filter(parent=None, is_public=True).order_by('number'),
+        'pawns': Pawn.objects.filter(parent=None, public=True).order_by('number'),
     })
-
-def _build_tree(node):
-    return {
-        'name': node.name,
-        'url': node.url(),
-        'children': [
-            {
-                'name': child.name,
-                'url': child.url(),
-                'children': [{'name': grandchild.name,
-                              'url': grandchild.url()
-                              } for grandchild in child.childs.all()]  # Aggiungi l'URL per i nipoti
-            } 
-            for child in node.childs.all()
-        ]
-    }
 
 def pawn(request, uuid):
     pawn = get_object_or_404(Pawn, uuid=uuid)
+    if not pawn.public and not request.user == pawn.user:
+        messages.error(request, 'Pawn not public')
     return render(request, 'pawns/pawn.html', {
         'pawn': pawn,
-        'pawns': pawn.childs.order_by('number'),
-        'data': _build_tree(pawn)
+        'pawns': pawn.childs.order_by('number')
+    })
+
+def info_pawn(request, uuid):
+    return render(request, 'pawns/info.html', {
+        'pawn': get_object_or_404(Pawn, uuid=uuid)
     })
 
 def new_pawn(request, uuid=None):
@@ -48,16 +39,10 @@ def new_pawn(request, uuid=None):
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                pawn = form.save(commit=False)
-                pawn.user = request.user  
-                if parent_pawn:
-                    pawn.parent = parent_pawn
-                pawn.save()
-                messages.success(request, 'New pawn created!')
-                return redirect(reverse('pawn', kwargs={'uuid': pawn.uuid}))
-            except IntegrityError as e:
-                form.add_error(None, 'An error occurred while creating the pawn.')
+            pawn = form.save(commit=False)
+            pawn.user = request.user  
+            pawn.save()
+            return redirect(pawn.url())
     else:
         if parent_pawn:
             form = PawnForm(initial={'parent': parent_pawn})

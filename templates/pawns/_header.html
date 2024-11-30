@@ -11,6 +11,7 @@
     </div>
     <div class="w3-col m4">
         <div class="w3-right w3-margin">
+            {% include 'partials/abutton.html' with url=pawn.url_info label='Esame' title='Try exam' icon='info-circle'%}
             {% if pawn.exam %}
                 {% include 'partials/abutton.html' with url=pawn.url_exam label='Esame' title='Try exam' icon='asterisk'%}
                 {% include 'partials/abutton.html' with url=pawn.url_examPlus label='Esame+' title='Try exam' icon='exclamation-circle'%}

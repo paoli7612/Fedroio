@@ -1,97 +1,60 @@
 import random, re, uuid
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
-from django.utils.text import slugify
 from django.urls import reverse
 from django.db import models
 from core.models import User
 
 class Pawn(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True) # id per l'URL
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs') # pawn padre
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='childs') 
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE) # utente creatore
+    editors = models.ManyToManyField(User, related_name='editablePawns', blank=True) # grouppo che può modificare questo pawn
     groups = models.ManyToManyField(Group, related_name='pawns', blank=True) # grouppi che possono modificarlo
     number = models.PositiveIntegerField(null=True, blank=True) # numero tra i fratelli
     name = models.CharField(max_length=128) # titolo 
     text = models.TextField(max_length=512, null=True, blank=True) # testo contenuto
     image = models.ImageField(upload_to='pawn_images/', null=True, blank=True)  # immagine contenuta
     link = models.TextField(max_length=256, blank=True, null=True) # link a risorsa esterna
-    is_public = models.BooleanField(default=False) # show in public?
-    is_active = models.BooleanField(default=False) # show in active?
+    
+    public = models.BooleanField(default=False) # show in public?
+    active = models.BooleanField(default=False) # show in active?
     explore = models.BooleanField(default=False) # allow to explore
     quiz = models.BooleanField(default=False) # allow quiz game
     coze = models.BooleanField(default=False) # allow coze game
     exam = models.BooleanField(default=False) # allow doing esam
+    partis = models.BooleanField(default=False) # allow open question
+
+    partis_run = models.BooleanField(default=False) # mode to allow autoevaluate users
     exam_count = models.IntegerField(default=36) # count of question for exam
     exam_time = models.IntegerField(default=45) # minutes for each exam
-    partis = models.BooleanField(default=False) # allow open question
-    partis_run = models.BooleanField(default=False) # mode to allow autoevaluate users
-
-    def has_children(self):
-        if self.childs.all().count()>0:
-            return 1
-        else:
-            return 0
-
-    def childs_explore(self):
-        return self.childs.filter(explore=True)
 
     def __str__(self):
         return self.name
-
-    def url(self):
-        return reverse('pawn', kwargs={'uuid': self.uuid})
-
-    def url_new(self):
-        return reverse('pawn.new', kwargs={'uuid': self.uuid})
     
-    def url_delete(self):
-        return reverse('pawn.delete', kwargs={'uuid': self.uuid})
+    def url(self): return reverse('pawn', kwargs={'uuid': self.uuid})
+    def url_edit(self): return reverse('pawn.edit', kwargs={'uuid': self.uuid})
+    def url_delete(self): return reverse('pawn.delete', kwargs={'uuid': self.uuid})
+    def url_new(self): return reverse('pawn.new', kwargs={'uuid': self.uuid})
+    def url_info(self): return reverse('pawn.info', kwargs={'uuid': self.uuid})
 
-    def url_edit(self):
-        return reverse('pawn.edit', kwargs={'uuid': self.uuid})
-    
-    def url_newQuestion(self):
-        return reverse('pawn.question-new', kwargs={'uuid': self.uuid})
+    def url_newSentence(self): return reverse('pawn.sentence-new', kwargs={'uuid': self.uuid})
+    def url_newQuestion(self): return reverse('pawn.question-new', kwargs={'uuid': self.uuid})
+    def url_newQuestions(self): return reverse('pawn.questions-new', kwargs={'uuid': self.uuid})
+    def url_newOpenQuestion(self): return reverse('pawn.openQuestion-new', kwargs={'uuid': self.uuid})
 
-    def url_newOpenQuestion(self):
-        return reverse('pawn.openQuestion-new', kwargs={'uuid': self.uuid})
+    def url_quizPoints(self): return reverse('pawn.quiz-points', kwargs={'uuid': self.uuid})
+    def url_quizHard(self): return reverse('pawn.quiz-pointsHard', kwargs={'uuid': self.uuid})
+    def url_quizChain(self): return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
+    def url_cozeEasy(self): return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 1})
+    def url_cozeNormal(self): return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 2})
+    def url_cozeHard(self): return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 3})
+    def url_cozeChoice(self): return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
 
-    def url_newQuestions(self):
-        return reverse('pawn.questions-new', kwargs={'uuid': self.uuid})
-
-    def url_newSentence(self):
-        return reverse('pawn.sentence-new', kwargs={'uuid': self.uuid})
-
-    def url_quizPoints(self):
-        return reverse('pawn.quiz-points', kwargs={'uuid': self.uuid})
-    
-    def url_quizHard(self):
-        return reverse('pawn.quiz-pointsHard', kwargs={'uuid': self.uuid})
-    
-    def url_explore(self):
-        return reverse('explore', kwargs={'uuid': self.uuid})
-
-    def url_quizChain(self):
-        return reverse('pawn.quiz-chain', kwargs={'uuid': self.uuid})
-
-    def url_cozeEasy(self):
-        return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 1})
-    
-    def url_cozeNormal(self):
-        return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 2})
-    
-    def url_cozeHard(self):
-        return reverse('pawn.coze', kwargs={'uuid': self.uuid, 'difficulty': 3})
-        
-    def url_cozeChoice(self):
-        return reverse('pawn.coze-choice', kwargs={'uuid': self.uuid})
-    
-    def url_exam(self):
-        return reverse('pawn.exam', kwargs={'uuid': self.uuid})
-    
-    def url_examPlus(self):
-        return reverse('pawn.examPlus', kwargs={'uuid': self.uuid, 'mode': 'hard'})
+    def url_exam(self): return reverse('pawn.exam', kwargs={'uuid': self.uuid})
+    def url_examPlus(self): return reverse('pawn.examPlus', kwargs={'uuid': self.uuid, 'mode': 'hard'})
+    def url_explore(self): return reverse('explore', kwargs={'uuid': self.uuid})
     
     def users(self):
         return User.objects.filter(groups__in=self.groups.all()).distinct()
@@ -126,6 +89,15 @@ class Pawn(models.Model):
         else:
             return [self]
         
+    def has_children(self):
+        if self.childs.all().count()>0:
+            return 1
+        else:
+            return 0
+
+    def childs_explore(self):
+        return self.childs.filter(explore=True)
+ 
     def all_questions(self, isRandom=False):
         questions = list(self.questions.all())
         for child in self.childs.all():
