@@ -9,15 +9,35 @@ class SettingsForm(forms.Form):
         model = User
         fields = ['theme']
         widgets = {
-            'theme': forms.RadioSelect(choices=[('dark', 'Dark Theme'), ('light', 'Light Theme')]),
+            'theme': forms.RadioSelect(choices=[
+                ('dark', 'Dark Theme'), 
+                ('light', 'Light Theme')
+            ]),
         }
+    
     theme = forms.ChoiceField(choices=[
-        ('blue', 'Blue'),
         ('red', 'Red'),
+        ('pink', 'Pink'),
+        ('purple', 'Purple'),
+        ('deep_purple', 'Deep Purple'),
+        ('indigo', 'Indigo'),
+        ('blue', 'Blue'),
+        ('light_blue', 'Light Blue'),
+        ('cyan', 'Cyan'),
+        ('aqua', 'Aqua'),
+        ('teal', 'Teal'),
         ('green', 'Green'),
-        ('yellow', 'Yellow')
+        ('light_green', 'Light Green'),
+        ('lime', 'Lime'),
+        ('sand', 'Sand'),
+        ('yellow', 'Yellow'),
+        ('amber', 'Amber'),
+        ('orange', 'Orange'),
+        ('deep_orange', 'Deep Orange'),
+        ('brown', 'Brown'),
+        ('blue_gray', 'Blue Gray'),
+        ('light_gray', 'Light Gray'),
     ])
-
 class UserForm(UserCreationForm):
     usable_password = None
     email = forms.EmailField(required=True, help_text="Enter a valid email address.")
