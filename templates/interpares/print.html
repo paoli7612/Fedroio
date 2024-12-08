@@ -26,37 +26,37 @@
             <tr>
                 <td rowspan="3">Forma</td>
                 <td>Ortografia</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.forma_ortografia }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.forma_ortografia }}</td>{% endfor %}
             </tr>
             <tr>
                 <td>Sintassi</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.forma_sintassi }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.forma_sintassi }}</td>{% endfor %}
             </tr>
             <tr>
                 <td>Semantica</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.forma_semantica }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.forma_semantica }}</td>{% endfor %}
             </tr>
             <tr>
                 <td rowspan="3">Contenuto</td>
                 <td>Informazioni sbagliate</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.informazioni_sbagliate }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.informazioni_sbagliate }}</td>{% endfor %}
             </tr>
             <tr>
                 <td>Informazioni in eccesso</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.informazioni_in_eccesso }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.informazioni_in_eccesso }}</td>{% endfor %}
             </tr>
             <tr>
                 <td>Informazioni mancanti</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.informazioni_mancanti }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.informazioni_mancanti }}</td>{% endfor %}
             </tr>
             <tr>
                 <td rowspan="2">Diviedi formali riassunto</td>
                 <td>Discorso diretto</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.discorso_diretto }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.discorso_diretto }}</td>{% endfor %}
             </tr>
             <tr>
                 <td>Figure retoriche</td>
-                <td>{% for griglia in tema.griglie.all %}{{ griglia.figure_retoriche }}{% endfor %}</td>
+                {% for griglia in tema.griglie.all %}<td>{{ griglia.figure_retoriche }}</td>{% endfor %}
             </tr>
         </table>
     </div>
