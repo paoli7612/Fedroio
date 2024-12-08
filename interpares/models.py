@@ -21,7 +21,6 @@ class Tema(models.Model):
 class Griglia(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='griglie')
     tema = models.ForeignKey(Tema, on_delete=models.CASCADE, related_name='griglie')
-    avreage = models.FloatField(null=True, blank=True)
 
     class Meta:
         unique_together = ('user', 'tema')
