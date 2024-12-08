@@ -41,14 +41,18 @@
                     </form>
                     {% url 'interpares.deleteTraccia' id=traccia.id as url  %}
                     {% include 'partials/abutton-admin.html' with url=url title='Elimina traccia' icon='trash'%}
-                {% endif %}
-                {% if traccia.partis_run %}
+                    {% url 'interpares.printTraccia' id=traccia.id as url  %}
+                    {% include 'partials/abutton-admin.html' with url=url title='Stampa risultati' icon='print'%}
+                    {% else %}
+                    {% if traccia.partis_run %}
                     {% url "interpares.evaluate" as url %}
                     {% include 'partials/abutton.html' with label='Valuta' color='yellow' icon='eye' %}
                 {% else %}
                     {% url "interpares.write" id=traccia.id as url %}
                     {% include 'partials/abutton.html' with label='Scrivi' icon='plus' %}
                 {% endif %}
+                {% endif %}
+               
             </div>
             {% if user.is_superuser %}
             <div class="w3-panel w3-card w3-border w3-border-amber">

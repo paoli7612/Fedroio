@@ -7,7 +7,8 @@ urlpatterns = [
     path('evaluate', views.evaluate, name='interpares.evaluate'),
     path('evaluate7345678<int:id>6128676', views.evaluate, name='interpares.evaluate'),
     path('new-traccia', views.newTraccia, name='interpares.newTraccia'),
-    path('delete-traccia/<int:id>', views.deleteTraccia, name='interpares.deleteTraccia')
+    path('delete-traccia/<int:id>', views.deleteTraccia, name='interpares.deleteTraccia'),
+    path('print-traccia/<int:id>', views.printTraccia, name='interpares.printTraccia')
 ]
 
 

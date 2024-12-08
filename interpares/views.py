@@ -35,12 +35,11 @@ def write(request, id):
             form.save() 
             return redirect(reverse('interpares'))
     else:
-       
         form = TemaForm(instance=tema)
-
-    return render(request, 'interpares/form.html', {
+    return render(request, 'interpares/write.html', {
         'form': form,
-        'back_url': reverse('interpares')
+        'back_url': reverse('interpares'),
+        'tema': tema
     })
 
 @login_required
@@ -94,4 +93,10 @@ def deleteTraccia(request, id):
         'title': 'Delete Traccia',
         'text': f'You\'re deleting the Traccia: <b>{traccia}</b>?',
         'url_back': reverse('interpares')
+    })
+
+@login_required
+def printTraccia(request, id):
+    return render(request, 'interpares/print.html', {
+        'traccia': get_object_or_404(Traccia, id=id)
     })
