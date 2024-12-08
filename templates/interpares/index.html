@@ -1,7 +1,8 @@
-
 {% extends "layout/base.html" %}
+{% load filter_wrote %}
+{% load filter_evaluated %}
 
-{% block title %}Ask{% endblock %}
+{% block title %}Inter Pares{% endblock %}
 
 {% block content %}
 
@@ -9,13 +10,78 @@
         <h1>Interpares</h1>
     </div>
 
-    <div class="w3-panel w3-white w3-card-4 w3-round">
-        <p>
-            Tema 1
-        </p>
-        {% url "interpares.write" as url %}
-        {% include 'partials/abutton.html' with label='Scrivi' icon='plus' %}
-        {% url "interpares.evaluate" as url %}
-        {% include 'partials/abutton.html' with label='Valuta' color='yellow' icon='eye' %}
-    </div>
+    {% if user.is_superuser %}
+        <div class="w3-panel">
+            {% url 'interpares.newTraccia' as url  %}
+            {% include 'partials/abutton-admin.html' with url=url title='Nuova traccia' icon='plus'%}
+        </div>
+    {% endif %}
+
+    {% for traccia in tracce %}
+        <div class="w3-panel w3-white w3-card-4 w3-round">
+            <p>
+                {{ traccia.text }}
+            </p>
+            <div class="w3-center w3-panel">
+                {% if user.is_superuser %}
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="traccia_id" value="{{ traccia.id }}">
+                        {% if traccia.partis_run %}
+                            <button type="submit" class="w3-btn w3-card w3-round w3-amber">
+                                <i class="fa fa-star-half-o"></i>
+                                Disabilita autovalutazione
+                            </button>
+                        {% else %}
+                            <button type="submit" class="w3-btn w3-card w3-round w3-border w3-border-amber">
+                                <i class="fa fa-star-half-o"></i>
+                                Abilità autovalutazione
+                            </button>
+                        {% endif %}
+                    </form>
+                    {% url 'interpares.deleteTraccia' id=traccia.id as url  %}
+                    {% include 'partials/abutton-admin.html' with url=url title='Elimina traccia' icon='trash'%}
+                {% endif %}
+                {% if traccia.partis_run %}
+                    {% url "interpares.evaluate" as url %}
+                    {% include 'partials/abutton.html' with label='Valuta' color='yellow' icon='eye' %}
+                {% else %}
+                    {% url "interpares.write" id=traccia.id as url %}
+                    {% include 'partials/abutton.html' with label='Scrivi' icon='plus' %}
+                {% endif %}
+            </div>
+            {% if user.is_superuser %}
+            <div class="w3-panel w3-card w3-border w3-border-amber">
+                {% for group in groups %}
+                    <div class="w3-panel w3-card w3-padding">
+                        <ul class="w3-ul">
+                            <table class="w3-table-all">
+                                {% for user in group.user_set.all %}
+                                    <tr>
+                                        <th>{{ user }}</th>
+                                        <td>
+                                            {% with tema=user|wrote:traccia %}
+                                                {{ tema.text }} <br>
+                                                {% for user in group.user_set.all %}
+                                                <ul class="w3-ul">
+                                                    {% with griglia=tema|evaluated:user %}
+                                                        {% if griglia %}
+                                                            <li>{{ griglia }}</li>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </ul>
+                                                {% endfor %}
+                                            {% endwith %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    {% endfor %}
 {% endblock %}

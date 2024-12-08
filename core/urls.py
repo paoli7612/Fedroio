@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('account', views.account, name='account'),
     path('account/settings', views.settings, name='settings'),
+    path('utente/sapphires', views.user_sappire, name='user.sapphires'),
     path('utente/<str:username>', views.user, name='user'),
     path('utente/<str:username>/delete', views.user_delete, name='user.delete'),
     path('utente/<str:username>/reset', views.user_reset, name='user.reset'),

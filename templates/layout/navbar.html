@@ -46,6 +46,9 @@
                     <a class="w3-bar-item w3-btn" href="{{ url }}" title={{ user.last_name }}>
                         <i class="fa fa-user"></i>
                         <span class="w3-hide-small">{{ user.username }}</span>
+                        <span class="w3-badge w3-white">
+                            {{ user.sapphires }} 
+                        </span>
                     </a> 
                 {% else %}
                     {% url 'login' as url %}

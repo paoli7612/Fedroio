@@ -13,7 +13,8 @@ class User(AbstractUser):
         ('yellow', 'Yellow'),
     ]
     theme = models.CharField(max_length=6, choices=THEME_CHOICES, default='blue')
-    
+    sapphires = models.PositiveBigIntegerField(default=0)
+
     def url(self):
         return reverse('user', kwargs={'username': self.username})
 

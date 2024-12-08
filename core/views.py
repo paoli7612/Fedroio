@@ -68,6 +68,14 @@ def user_reset(request, username):
     messages.success(request, f"{user}: new password = {password}")
     return redirect(reverse('dashboard'))
 
+def user_sappire(request):
+    print(request.POST)
+    sapphires = request.POST.get('sapphires')
+    user = get_object_or_404(User, id=request.POST.get('user'))
+    user.sapphires = sapphires
+    user.save()
+    return redirect(reverse('dashboard'))
+
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)

@@ -25,9 +25,21 @@
             </div>
         </div>
         <div class="w3-col m9 w3-padding">
-            <div class="w3-panel w3-white w3-card-4 w3-round">
-                <strong>Gruppi: </strong>
-                {{ user.groups.all|join:', ' }}
+            <div class="w3-half w3-panel w3-center">
+
+                <div class="w3-panel w3-theme w3-round w3-card-4 w3-xlarge w3-display-container">
+                    <strong>Sapphires <i class="fa fa-money"></i> </strong>
+                    {{ user.sapphires }}
+                    <a href="{% url "info" %}#sapphires" class="w3-badge w3-card w3-theme-l2 w3-display-topleft w3-tiny" style="margin: 4px" title="More info">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-half w3-panel w3-center">
+                <div class="w3-panel w3-theme w3-round w3-card-4 w3-xlarge">
+                    <strong>Groups <i class="fa fa-users"></i> </strong>
+                    {{ user.groups.all|join:', ' }}
+                </div>
             </div>
         </div>
         {% include 'pawns/_childs.html' with pawns=user.pawns %}

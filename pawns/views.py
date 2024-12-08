@@ -9,7 +9,6 @@ from .forms import PawnForm, SentenceForm, QuestionForm, QuestionsForm, OpenQues
 from .views_exercise import *
 
 def index(request):
-    print(Pawn.objects.filter(parent=None, public=True).order_by('number'))
     return render(request, 'pawns/index.html', {
         'pawns': Pawn.objects.filter(parent=None, public=True).order_by('number'),
     })
@@ -28,6 +27,7 @@ def info_pawn(request, uuid):
         'pawn': get_object_or_404(Pawn, uuid=uuid)
     })
 
+@login_required
 def new_pawn(request, uuid=None):
     parent_pawn = None
     if uuid:
@@ -39,10 +39,14 @@ def new_pawn(request, uuid=None):
     if request.method == 'POST':
         form = PawnForm(request.POST, request.FILES)
         if form.is_valid():
-            pawn = form.save(commit=False)
-            pawn.user = request.user  
-            pawn.save()
-            return redirect(pawn.url())
+            if request.user.sapphires > 10:
+                request.user.sapphires -= 10
+                pawn = form.save(commit=False)
+                pawn.user = request.user  
+                pawn.save()
+                return redirect(pawn.url())
+            else:
+                messages.error(request, 'No enough sapphires. Create a new Pawn require 10 sapphires')
     else:
         if parent_pawn:
             form = PawnForm(initial={'parent': parent_pawn})

@@ -16,6 +16,10 @@
     </div>
 
     <div class="w3-panel w3-white w3-card-4 w3-round">
+        <div class="w3-right w3-panel">
+            {% url 'pawn.new' as url  %}
+            {% include "partials/abutton.html" with title="Nuovo" icon='plus-circle' url=url %}
+        </div>
         {% include 'pawns/_childs.html' with pawns=pawns %}
     </div>
 {% endblock %}

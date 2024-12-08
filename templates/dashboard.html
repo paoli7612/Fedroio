@@ -18,6 +18,12 @@
                     {% include 'partials/abutton-admin.html' with url=user.url title='Profilo' icon='user'%}
                     {% include 'partials/abutton-admin.html' with url=user.url_reset title='Reset password' icon='key'%}
                     {% include 'partials/abutton-admin.html' with url=user.url_delete title='Elimina account' icon='trash'%}
+                    <form action="{% url 'user.sapphires' %}"  class="w3-right" method="post" style="display: inline;">
+                        <input type="hidden" name="user" value="{{ user.id }}">
+                        {% csrf_token %}
+                        <input value="{{ user.sapphires }}" class="w3-input w3-card w3-round w3-quarter" type="number" name="sapphires">
+                        <button class="w3-btn w3-round w3-card-4" type="submit">Salva <i class="fa fa-save"></i></button>
+                    </form>
                 </td>
             </tr>
         {% endfor %}
